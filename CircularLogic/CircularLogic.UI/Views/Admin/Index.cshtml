@@ -1,15 +1,78 @@
-﻿
+﻿@using CircularLogic.Models
+@model CircularLogic.UI.Models.AdminIndexVM
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Administrator Dashboard</h2>
 
-@* 
 
-    The page will have two tabs inside the body
+
+
+<div id="exTab3" class="container">
+    <ul class="nav nav-pills">
+        <li class="active">
+            <a href="#1" data-toggle="tab">Post Queue</a>
+        </li>
+        <li>
+            <a href="#2" data-toggle="tab">Category Management</a>
+        </li>
+        <li>
+            <a href="#3" data-toggle="tab">User Management</a>
+        </li>
+    </ul>
+
+    <div class="tab-content clearfix">
+        <div class="tab-pane active" id="1">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">New Posts</div>
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <td>Title</td>
+                            <td>Author</td>
+                            <td>Date Submitted</td>
+                            <td>Approve</td>
+                            <td>Deny</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (BlogPost bp in Model.BlogPosts)
+                        {
+                            <tr>
+                                <td>@bp.Title</td>
+                                <td>@bp.User.LastName</td>
+                                <td>@bp.CreationTime.Value.ToShortDateString()</td>
+                                <td>
+                                    <input class="icheckbox_flat-red" type="checkbox"/>
+                                </td>
+                                <td>
+                                    <input class="icheckbox_flat-green" type="checkbox" />
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="2">
+            <h3>We use the class nav-pills instead of nav-tabs which automatically creates a background color for the tab</h3>
+        </div>
+        <div class="tab-pane" id="3">
+            <h3>We applied clearfix to the tab-content to rid of the gap between the tab and the content</h3>
+        </div>
+    </div>
+</div>
+
+
+
+@* 
+    The page will have 3 tabs inside the body
     
-    Post Queue  |  Category Management
+    Post Queue  |  Category Management  |  User Management
     
     The 1st will
 
@@ -41,5 +104,5 @@
             if mention count > 0 throw error requiring the user to re-categorize before deleting
             else Delete it and update table on page
 
-
+    The Third will allow the Admin to set user roles
 *@
