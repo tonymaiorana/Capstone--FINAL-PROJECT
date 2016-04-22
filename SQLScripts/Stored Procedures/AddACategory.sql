@@ -20,7 +20,7 @@ GO
 -- =============================================
 CREATE PROCEDURE AddACategory 
 	-- Add the parameters for the stored procedure here
-	@Description varchar(50),
+	@Name varchar(50),
 	@CategoryID int output
 AS
 BEGIN
@@ -29,7 +29,7 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	INSERT INTO dbo.Category ([Description]) VALUES(@Description);
+	INSERT INTO  dbo.Category (CategoryName) VALUES(@Name);
 	SET @CategoryID = SCOPE_IDENTITY();
 	
 END

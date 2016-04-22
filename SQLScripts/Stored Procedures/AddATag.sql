@@ -20,7 +20,7 @@ GO
 -- =============================================
 CREATE PROCEDURE AddATag
 	-- Add the parameters for the stored procedure here
-	@Description varchar(50),
+	@Name varchar(50),
 	@TagID int output
 AS
 BEGIN
@@ -29,7 +29,7 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	INSERT INTO dbo.Tag ([Description]) VALUES(@Description)
+	INSERT INTO dbo.Tag (TagName) VALUES(@Name)
 	SET @TagID = SCOPE_IDENTITY();
 END
 GO
