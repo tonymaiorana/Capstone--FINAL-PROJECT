@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Administrator Dashboard</h2>
+
+@* 
+
+    The page will have two tabs inside the body
+    
+    Post Queue  |  Category Management
+    
+    The 1st will
+
+        Display a table of Admin Queue Posts
+            Pannel with tables in body for the grouping
+            get them as sorted by Add / Edit / Delete 
+                and then ordered by most recent
+                    if time allows dynamic angular sorting?
+    
+        Title  |  Author  |  Date Submitted  |  Approve  |  Deny  |
+        Link      string       date string     checkbox   checkbox
+    
+    
+            Title will be a link to view the post in question most likely a modal,
+        allowing editing on page with a Delete button and an Approve button. 
+        These buttons will preform their individual actions immediately and update
+        this pages table.
+    
+        Checkboxes only one can be selected at a time but they can also select neither
+        this will all be in a form and at the bottom the admin can hit submit to process 
+        multiple check boxes. 
+    
+
+    The Second will
+    
+        Category Name  |  Count  |  Delete    
+
+        Display a table of all categories with their mention count and a button to delete them
+            if mention count > 0 throw error requiring the user to re-categorize before deleting
+            else Delete it and update table on page
+
+
+*@
