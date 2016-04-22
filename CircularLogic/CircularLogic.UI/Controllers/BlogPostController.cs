@@ -11,7 +11,6 @@ namespace CircularLogic.UI.Controllers
 {
     public class BlogPostController : Controller
     {
-        //TODO: Connect to DB
         // GET: BlogPost
         public ActionResult Index()
         {
