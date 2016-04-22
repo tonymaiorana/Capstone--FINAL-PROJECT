@@ -124,7 +124,7 @@ tinymce.PluginManager.add('template', function(editor) {
 						type: 'listbox', label: 'Templates', name: 'template', values: values, onselect: onSelectTemplate
 					}}
 				]},
-				{type: 'label', name: 'description', label: 'Description', text: '\u00a0'},
+				{type: 'label', name: 'description', label: 'Name', text: '\u00a0'},
 				{type: 'iframe', flex: 1, border: 1}
 			],
 

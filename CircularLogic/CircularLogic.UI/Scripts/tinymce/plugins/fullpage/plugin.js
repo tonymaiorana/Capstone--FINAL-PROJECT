@@ -24,7 +24,7 @@ tinymce.PluginManager.add('fullpage', function(editor) {
 			body: [
 				{name: 'title', label: 'Title'},
 				{name: 'keywords', label: 'Keywords'},
-				{name: 'description', label: 'Description'},
+				{name: 'description', label: 'Name'},
 				{name: 'robots', label: 'Robots'},
 				{name: 'author', label: 'Author'},
 				{name: 'docencoding', label: 'Encoding'}

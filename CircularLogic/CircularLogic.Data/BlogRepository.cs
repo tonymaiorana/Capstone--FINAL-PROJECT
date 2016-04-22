@@ -19,7 +19,7 @@ namespace CircularLogic.Data
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = "AddACategory";
-                cmd.Parameters.AddWithValue("@Description", category.Description);
+                cmd.Parameters.AddWithValue("@Name", category.Name);
 
                 SqlParameter outputParam = new SqlParameter("@CategoryID", SqlDbType.Int)
                 {
@@ -82,7 +82,7 @@ namespace CircularLogic.Data
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = "AddATag";
-                cmd.Parameters.AddWithValue("@Description", tag.Name);
+                cmd.Parameters.AddWithValue("@Name", tag.Name);
 
                 SqlParameter outputParam = new SqlParameter("@TagID", SqlDbType.Int)
                 {
