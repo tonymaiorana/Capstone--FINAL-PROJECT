@@ -12,7 +12,7 @@ namespace CircularLogic.Data
 {
     public class BlogRepository
     {
-        public int AddACategory(Category category)
+        private int AddACategory(Category category)
         {
             using (SqlConnection cn =
                 new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
@@ -38,7 +38,7 @@ namespace CircularLogic.Data
             }
         }
 
-        public int AddABlogPost(BlogPost blogPost)
+        private int AddABlogPost(BlogPost blogPost)
         {
             using (
                 SqlConnection cn =
@@ -66,15 +66,11 @@ namespace CircularLogic.Data
                 cn.Close();
 
                 int blogID = int.Parse(outputParam.SqlValue.ToString());
-                if (blogPost.Category.CategoryID == 0)
-                {
-                    AddACategory(blogPost.Category);
-                }
                 return blogID;
             }
         }
 
-        public int AddATag(Tag tag)
+        private int AddATag(Tag tag)
         {
             using (
                 SqlConnection cn =
@@ -102,7 +98,7 @@ namespace CircularLogic.Data
             }
         }
 
-        public int AddAnImage(Image image)
+        private int AddAnImage(Image image)
         {
             using (
                 SqlConnection cn =
@@ -131,7 +127,7 @@ namespace CircularLogic.Data
             }
         }
 
-        public void BridgeBlogImage(int blogID, int imageID)
+        private void BridgeBlogImage(int blogID, int imageID)
         {
             using (
                 SqlConnection cn =
@@ -150,7 +146,7 @@ namespace CircularLogic.Data
             }
         }
 
-        public void BridgePostTag(int blogID, int tagID)
+        private void BridgePostTag(int blogID, int tagID)
         {
             using (
                 SqlConnection cn =
@@ -167,6 +163,32 @@ namespace CircularLogic.Data
                 cmd.ExecuteNonQuery();
                 cn.Close();
             }
+        }
+
+        //Needs to return a new Blog??
+        public BlogPost CreateBlogPost (BlogPost blogPost)
+        {
+            if (blogPost.Category.CategoryID == 0)
+            {
+                blogPost.Category.CategoryID = AddACategory(blogPost.Category);
+            }
+
+            blogPost.BlogPostID = AddABlogPost(blogPost);
+            blogPost.Image.ImageID = AddAnImage(blogPost.Image);
+            BridgeBlogImage(blogPost.BlogPostID, blogPost.Image.ImageID);
+
+            //Not sure if this is a list? blogPost.Tag wouldn't work??
+            foreach (Tag t in new List<Tag>())
+            {
+                if (t.TagID == 0)
+                {
+                    t.TagID = AddATag(t);
+                }
+                BridgePostTag(t.TagID, blogPost.BlogPostID);
+            }
+            
+            //returns the actual blog we just put everything in??
+            return blogPost;
         }
     }
 }

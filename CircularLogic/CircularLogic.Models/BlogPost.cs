@@ -23,7 +23,7 @@ namespace CircularLogic.Models
         [AllowHtml]
         public string HtmlContent { get; set; }
 
-        public string Image { get; set; }
+        public Image Image { get; set; }
         public Category Category { get; set; }
     }
 }
