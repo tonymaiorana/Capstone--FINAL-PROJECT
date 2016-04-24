@@ -3,26 +3,8 @@
 @{
     ViewBag.Title = "BlogPostDetail";
 }
-
 <h2>Blog Post Details</h2>
-
-<th>
-    @Html.DisplayFor(model => model.BlogPost.Title)
-</th>
-<th>
-    @Html.DisplayFor(model => model.BlogPost.HtmlContent)
-</th>
-<th>
-    @Html.DisplayFor(model => model.BlogPost.HtmlContent)
-</th>
-<th>
-    @Html.DisplayFor(model => model.BlogPost.Tags)
-</th>
-<th>
-    @Html.DisplayFor(model => model.BlogPost.Image.ImageData)
-</th>
-<th>
-    @Html.DisplayFor(model => model.BlogPost.Category)
-</th>
-
-<form action="/Home/CreateBlogPost/@Model.BlogPost.BlogPostID" method="get"></form>
+@*TODO: Hannah needs to complete - had different format and needed to modify Controller*@
+<p>Title: @Model.BlogPost.Title</p>
+<p>Content: @Model.BlogPost.HtmlContent</p>
+<p>Tags: @Model.BlogPost.Tags</p>

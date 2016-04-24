@@ -26,17 +26,32 @@ namespace CircularLogic.UI.Controllers
         {
             string name = User.Identity.Name;
             string id = new ApplicationDbContext().Users.FirstOrDefault(u => u.UserName == name).Id;
-            var CreateBlogPostVM = new BlogPostViewModel(new BlogPost() {UserID = id});
+            var CreateBlogPostVM = new BlogPostViewModel(new BlogPost() { UserID = id });
             return View("CreateBlogPost", CreateBlogPostVM);
         }
 
-        //Post : BlogPost / Create
+        // Post / BlogPost
         [HttpPost]
-        public ActionResult CreateBlogDetails(BlogPostViewModel blogPost)
+        public ActionResult CreateBlogPost(BlogPostViewModel blogVM)
+        {
+            _repo.CreateBlogPost(blogVM.BlogPost);
+
+            return RedirectToAction("BlogHome");
+        }
+
+        public ActionResult BlogPostDetail(BlogPostViewModel blogPost)
         {
             BlogPost newBlogPost = blogPost.BlogPost;
             _repo.CreateBlogPost(newBlogPost);
-            return RedirectToAction("Index");
+
+            return View();
+        }
+
+        public ActionResult BlogHome()
+        {
+            var allPosts = _repo.GetAllBlogPosts().Where(p => p.IsApproved).OrderByDescending(p => p.CreationTime);
+
+            return View();
         }
     }
 }
