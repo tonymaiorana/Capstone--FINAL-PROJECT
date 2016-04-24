@@ -10,11 +10,15 @@ namespace CircularLogic.UI.Models
     public class BlogPostViewModel
     {
         public BlogPost BlogPost { get; set; }
-
+        public ApplicationUser User { get; set; }
         public List<SelectListItem> CategoryList { get; set; }
 
-        public BlogPostViewModel()
+        public BlogPostViewModel(BlogPost bp)
         {
+            BlogPost = bp;
+            
+            var context = new ApplicationDbContext();
+            User = context.Users.ToList().FirstOrDefault(u => u.Id == bp.UserID);
             //Will change listed items text and value once we confirm the categories (Hannah)
             CategoryList = new List<SelectListItem>
             {
