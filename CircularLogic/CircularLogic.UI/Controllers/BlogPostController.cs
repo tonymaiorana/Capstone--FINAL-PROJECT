@@ -13,6 +13,8 @@ namespace CircularLogic.UI.Controllers
 {
     public class BlogPostController : Controller
     {
+        private BlogRepository _repo = new BlogRepository();
+
         // GET: BlogPost
         public ActionResult Index()
         {
@@ -29,12 +31,12 @@ namespace CircularLogic.UI.Controllers
         }
 
         //Post : BlogPost / Create
-        //[HttpPost]
-        //public ActionResult Create(BlogPost blogPost)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //    }
-        //}
+        [HttpPost]
+        public ActionResult CreateBlogDetails(BlogPostViewModel blogPost)
+        {
+            BlogPost newBlogPost = blogPost.BlogPost;
+            _repo.CreateBlogPost(newBlogPost);
+            return RedirectToAction("Index");
+        }
     }
 }
