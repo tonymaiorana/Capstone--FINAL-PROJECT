@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace CircularLogic.UI.Controllers
 {
@@ -21,7 +22,9 @@ namespace CircularLogic.UI.Controllers
         // GET: BlogPost / Create
         public ActionResult CreateBlogPost()
         {
-            var CreateBlogPostVM = new BlogPostViewModel();
+            string name = User.Identity.Name;
+            string id = new ApplicationDbContext().Users.FirstOrDefault(u => u.UserName == name).Id;
+            var CreateBlogPostVM = new BlogPostViewModel(new BlogPost() {UserID = id});
             return View("CreateBlogPost", CreateBlogPostVM);
         }
 
