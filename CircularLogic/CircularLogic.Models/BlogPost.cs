@@ -16,14 +16,13 @@ namespace CircularLogic.Models
         public string Title { get; set; }
 
         [Required]
-        public User User { get; set; }
+        public string UserID { get; set; }
 
         public DateTime? PostTime { get; set; }
         public DateTime? Expiration { get; set; }
         public DateTime? CreationTime { get; set; }
         public DateTime UpdateTime { get; set; }
-        public Tag Tag { get; set; }
-        public Comment Comment { get; set; }
+        public List<Tag> Tags { get; set; }
 
         public bool IsApproved { get; set; }
 
