@@ -46,7 +46,8 @@ namespace CircularLogic.Data
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = "AddABlog";
-                cmd.Parameters.AddWithValue("@CategoryID", blogPost.Category);
+                cmd.Parameters.AddWithValue("@CategoryID", blogPost.Category.CategoryID);
+                cmd.Parameters.AddWithValue("@UserID", blogPost.UserID);
                 cmd.Parameters.AddWithValue("@Title", blogPost.Title);
                 cmd.Parameters.AddWithValue("@TextBody", blogPost.HtmlContent);
                 cmd.Parameters.AddWithValue("@UpdateTime", blogPost.UpdateTime);
@@ -191,6 +192,82 @@ namespace CircularLogic.Data
             return blogPost;
         }
 
+        public BlogPost GetBlogPostByBlogID(int blogID)
+        {
+            BlogPost blogPost = new BlogPost();
+            using (SqlConnection cn =
+                new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "GetBlogPostByBlogPostID";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@BlogPostID", blogID);
+
+                cmd.Connection = cn;
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        blogPost = BlogPostFromReader(dr);
+                    }
+                }
+            }
+            return blogPost;
+        }
+
+        public Image GetBlogImageByBlogID(int blogID)
+        {
+            Image img = new Image();
+            using (SqlConnection cn =
+                new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "GetBlogImageByBlogID";
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Connection = cn;
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        img = ImageFromReader(dr);
+                    }
+                }
+            }
+            return img;
+        }
+
+        public List<BlogPost> GetAllBlogPosts()
+        {
+            List<BlogPost> blogPosts = new List<BlogPost>();
+            using (SqlConnection cn =
+                new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "GetAllBlogPost";
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Connection = cn;
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        blogPosts.Add(BlogPostFromReader(dr));
+                    }
+                }
+            }
+            return blogPosts;
+        }
+
         public List<BlogPost> GetAllBlogPostByCategoryID(int categoryID)
         {
             List<BlogPost> blogPosts = new List<BlogPost>();
@@ -272,8 +349,10 @@ namespace CircularLogic.Data
         private BlogPost BlogPostFromReader(SqlDataReader dr)
         {
             BlogPost blogPost = new BlogPost();
+
             blogPost.BlogPostID = (int)dr["BlogPostID"];
             blogPost.Category.CategoryID = (int)dr["CategoryID"];
+            blogPost.UserID = (string)dr["UserID"];
             blogPost.Title = (string)dr["Title"];
             blogPost.HtmlContent = (string)dr["TextBody"];
             blogPost.PostTime = (DateTime)dr["PostTime"];
@@ -282,6 +361,7 @@ namespace CircularLogic.Data
             blogPost.CreationTime = (DateTime)dr["CreationTime"];
             blogPost.IsApproved = (bool)dr["IsApproved"];
             TagFromReader(dr);
+            ImageFromReader(dr);
             return blogPost;
         }
 
@@ -291,6 +371,15 @@ namespace CircularLogic.Data
             tag.TagID = (int)dr["TagID"];
             tag.Name = (string)dr["TagName"];
             return tag;
+        }
+
+        private Image ImageFromReader(SqlDataReader dr)
+        {
+            Image img = new Image();
+            img.ImageID = (int)dr["ImageID"];
+            img.ImageData = (string)dr["ImageData"];
+            img.Name = (string)dr["Name"];
+            return img;
         }
     }
 }

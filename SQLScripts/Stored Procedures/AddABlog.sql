@@ -21,6 +21,7 @@ GO
 CREATE PROCEDURE AddABlog 
 	-- Add the parameters for the stored procedure here
 		@CategoryID int,
+		@UserID varchar(128),
 		@Title varchar(150), 
 		@TextBody varchar(max),
 		@UpdateTime datetime,
@@ -34,8 +35,8 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	INSERT INTO dbo.BlogPost (CategoryID, Title, TextBody, UpdateTime, CreationTime)
-	 VALUES(@CategoryID, @Title, @TextBody, @UpdateTime, @CreationTime);
+	INSERT INTO dbo.BlogPost (CategoryID, UserID, Title, TextBody, UpdateTime, CreationTime)
+	 VALUES(@CategoryID, @UserID, @Title, @TextBody, @UpdateTime, @CreationTime);
 		SET @BlogID = SCOPE_IDENTITY();
 END
 GO
