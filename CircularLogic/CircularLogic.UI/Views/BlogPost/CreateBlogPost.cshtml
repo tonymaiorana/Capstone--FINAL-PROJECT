@@ -12,83 +12,46 @@
         <h4>Blog Post</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         <div class="form-group">
-            @Html.LabelFor(model => model.BlogPost.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2"> @Html.LabelFor(model => model.BlogPost.Title, htmlAttributes: new { @class = "control-label col-md-2" })</div>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.BlogPost.Title, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.BlogPost.Title, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
-    <div>
-        @Html.TextAreaFor(model => model.BlogPost.HtmlContent)
-    </div>
-    @*   <div class="form-group">
-            @Html.LabelFor(model => model.BlogPost.PostTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BlogPost.PostTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BlogPost.PostTime, "", new { @class = "text-danger" })
-            </div>
+
+        <div>
+            @Html.TextAreaFor(model => model.BlogPost.HtmlContent)
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.BlogPost.Expiration, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BlogPost.Expiration, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BlogPost.Expiration, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.BlogPost.CreationTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BlogPost.CreationTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BlogPost.CreationTime, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.BlogPost.UpdateTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BlogPost.UpdateTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BlogPost.UpdateTime, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-    <div class="form-group">
-        @Html.LabelFor(model => model.BlogPost.Tag, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.BlogPost.Tag, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.BlogPost.Tag, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.BlogPost.Comment, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.BlogPost.Comment, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.BlogPost.Comment, "", new { @class = "text-danger" })
-        </div>
-    </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.BlogPost.IsApproved, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.BlogPost.Tag, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.BlogPost.IsApproved)
-                    @Html.ValidationMessageFor(model => model.BlogPost.IsApproved, "", new { @class = "text-danger" })
-                </div>
+                <input type="text" name="tags" placeholder="Tags" class="tagsManager" />
+                <input type="hidden" value="Pisa,Rome" name="hiddenTagList">
+                @*@Html.EditorFor(model => model.BlogPost.Tag, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.ValidationMessageFor(model => model.BlogPost.Tag, "", new { @class = "text-danger" })
             </div>
         </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.BlogPost.Image, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.BlogPost.Image, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.BlogPost.Image.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.BlogPost.Image, "", new { @class = "text-danger" })
             </div>
         </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.BlogPost.Category, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.BlogPost.Category, Model.CategoryList, new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.BlogPost.Category.Name, Model.CategoryList, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.BlogPost.Category, "", new { @class = "text-danger" })
             </div>
         </div>
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -106,6 +69,25 @@
             tinyMCE.init({
                 mode: "textareas",
                 theme: "modern"
+            });
+        });
+    </script>
+    <script src="~/Scripts/app/bootstrap3-typeahead.min.js"></script>
+    <script src="~/Scripts/app/bootstrap-tagmanager.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".tagsManager").tagsManager({
+                prefilled: [],
+                CapitalizeFirstLetter: true,
+                preventSubmitOnEnter: true,
+                typeahead: false,
+                typeaheadAjaxSource: null,
+                typeaheadSource: ["MVC", "JavaScript", "SQL", ".NET/C#", "Web APIs", "Databases", "Project Management", "Web Development", "Jr Deveeloper"],
+                delimeters: [44, 188, 13],
+                backspace: [8],
+                blinkBGColor_1: '#FFFF9C',
+                blinkBGColor_2: '#CDE69C',
+                hiddenTagListName: 'hiddenTagListA'
             });
         });
     </script>

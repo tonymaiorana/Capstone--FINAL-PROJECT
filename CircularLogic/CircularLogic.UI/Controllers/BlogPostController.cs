@@ -1,4 +1,5 @@
-﻿using CircularLogic.Models;
+﻿using CircularLogic.Data;
+using CircularLogic.Models;
 using CircularLogic.UI.Models;
 using System;
 using System.Collections.Generic;
@@ -24,13 +25,12 @@ namespace CircularLogic.UI.Controllers
             return View("CreateBlogPost", CreateBlogPostVM);
         }
 
-        // Post : BlogPost / Create
+        //Post : BlogPost / Create
         //[HttpPost]
         //public ActionResult Create(BlogPost blogPost)
         //{
         //    if (ModelState.IsValid)
         //    {
-        //        //TODO: Validate (Hannah)
         //    }
         //}
     }
