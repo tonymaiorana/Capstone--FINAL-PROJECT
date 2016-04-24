@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CircularLogic.Models;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -6,7 +7,6 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CircularLogic.Models;
 
 namespace CircularLogic.Data
 {
@@ -179,7 +179,7 @@ namespace CircularLogic.Data
             BridgeBlogImage(blogPost.BlogPostID, blogPost.Image.ImageID);
 
             //Not sure if this is a list? blogPost.Tag wouldn't work??
-            foreach (Tag t in new List<Tag>())
+            foreach (Tag t in blogPost.Tags)
             {
                 if (t.TagID == 0)
                 {
@@ -212,7 +212,6 @@ namespace CircularLogic.Data
                     while (dr.Read())
                     {
                         blogPost = BlogPostFromReader(dr);
-
                     }
                 }
             }
@@ -221,7 +220,7 @@ namespace CircularLogic.Data
 
         public Image GetBlogImageByBlogID(int blogID)
         {
-             Image img = new Image();
+            Image img = new Image();
             using (SqlConnection cn =
                 new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
             {
@@ -263,7 +262,6 @@ namespace CircularLogic.Data
                     while (dr.Read())
                     {
                         blogPosts.Add(BlogPostFromReader(dr));
-
                     }
                 }
             }
@@ -290,7 +288,6 @@ namespace CircularLogic.Data
                     while (dr.Read())
                     {
                         blogPosts.Add(BlogPostFromReader(dr));
-
                     }
                 }
             }
@@ -352,16 +349,17 @@ namespace CircularLogic.Data
         private BlogPost BlogPostFromReader(SqlDataReader dr)
         {
             BlogPost blogPost = new BlogPost();
-            blogPost.BlogPostID = (int) dr["BlogPostID"];
-            blogPost.Category.CategoryID = (int) dr["CategoryID"];
-            blogPost.UserID = (string) dr["UserID"];
-            blogPost.Title = (string) dr["Title"];
-            blogPost.HtmlContent = (string) dr["TextBody"];
-            blogPost.PostTime = (DateTime) dr["PostTime"];
-            blogPost.Expiration = (DateTime) dr["ExpirationTime"];
-            blogPost.UpdateTime = (DateTime) dr["UpdateTime"];
-            blogPost.CreationTime = (DateTime) dr["CreationTime"];
-            blogPost.IsApproved = (bool) dr["IsApproved"];
+
+            blogPost.BlogPostID = (int)dr["BlogPostID"];
+            blogPost.Category.CategoryID = (int)dr["CategoryID"];
+            blogPost.UserID = (string)dr["UserID"];
+            blogPost.Title = (string)dr["Title"];
+            blogPost.HtmlContent = (string)dr["TextBody"];
+            blogPost.PostTime = (DateTime)dr["PostTime"];
+            blogPost.Expiration = (DateTime)dr["ExpirationTime"];
+            blogPost.UpdateTime = (DateTime)dr["UpdateTime"];
+            blogPost.CreationTime = (DateTime)dr["CreationTime"];
+            blogPost.IsApproved = (bool)dr["IsApproved"];
             TagFromReader(dr);
             ImageFromReader(dr);
             return blogPost;
@@ -370,17 +368,17 @@ namespace CircularLogic.Data
         private Tag TagFromReader(SqlDataReader dr)
         {
             Tag tag = new Tag();
-            tag.TagID = (int) dr["TagID"];
-            tag.Name = (string) dr["TagName"];
+            tag.TagID = (int)dr["TagID"];
+            tag.Name = (string)dr["TagName"];
             return tag;
         }
 
         private Image ImageFromReader(SqlDataReader dr)
         {
             Image img = new Image();
-            img.ImageID = (int) dr["ImageID"];
-            img.ImageData = (string) dr["ImageData"];
-            img.Name = (string) dr["Name"];
+            img.ImageID = (int)dr["ImageID"];
+            img.ImageData = (string)dr["ImageData"];
+            img.Name = (string)dr["Name"];
             return img;
         }
     }

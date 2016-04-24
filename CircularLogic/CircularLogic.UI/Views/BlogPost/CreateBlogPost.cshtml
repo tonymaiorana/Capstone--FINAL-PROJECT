@@ -6,57 +6,53 @@
 
 <h2>CreateBlogPost</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("CreateBlogPost", "BlogPost", FormMethod.Post, new {@class="form-horizontal"}))
 {
-    <div class="form-horizontal">
-        <h4>Blog Post</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            <div class="col-md-2"> @Html.LabelFor(model => model.BlogPost.Title, htmlAttributes: new { @class = "control-label col-md-2" })</div>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BlogPost.Title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BlogPost.Title, "", new { @class = "text-danger" })
-            </div>
+    <h4>Blog Post</h4>
+    <hr/>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.BlogPost.Title, new {@class = "control-label "})
+        @Html.EditorFor(model => model.BlogPost.Title, new { HtmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.BlogPost.Title, "", new {@class = "text-danger"})
+    </div>
+
+
+    <div class="form-group">
+        @Html.TextAreaFor(model => model.BlogPost.HtmlContent)
+    </div>
+
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.BlogPost.Tags,new {@class = "control-label"})*@
+        <input type="text" name="tags" placeholder="Tags" class="tagsManager form-control"/>
+        <input type="hidden" value="" name="hiddenTagList">
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.BlogPost.Image.Name, new {@class = "control-label"})
+        @Html.EditorFor(model => model.BlogPost.Image.Name, new { HtmlAttributes = new { @class = "form-control" } })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.BlogPost.Image.ImageData, new { @class = "control-label" })
+        @Html.EditorFor(model => model.BlogPost.Image.ImageData, new { HtmlAttributes = new { @class = "form-control" } })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.BlogPost.Category, new {@class = "control-label"})
+        @Html.DropDownListFor(model => model.BlogPost.Category.Name, Model.CategoryList, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default"/>
         </div>
     </div>
 
-        <div>
-            @Html.TextAreaFor(model => model.BlogPost.HtmlContent)
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.BlogPost.Tag, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="text" name="tags" placeholder="Tags" class="tagsManager" />
-                <input type="hidden" value="Pisa,Rome" name="hiddenTagList">
-                @*@Html.EditorFor(model => model.BlogPost.Tag, new { htmlAttributes = new { @class = "form-control" } })*@
-                @Html.ValidationMessageFor(model => model.BlogPost.Tag, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.BlogPost.Image, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BlogPost.Image.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BlogPost.Image, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.BlogPost.Category, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.BlogPost.Category.Name, Model.CategoryList, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.BlogPost.Category, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
 }
 @section scripts
 {
@@ -80,7 +76,7 @@
                 prefilled: [],
                 CapitalizeFirstLetter: true,
                 preventSubmitOnEnter: true,
-                typeahead: false,
+                typeahead: true,
                 typeaheadAjaxSource: null,
                 typeaheadSource: ["MVC", "JavaScript", "SQL", ".NET/C#", "Web APIs", "Databases", "Project Management", "Web Development", "Jr Deveeloper"],
                 delimeters: [44, 188, 13],
