@@ -46,7 +46,8 @@ namespace CircularLogic.Data
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = "AddABlog";
-                cmd.Parameters.AddWithValue("@CategoryID", blogPost.Category);
+                cmd.Parameters.AddWithValue("@CategoryID", blogPost.Category.CategoryID);
+                cmd.Parameters.AddWithValue("@UserID", blogPost.UserID);
                 cmd.Parameters.AddWithValue("@Title", blogPost.Title);
                 cmd.Parameters.AddWithValue("@TextBody", blogPost.HtmlContent);
                 cmd.Parameters.AddWithValue("@UpdateTime", blogPost.UpdateTime);
@@ -275,6 +276,7 @@ namespace CircularLogic.Data
             BlogPost blogPost = new BlogPost();
             blogPost.BlogPostID = (int) dr["BlogPostID"];
             blogPost.Category.CategoryID = (int) dr["CategoryID"];
+            blogPost.UserID = (string) dr["UserID"];
             blogPost.Title = (string) dr["Title"];
             blogPost.HtmlContent = (string) dr["TextBody"];
             blogPost.PostTime = (DateTime) dr["PostTime"];

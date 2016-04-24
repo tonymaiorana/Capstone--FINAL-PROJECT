@@ -27,7 +27,7 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-SELECT c.CategoryName, bp.Title, bp.TextBody, bp.PostTime, t.TagName
+SELECT c.CategoryName, bp.UserID, bp.Title, bp.TextBody, bp.PostTime, t.TagName
  FROM BlogPost bp
 INNER JOIN Category c
  ON c.CategoryID = bp.CategoryID
