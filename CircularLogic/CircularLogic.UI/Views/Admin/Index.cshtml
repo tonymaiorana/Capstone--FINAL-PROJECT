@@ -24,81 +24,229 @@
 
     <div class="tab-content clearfix">
         <div class="tab-pane active" id="1">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading">New Posts</div>
-                <div class="panel-body">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <td>Title</td>
-                            <td>Author</td>
-                            <td>Date Submitted</td>
-                            <td>Approve</td>
-                            <td>Deny</td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach (BlogPost bp in Model.BlogPosts)
-                        {
-                            <tr>
-                                <td>@bp.Title</td>
-                                <td>@bp.User.LastName</td>
-                                <td>@bp.CreationTime.Value.ToShortDateString()</td>
-                                <td>
-                                    <input class="icheckbox_flat-red" type="checkbox"/>
-                                </td>
-                                <td>
-                                    <input class="icheckbox_flat-green" type="checkbox" />
-                                </td>
-                            </tr>
-                        }
-                        </tbody>
-                    </table>
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                                New Blog Posts
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <td>Title</td>
+                                        <td>Author</td>
+                                        <td>Date Submitted</td>
+                                        <td>Approve</td>
+                                        <td>Deny</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (BlogPost bp in Model.BlogPosts)
+                                {
+                                    <tr>
+                                        <td>@bp.Title</td>
+                                        <td>@bp.User.LastName</td>
+                                        <td>@bp.CreationTime.Value.ToShortDateString()</td>
+                                        <td>
+                                            <input type="checkbox" />
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" />
+                                        </td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+                            <button type="submit">Submit</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                                Edit Requests
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse2" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <td>Title</td>
+                                        <td>Author</td>
+                                        <td>Date Submitted</td>
+                                        <td>Approve</td>
+                                        <td>Deny</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (BlogPost bp in Model.BlogPosts)
+                                {
+                                    <tr>
+                                        <td>@bp.Title</td>
+                                        <td>@bp.User.LastName</td>
+                                        <td>@bp.CreationTime.Value.ToShortDateString()</td>
+                                        <td>
+                                            <input type="checkbox" />
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" />
+                                        </td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+                            <button type="submit">Submit</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                                Delete Requests
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse3" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <td>Title</td>
+                                        <td>Author</td>
+                                        <td>Date Submitted</td>
+                                        <td>Approve</td>
+                                        <td>Deny</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (BlogPost bp in Model.BlogPosts)
+                                    {
+                                    <tr>
+                                        <td>@bp.Title</td>
+                                        <td>@bp.User.LastName</td>
+                                        <td>@bp.CreationTime.Value.ToShortDateString()</td>
+                                        <td>
+                                            <input type="checkbox" />
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" />
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <button type="submit">Submit</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="tab-pane" id="2">
-            <h3>We use the class nav-pills instead of nav-tabs which automatically creates a background color for the tab</h3>
-        </div>
-        <div class="tab-pane" id="3">
-            <h3>We applied clearfix to the tab-content to rid of the gap between the tab and the content</h3>
+            </div>
+            <div class="tab-pane" id="2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Categories</h4>
+                    </div>
+                    <div class="panel-body">
+                        <table>
+                            <thead>
+                            <tr>
+                                <td>Category Name</td>
+                                <td>Blogs in Category</td>
+                                <td>Action</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (KeyValuePair<Category, int> c in Model.CategoryCountDictionary)
+                            {
+                                <td>@c.Key.Name</td>
+                                <td>@c.Value</td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm catDelete" type="submit" id=@Html.Raw(c.Key.CategoryID)><span class="glyphicon glyphicon-trash"></span></button>
+                                </td>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                        @*<div class="panel-footer">Panel Footer</div>*@
+                </div>
+            </div>
+            <div class="tab-pane" id="3">
+                <h3>Coming Soon</h3>
+            </div>
         </div>
     </div>
-</div>
+
+@section scripts{
+    <script type="text/javascript">
+        var uri = "../api/categoryAPI";
+        $(document).ready(function() {
+            $('.catDelete').click(function() {
+                var t = this.id;
+                var OtherPost = {
+                    id: t,
+                    type: 'DELETE'
+                }
+                $.post(uri, OtherPost)
+                    .done(function() {
+                        alert("Success");
+                        $(this).closest('tr').remove();
+                    })
+                    .fail(function(jqXhr, status, err) {
+                        alert((status + ' - ' + err));
+                    });
+            });
+        });
+
+    </script>
+    @*
+        -script to prevent allow and deny being checked at the same time
+        -build form around allow and deny
+        -add link to view a blog post
+        *@
+}
 
 
-
-@* 
+@*
     The page will have 3 tabs inside the body
-    
+
     Post Queue  |  Category Management  |  User Management
-    
+
     The 1st will
 
         Display a table of Admin Queue Posts
             Pannel with tables in body for the grouping
-            get them as sorted by Add / Edit / Delete 
+            get them as sorted by Add / Edit / Delete
                 and then ordered by most recent
                     if time allows dynamic angular sorting?
-    
+
         Title  |  Author  |  Date Submitted  |  Approve  |  Deny  |
         Link      string       date string     checkbox   checkbox
-    
-    
+
+
             Title will be a link to view the post in question most likely a modal,
-        allowing editing on page with a Delete button and an Approve button. 
+        allowing editing on page with a Delete button and an Approve button.
         These buttons will preform their individual actions immediately and update
         this pages table.
-    
+
         Checkboxes only one can be selected at a time but they can also select neither
-        this will all be in a form and at the bottom the admin can hit submit to process 
-        multiple check boxes. 
-    
+        this will all be in a form and at the bottom the admin can hit submit to process
+        multiple check boxes.
+
 
     The Second will
-    
-        Category Name  |  Count  |  Delete    
+
+        Category Name  |  Count  |  Delete
 
         Display a table of all categories with their mention count and a button to delete them
             if mention count > 0 throw error requiring the user to re-categorize before deleting
