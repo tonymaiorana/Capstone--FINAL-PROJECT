@@ -8,7 +8,8 @@ namespace CircularLogic.UI.Models
 {
     public class AdminIndexVM
     {
-        public List<Category> Categories { get; set; }
+        //public List<Category> Categories { get; set; }
+        public Dictionary<Category, int> CategoryCountDictionary { get; set; }
         public List<BlogPost> BlogPosts { get; set; }
         public List<ApplicationUser> Users { get; set; }
     }
