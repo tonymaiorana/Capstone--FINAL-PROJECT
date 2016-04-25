@@ -293,6 +293,31 @@ namespace CircularLogic.Data
             return categoryList;
         }
 
+        public List<Tag> GetAllTags()
+        {
+            List<Tag> tagList = new List<Tag>();
+            using (SqlConnection cn =
+                new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "GetAllTags";
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Connection = cn;
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        tagList.Add(TagFromReader(dr));
+                    }
+                }
+            }
+            return tagList;
+        }
+
         public List<BlogPost> GetAllBlogPostByCategoryID(int categoryID)
         {
             List<BlogPost> blogPosts = new List<BlogPost>();
