@@ -10,6 +10,12 @@ namespace CircularLogic.Models
 {
     public class BlogPost
     {
+        public BlogPost()
+        {
+            Category = new Category();
+            Tags = new List<Tag>();
+        }
+
         public int BlogPostID { get; set; }
 
         [Required]
@@ -31,6 +37,5 @@ namespace CircularLogic.Models
 
         public Image Image { get; set; }
         public Category Category { get; set; }
-        public QueueAction QueueAction { get; set; }
     }
 }

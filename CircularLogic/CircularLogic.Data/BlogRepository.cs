@@ -201,7 +201,7 @@ namespace CircularLogic.Data
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = "GetBlogPostByBlogPostID";
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@BlogPostID", blogID);
+                cmd.Parameters.AddWithValue("@BlogID", blogID);
 
                 cmd.Connection = cn;
 
@@ -215,6 +215,8 @@ namespace CircularLogic.Data
                     }
                 }
             }
+            GetAllTagNameByBlogPostID(blogPost.BlogPostID);
+            GetBlogImageByBlogID(blogPost.BlogPostID);
             return blogPost;
         }
 
@@ -227,6 +229,7 @@ namespace CircularLogic.Data
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = "GetBlogImageByBlogID";
                 cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@BlogID", blogID);
 
                 cmd.Connection = cn;
 
@@ -264,6 +267,11 @@ namespace CircularLogic.Data
                         blogPosts.Add(BlogPostFromReader(dr));
                     }
                 }
+            }
+            foreach (BlogPost blogPost in blogPosts)
+            {
+                blogPost.Tags = GetAllTagNameByBlogPostID(blogPost.BlogPostID);
+                blogPost.Image = GetBlogImageByBlogID(blogPost.BlogPostID);
             }
             return blogPosts;
         }
@@ -340,6 +348,11 @@ namespace CircularLogic.Data
                         blogPosts.Add(BlogPostFromReader(dr));
                     }
                 }
+                foreach (BlogPost blogPost in blogPosts)
+                {
+                    blogPost.Tags = GetAllTagNameByBlogPostID(blogPost.BlogPostID);
+                    blogPost.Image = GetBlogImageByBlogID(blogPost.BlogPostID);
+                }
             }
             return blogPosts;
         }
@@ -370,16 +383,16 @@ namespace CircularLogic.Data
             return blogPosts;
         }
 
-        public List<Tag> GetAllTagNameByBlogID(int blogID)
+        public List<Tag> GetAllTagNameByBlogPostID(int blogID)
         {
             List<Tag> tags = new List<Tag>();
             using (SqlConnection cn =
                 new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = "GetAllTagNameByBlogID";
+                cmd.CommandText = "GetAllTagNameByBlogPostID";
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@BlogPostID", blogID);
+                cmd.Parameters.AddWithValue("@BlogID", blogID);
 
                 cmd.Connection = cn;
 
@@ -402,16 +415,17 @@ namespace CircularLogic.Data
 
             blogPost.BlogPostID = (int)dr["BlogPostID"];
             blogPost.Category.CategoryID = (int)dr["CategoryID"];
-            blogPost.UserID = (string)dr["UserID"];
+            blogPost.UserID = (string)dr["UserName"];
             blogPost.Title = (string)dr["Title"];
             blogPost.HtmlContent = (string)dr["TextBody"];
-            blogPost.PostTime = (DateTime)dr["PostTime"];
-            blogPost.Expiration = (DateTime)dr["ExpirationTime"];
+            blogPost.PostTime = dr["PostTime"] == DBNull.Value ? new DateTime() : (DateTime)dr["PostTime"];
+            blogPost.Expiration = dr["ExpirationTime"] == DBNull.Value ? new DateTime() : (DateTime)dr["ExpirationTime"];
             blogPost.UpdateTime = (DateTime)dr["UpdateTime"];
             blogPost.CreationTime = (DateTime)dr["CreationTime"];
             blogPost.IsApproved = (bool)dr["IsApproved"];
-            TagFromReader(dr);
-            ImageFromReader(dr);
+            blogPost.Tags = GetAllTagNameByBlogPostID(blogPost.BlogPostID);
+            blogPost.Image = GetBlogImageByBlogID(blogPost.BlogPostID);
+
             return blogPost;
         }
 
@@ -435,9 +449,45 @@ namespace CircularLogic.Data
         private Category CategoryFromReader(SqlDataReader dr)
         {
             Category cat = new Category();
-            cat.CategoryID = (int) dr["CategoryID"];
-            cat.Name = (string) dr["CategoryName"];
+            cat.CategoryID = (int)dr["CategoryID"];
+            cat.Name = (string)dr["CategoryName"];
             return cat;
         }
+
+        public List<QueuedBP> GetAdminQueue()
+        {
+            List<QueuedBP> bps = new List<QueuedBP>();
+            using (SqlConnection cn =
+                new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "GetAdminQueue";
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Connection = cn;
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        QueuedBP qbp = new QueuedBP();
+                        qbp.BlogPostID = (int)dr["BlogPostID"];
+                        int temp;
+                        int.TryParse(dr["OrigBlogPostID"].ToString(), out temp);
+                        qbp.OrigBlogPostID = temp;
+                        qbp.NewBlogPostID = (int)dr["NewBlogPostID"];
+                        qbp.QueueAction = (QueueAction)(int)dr["QueueActionID"];
+                        qbp.ContentQueueID = (int)dr["ContentQueueID"];
+                        qbp.UserID = (string)dr["UserID"];
+                        qbp.Title = (string)dr["Title"];
+                        qbp.CreationTime = (DateTime)dr["CreationTime"];
+                        bps.Add(qbp);
+                    }
+                    return bps;
+                }
+            }
+        } 
     }
 }
