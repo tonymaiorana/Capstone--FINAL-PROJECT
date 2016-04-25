@@ -206,6 +206,9 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\glyphicons-halflings-white.png" />
     <Content Include="Content\Images\glyphicons-halflings.png" />
+    <Content Include="Content\Images\social-icons-sprite.png" />
+    <Content Include="Content\Images\social-icons.png" />
+    <Content Include="Content\jquery.share.css" />
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -277,6 +280,7 @@
     <Content Include="Scripts\app\jquery-validate-defaults.js" />
     <Content Include="Scripts\app\bootstrap-tagmanager.css" />
     <Content Include="Scripts\app\bootstrap-tagmanager.js" />
+    <Content Include="Scripts\app\jquery.share.js" />
     <Content Include="Scripts\app\snarl.min.css" />
     <Content Include="Scripts\app\snarl.min.js" />
     <Content Include="Scripts\bootstrap.js" />

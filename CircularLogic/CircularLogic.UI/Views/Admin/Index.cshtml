@@ -231,7 +231,7 @@
                     .success(function() {
                         Snarl.addNotification({
                             title: 'Category Removed',
-                            text: 'The category has been successfully removed'
+                            text: 'The category has been successful'
                         });
                         closestTR.remove();
                     })
@@ -288,7 +288,10 @@
                 };
                 $.post(uriAdmin, AllowDeny)
                     .done(function() {
-                        alert("Success");
+                        Snarl.addNotification({
+                            title: 'Success',
+                            text: 'The your queue has been successfully updated'
+                        });
                         rowsChanged.forEach(function(item) {
                             item.remove();
                         });
