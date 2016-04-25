@@ -501,6 +501,7 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\readme.md" />
     <Content Include="Scripts\tinymce\langs\readme.md" />
+    <Content Include="Views\Shared\_BlogTilePartial.cshtml" />
     <Content Include="Views\BlogPost\BlogPostDetail.cshtml" />
     <Content Include="Views\BlogPost\BlogHomePage.cshtml" />
   </ItemGroup>
