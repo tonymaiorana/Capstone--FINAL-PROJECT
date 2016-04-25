@@ -10,7 +10,7 @@ namespace CircularLogic.UI.Models
     {
         //public List<Category> Categories { get; set; }
         public Dictionary<Category, int> CategoryCountDictionary { get; set; }
-        public List<BlogPost> BlogPosts { get; set; }
+        public List<QueuedBP> BlogPosts { get; set; }
         public List<ApplicationUser> Users { get; set; }
     }
 }
