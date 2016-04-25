@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Dev's Round Table</title>
+    <link href="~/Content/tileTest.css" rel="stylesheet">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -30,11 +31,17 @@
         </div>
     </div>
     <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>@DateTime.Now.ToShortDateString() - Circular Logic &copy;</p>
-        </footer>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-9">
+                @RenderBody()
+                <hr />
+                <footer>
+                    <p>@DateTime.Now.ToShortDateString() - Circular Logic &copy;</p>
+                </footer>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

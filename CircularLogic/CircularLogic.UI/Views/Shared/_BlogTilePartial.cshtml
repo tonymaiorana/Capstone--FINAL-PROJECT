@@ -13,15 +13,15 @@
         <div class="tile-title-text ">@Model.BlogPost.Title</div>
     </div>
     <div class="tile-author-container">
-        <div class="tile-author">@Model.ContributorName</div>
+        <div class="tile-author">@Model.User.FirstName @Model.User.LastName</div>
     </div>
     <div class="tile-tags-container">
         <div class="tile-tags">
             @foreach (var tag in Model.BlogPost.Tags)
             {
-                tag.Name + ", ";
+                <span>tag.Name, </span>
             }
         </div>
     </div>
-    <div class="tile-fadeout" />
+    <div class="tile-fadeout"> </div>
 </div>

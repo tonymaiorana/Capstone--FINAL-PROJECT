@@ -1,0 +1,149 @@
+
+
+.blog-tile {
+	width: 320px;
+	height: 510px;	
+	box-shadow: 8px 8px 5px grey;
+	
+}
+
+.tile-title {
+	height: 45px;
+	background-color: #e79c00;
+	overflow: hidden;
+}
+
+.tile-title-text-container {
+	height: 1120x;
+	width: 320px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.tile-title-text {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 27px;
+	padding: 8px;
+	font-weight: 525;
+	overflow: hidden;
+}
+
+.tile-date {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 20px;
+	padding: 14px;
+	color: white;
+	font-weight: 100;
+	overflow: hidden;
+	text-align: middle;
+}
+
+.tile-image-container{
+	height: 192px;
+	width: 320px;
+	overflow: hidden;
+}
+
+.tile-image {
+
+}
+
+.tile-textbody-container{
+	width: 310px;
+	height: 220px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.tile-textbody {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
+	padding: 12px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.tile-fadeout {
+    position: relative; 
+    bottom: 8em;
+    height: 8em;
+    background: -webkit-linear-gradient(
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 1) 100%
+    ); 
+    background-image: -moz-linear-gradient(
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 1) 100%
+    );
+    background-image: -o-linear-gradient(
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 1) 100%
+    );
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 1) 100%
+    );
+    background-image: -ms-linear-gradient(
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 1) 100%
+    );
+} 
+
+.tile-author-container {
+	width: 310px;
+	height: 40px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.tile-author {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 18px;
+	padding: 8px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+
+}
+
+.tile-category-container{
+	width: 310px;
+	height: 40px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.tile-category {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 12px;
+	padding: 8px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	text-align: right;
+}
+
+.tile-tags-container{
+	width: 310px;
+	height: 106px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.tile-tags {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 12px;
+	padding: 6px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.tile-row-space {
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+}
+
+.tile-spacer {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    margin-left: 30px;
+}
+
