@@ -213,6 +213,7 @@
 </div>
 
 @section scripts{
+<script src="~/Scripts/app/snarl.min.js"></script>
     <script type="text/javascript">
         var uri = "/api/categoryAPI";
         $(document).ready(function () {
@@ -228,7 +229,10 @@
                         
                     })
                     .success(function() {
-                        alert("Success");
+                        Snarl.addNotification({
+                            title: 'Category Removed',
+                            text: 'The category has been successfully removed'
+                        });
                         closestTR.remove();
                     })
                     .fail(function(jqXhr, status, err) {
