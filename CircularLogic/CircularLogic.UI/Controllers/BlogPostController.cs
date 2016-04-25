@@ -18,52 +18,52 @@ namespace CircularLogic.UI.Controllers
         private BlogRepository _repo = new BlogRepository();
 
         // GET: BlogPost
-        public ActionResult Index()
-        {
-            ApplicationUser au = new ApplicationUser
-            {
-                FirstName = "Bill",
-                LastName = "Poulson"
-            };
-            List<Tag> tags = new List<Tag>();
-            Tag newTag = new Tag
-            {
-                Name = "whoa a tag",
-                TagID = 1
-            };
-            tags.Add(newTag);
-            tags.Add(newTag);
-            tags.Add(newTag);
-            BlogPost bp = new BlogPost
-            {
-                Title = "This is a Blog Post Broski",
-                Tags = tags
-            };
+        //public ActionResult Index()
+        //{
+        //ApplicationUser au = new ApplicationUser
+        //{
+        //    FirstName = "Bill",
+        //    LastName = "Poulson"
+        //};
+        //List<Tag> tags = new List<Tag>();
+        //Tag newTag = new Tag
+        //{
+        //    Name = "whoa a tag",
+        //    TagID = 1
+        //};
+        //tags.Add(newTag);
+        //tags.Add(newTag);
+        //tags.Add(newTag);
+        //BlogPost bp = new BlogPost
+        //{
+        //    Title = "This is a Blog Post Broski",
+        //    Tags = tags
+        //};
 
-            List<BlogPostViewModel> blogPostViewModels = new List<BlogPostViewModel>();
+        //List<BlogPostViewModel> blogPostViewModels = new List<BlogPostViewModel>();
 
-            BlogPostViewModel one = new BlogPostViewModel(bp)
-            {
-                User = au
-            };
-            BlogPostViewModel two = new BlogPostViewModel(bp)
-            {
-                User = au
-            };
-            BlogPostViewModel three = new BlogPostViewModel(bp)
-            {
-                User = au
-            };
-            BlogPostViewModel four = new BlogPostViewModel(bp)
-            {
-                User = au
-            };
-            blogPostViewModels.Add(one);
-            blogPostViewModels.Add(two);
-            blogPostViewModels.Add(three);
-            blogPostViewModels.Add(four);
-            return View("BlogHomePage", blogPostViewModels);
-        }
+        //BlogPostViewModel one = new BlogPostViewModel(bp)
+        //{
+        //    User = au
+        //};
+        //BlogPostViewModel two = new BlogPostViewModel(bp)
+        //{
+        //    User = au
+        //};
+        //BlogPostViewModel three = new BlogPostViewModel(bp)
+        //{
+        //    User = au
+        //};
+        //BlogPostViewModel four = new BlogPostViewModel(bp)
+        //{
+        //    User = au
+        //};
+        //blogPostViewModels.Add(one);
+        //blogPostViewModels.Add(two);
+        //blogPostViewModels.Add(three);
+        //blogPostViewModels.Add(four);
+        //    return View("BlogHomePage", blogPostViewModels);
+        //}
 
         // GET: BlogPost / Create
         [Authorize]
@@ -99,7 +99,13 @@ namespace CircularLogic.UI.Controllers
         {
             var allPosts = _repo.GetAllBlogPosts().Where(p => p.IsApproved).OrderByDescending(p => p.CreationTime);
 
-            return View();
+            var listOfBlogViewModels = new List<BlogPostViewModel>();
+            foreach (var blogPost in allPosts)
+            {
+                BlogPostViewModel bpVM = new BlogPostViewModel(blogPost);
+                listOfBlogViewModels.Add(bpVM);
+            }
+            return View("BlogHomePage", listOfBlogViewModels);
         }
     }
 }

@@ -27,5 +27,13 @@ namespace CircularLogic.UI.Models
                 CategoryList.Add(new SelectListItem() { Text = category.Name, Value = category.CategoryID.ToString() });
             }
         }
+
+        public BlogPostViewModel(BlogPost bp)
+        {
+            BlogPost = bp;
+
+            var context = new ApplicationDbContext();
+            User = context.Users.ToList().FirstOrDefault(u => u.Id == bp.UserID);
+        }
     }
 }
