@@ -20,7 +20,7 @@ namespace CircularLogic.Models
 
         public DateTime? PostTime { get; set; }
         public DateTime? Expiration { get; set; }
-        public DateTime? CreationTime { get; set; }
+        public DateTime CreationTime { get; set; }
         public DateTime UpdateTime { get; set; }
         public List<Tag> Tags { get; set; }
 
