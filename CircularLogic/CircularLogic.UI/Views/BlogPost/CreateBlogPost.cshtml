@@ -14,6 +14,7 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <div class="form-group">
+        @Html.HiddenFor(model => model.BlogPost.UserID)
         @Html.LabelFor(model => model.BlogPost.Title, new { @class = "control-label " })
         @Html.EditorFor(model => model.BlogPost.Title, new { HtmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.BlogPost.Title, "", new { @class = "text-danger" })
