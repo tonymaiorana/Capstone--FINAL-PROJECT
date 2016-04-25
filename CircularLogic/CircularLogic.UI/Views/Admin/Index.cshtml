@@ -7,8 +7,6 @@
 <h2>Administrator Dashboard</h2>
 
 
-
-
 <div id="exTab3" class="container">
     <ul class="nav nav-pills">
         <li class="active">
@@ -37,32 +35,36 @@
                         <div class="panel-body">
                             <table class="table">
                                 <thead>
-                                    <tr>
-                                        <td>Title</td>
-                                        <td>Author</td>
-                                        <td>Date Submitted</td>
-                                        <td>Approve</td>
-                                        <td>Deny</td>
-                                    </tr>
+                                <tr>
+                                    <td>Title</td>
+                                    <td>Author</td>
+                                    <td>Date Submitted</td>
+                                    <td>Approve</td>
+                                    <td>Deny</td>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (BlogPost bp in Model.BlogPosts)
+                                @foreach (BlogPost bp in Model.BlogPosts.Where(b => b.QueueAction == QueueAction.New))
                                 {
                                     <tr>
-                                        <td>@bp.Title</td>
-                                        <td>@bp.User.LastName</td>
-                                        <td>@bp.CreationTime.Value.ToShortDateString()</td>
                                         <td>
-                                            <input type="checkbox" />
+                                            @bp.Title
+                                            <input type="hidden" value="@bp.BlogPostID" class="hidden new"/>
+                                        </td>
+                                        <td>@bp.UserID</td>
+                                        <td>@bp.CreationTime.ToShortDateString()</td>
+                                        <td>
+                                            <input type="checkbox" class="newCB allow"/>
                                         </td>
                                         <td>
-                                            <input type="checkbox" />
+                                            <input type="checkbox" class="newCB deny"/>
                                         </td>
                                     </tr>
                                 }
                                 </tbody>
                             </table>
-                            <button type="submit">Submit</button>
+                            <button type="submit" id="newQueue">Submit</button>
+
                         </div>
                     </div>
                 </div>
@@ -79,32 +81,37 @@
                         <div class="panel-body">
                             <table class="table">
                                 <thead>
-                                    <tr>
-                                        <td>Title</td>
-                                        <td>Author</td>
-                                        <td>Date Submitted</td>
-                                        <td>Approve</td>
-                                        <td>Deny</td>
-                                    </tr>
+                                <tr>
+                                    <td>Title</td>
+                                    <td>Author</td>
+                                    <td>Date Submitted</td>
+                                    <td>Approve</td>
+                                    <td>Deny</td>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (BlogPost bp in Model.BlogPosts)
+                                <tr>
+                                @foreach (BlogPost bp in Model.BlogPosts.Where(b => b.QueueAction == QueueAction.Edit))
                                 {
                                     <tr>
-                                        <td>@bp.Title</td>
-                                        <td>@bp.User.LastName</td>
-                                        <td>@bp.CreationTime.Value.ToShortDateString()</td>
                                         <td>
-                                            <input type="checkbox" />
+                                            @bp.Title
+                                            <input type="hidden" value="@bp.BlogPostID" class="hidden edit"/>
+                                        </td>
+                                        <td>@bp.UserID</td>
+                                        <td>@bp.CreationTime.ToShortDateString()</td>
+                                        <td>
+                                            <input type="checkbox" class="editCB allow"/>
                                         </td>
                                         <td>
-                                            <input type="checkbox" />
+                                            <input type="checkbox" class="editCB deny"/>
                                         </td>
                                     </tr>
                                 }
                                 </tbody>
                             </table>
-                            <button type="submit">Submit</button>
+                            <button type="submit" id="editQueue">Submit</button>
+
                         </div>
                     </div>
                 </div>
@@ -121,71 +128,76 @@
                         <div class="panel-body">
                             <table class="table">
                                 <thead>
-                                    <tr>
-                                        <td>Title</td>
-                                        <td>Author</td>
-                                        <td>Date Submitted</td>
-                                        <td>Approve</td>
-                                        <td>Deny</td>
-                                    </tr>
+                                <tr>
+                                    <td>Title</td>
+                                    <td>Author</td>
+                                    <td>Date Submitted</td>
+                                    <td>Approve</td>
+                                    <td>Deny</td>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (BlogPost bp in Model.BlogPosts)
-                                    {
+                                @foreach (BlogPost bp in Model.BlogPosts.Where(b => b.QueueAction == QueueAction.Delete))
+                                {
                                     <tr>
-                                        <td>@bp.Title</td>
-                                        <td>@bp.User.LastName</td>
-                                        <td>@bp.CreationTime.Value.ToShortDateString()</td>
                                         <td>
-                                            <input type="checkbox" />
+                                            @bp.Title
+                                            <input type="hidden" value="@bp.BlogPostID" class="hidden delete"/>
+                                        </td>
+                                        <td>@bp.UserID</td>
+                                        <td>@bp.CreationTime.ToShortDateString()</td>
+                                        <td>
+                                            <input type="checkbox" class="deleteCB allow"/>
                                         </td>
                                         <td>
-                                            <input type="checkbox" />
+                                            <input type="checkbox" class="deleteCB deny"/>
                                         </td>
                                     </tr>
-                                    }
+                                }
                                 </tbody>
                             </table>
-                            <button type="submit">Submit</button>
+                            <button type="submit" id="deleteQueue">Submit</button>
+
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
-            <div class="tab-pane" id="2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">Categories</h4>
-                    </div>
-                    <div class="panel-body">
-                        <table>
-                            <thead>
-                            <tr>
-                                <td>Category Name</td>
-                                <td>Blogs in Category</td>
-                                <td>Action</td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach (KeyValuePair<Category, int> c in Model.CategoryCountDictionary)
-                            {
-                                <td>@c.Key.Name</td>
-                                <td>@c.Value</td>
-                                <td>
-                                    <button class="btn btn-danger btn-sm catDelete" type="submit" id=@Html.Raw(c.Key.CategoryID)><span class="glyphicon glyphicon-trash"></span></button>
-                                </td>
-                            }
-                            </tbody>
-                        </table>
-                    </div>
-                        @*<div class="panel-footer">Panel Footer</div>*@
+        </div>
+        <div class="tab-pane" id="2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Categories</h4>
                 </div>
-            </div>
-            <div class="tab-pane" id="3">
-                <h3>Coming Soon</h3>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <td>Category Name</td>
+                            <td>Blogs in Category</td>
+                            <td>Action</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (KeyValuePair<Category, int> c in Model.CategoryCountDictionary)
+                        {
+                            <td>@c.Key.Name</td>
+                            <td>@c.Value</td>
+                            <td>
+                                <button class="btn btn-danger btn-sm catDelete" type="submit" id=@Html.Raw(c.Key.CategoryID)>
+                                    <span class="glyphicon glyphicon-trash"></span></button>
+                            </td>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+                @*<div class="panel-footer">Panel Footer</div>*@
             </div>
         </div>
+        <div class="tab-pane" id="3">
+            <h3>Coming Soon</h3>
+        </div>
     </div>
+</div>
 
 @section scripts{
     <script type="text/javascript">
@@ -209,9 +221,40 @@
         });
 
     </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('input.newCB').on('change', function() {
+                $(this).closest('tr').find('input.newCB').not(this).prop('checked', false);
+            });
+
+            $('input.editCB').on('change', function() {
+                $(this).closest('tr').find('input.editCB').not(this).prop('checked', false);
+            });
+
+            $('input.deleteCB').on('change', function() {
+                $(this).closest('tr').find('input.deleteCB').not(this).prop('checked', false);
+            });
+
+            $('#newQueue').on('click', function() {
+
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#newQueue').on('click', function() {
+                var allowedBlogPosts = [];
+                $('input.newCB.allow').each(function() {
+                    if (this.checked) {
+                        allowedBlogPosts.push($(this).closest('tr').find('input.hidden').val());
+                    }
+                });
+            });
+        });
+    </script>
+
     @*
-        -script to prevent allow and deny being checked at the same time
-        -build form around allow and deny
         -add link to view a blog post
         *@
 }

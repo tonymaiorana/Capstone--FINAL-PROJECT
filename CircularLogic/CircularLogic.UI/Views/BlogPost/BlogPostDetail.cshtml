@@ -1,0 +1,16 @@
+﻿@model CircularLogic.Models.BlogPost
+
+@{
+    ViewBag.Title = "BlogPostDetail";
+}
+<h2>Blog Post Details</h2>
+@*TODO: Further review (Hannah)*@
+<div class="row">
+    <div class="col-md-12">
+        <h3>@Model.Title</h3>
+
+        <p>@Html.Raw(Model.HtmlContent)</p>
+        <p>Tags: @Model.Tags</p>
+        <p>Categories: @Model.Category.CategoryID</p>
+    </div>
+</div>

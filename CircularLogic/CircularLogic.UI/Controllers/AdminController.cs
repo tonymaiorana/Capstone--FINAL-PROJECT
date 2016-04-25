@@ -16,7 +16,8 @@ namespace CircularLogic.UI.Controllers
         {
             AdminIndexVM aivm = new AdminIndexVM();
             aivm.BlogPosts = new List<BlogPost>();
-            aivm.BlogPosts.Add(new BlogPost() {CreationTime = DateTime.Now, Title  = "Test Title"});
+            aivm.BlogPosts.Add(new BlogPost() {CreationTime = DateTime.Now, Title  = "Test Title", QueueAction = QueueAction.New} );
+            aivm.BlogPosts.Add(new BlogPost() {CreationTime = DateTime.Now, Title  = "Test Title", QueueAction = QueueAction.New, BlogPostID = 5});
             aivm.CategoryCountDictionary = new Dictionary<Category, int>();
             aivm.CategoryCountDictionary.Add(new Category() {CategoryID = 5, Name = "Test"}, 3);
             return View(aivm);

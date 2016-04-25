@@ -15,10 +15,10 @@ SET QUOTED_IDENTIFIER ON
 GO
 -- =============================================
 -- Author:		<Author,,Tony Maiorana>
--- Create date: <Create Date,,4/24/2016>
--- Description:	<Description,,Get All Blogs>
+-- Create date: <Create Date,,4/25/2016>
+-- Description:	<Description,,Get All Categories>
 -- =============================================
-CREATE PROCEDURE GetAllBlogs
+CREATE PROCEDURE GetAllCategories
 	-- Add the parameters for the stored procedure here
 AS
 BEGIN
@@ -27,9 +27,6 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	SELECT c.CategoryName, bp.Title, bp.UserID, bp.TextBody, bp.PostTime FROM BlogPost bp
-	INNER JOIN Category c
-	 ON c.CategoryID = bp.CategoryID
-	  WHERE bp.IsApproved = 1 AND bp.IsDeleted = 0
+	SELECT * FROM Category
 END
 GO
