@@ -26,7 +26,7 @@ namespace CircularLogic.UI.Controllers
         {
             string name = User.Identity.Name;
             string id = new ApplicationDbContext().Users.FirstOrDefault(u => u.UserName == name).Id;
-            var CreateBlogPostVM = new BlogPostViewModel(new BlogPost() { UserID = id });
+            var CreateBlogPostVM = new BlogPostViewModel(new BlogPost() { UserID = id }, _repo.GetAllCategories());
             return View("CreateBlogPost", CreateBlogPostVM);
         }
 
@@ -34,6 +34,9 @@ namespace CircularLogic.UI.Controllers
         [HttpPost]
         public ActionResult CreateBlogPost(BlogPost blogPost)
         {
+            blogPost.CreationTime = DateTime.Now;
+            blogPost.UpdateTime = DateTime.Now;
+
             _repo.CreateBlogPost(blogPost);
 
             return RedirectToAction("BlogHome");

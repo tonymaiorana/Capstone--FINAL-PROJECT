@@ -13,19 +13,19 @@ namespace CircularLogic.UI.Models
         public ApplicationUser User { get; set; }
         public List<SelectListItem> CategoryList { get; set; }
 
-        public BlogPostViewModel(BlogPost bp)
+        public BlogPostViewModel(BlogPost bp, List<Category> categories)
+
         {
             BlogPost = bp;
 
             var context = new ApplicationDbContext();
             User = context.Users.ToList().FirstOrDefault(u => u.Id == bp.UserID);
-            //Will change listed items text and value once we confirm the categories (Hannah)
-            CategoryList = new List<SelectListItem>
+
+            CategoryList = new List<SelectListItem>();
+            foreach (var category in categories)
             {
-                new SelectListItem {Text = "Web Development", Value = "1"},
-                new SelectListItem {Text = "Databases", Value = "2"},
-                new SelectListItem {Text = "Object-oriented Programming", Value = "3"},
-            };
+                CategoryList.Add(new SelectListItem() { Text = category.Name, Value = category.CategoryID.ToString() });
+            }
         }
     }
 }

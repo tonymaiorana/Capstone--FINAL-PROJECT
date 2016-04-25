@@ -201,7 +201,7 @@ namespace CircularLogic.Data
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = "GetBlogPostByBlogPostID";
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@BlogPostID", blogID);
+                cmd.Parameters.AddWithValue("@BlogID", blogID);
 
                 cmd.Connection = cn;
 
@@ -215,6 +215,8 @@ namespace CircularLogic.Data
                     }
                 }
             }
+            GetAllTagNameByBlogPostID(blogPost.BlogPostID);
+            GetBlogImageByBlogID(blogPost.BlogPostID);
             return blogPost;
         }
 
@@ -264,6 +266,11 @@ namespace CircularLogic.Data
                         blogPosts.Add(BlogPostFromReader(dr));
                     }
                 }
+            }
+            foreach (BlogPost blogPost in blogPosts)
+            {
+                blogPost.Tags = GetAllTagNameByBlogPostID(blogPost.BlogPostID);
+                blogPost.Image = GetBlogImageByBlogID(blogPost.BlogPostID);
             }
             return blogPosts;
         }
@@ -340,6 +347,11 @@ namespace CircularLogic.Data
                         blogPosts.Add(BlogPostFromReader(dr));
                     }
                 }
+                foreach (BlogPost blogPost in blogPosts)
+                {
+                    blogPost.Tags = GetAllTagNameByBlogPostID(blogPost.BlogPostID);
+                    blogPost.Image = GetBlogImageByBlogID(blogPost.BlogPostID);
+                }
             }
             return blogPosts;
         }
@@ -370,14 +382,14 @@ namespace CircularLogic.Data
             return blogPosts;
         }
 
-        public List<Tag> GetAllTagNameByBlogID(int blogID)
+        public List<Tag> GetAllTagNameByBlogPostID(int blogID)
         {
             List<Tag> tags = new List<Tag>();
             using (SqlConnection cn =
                 new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = "GetAllTagNameByBlogID";
+                cmd.CommandText = "GetAllTagNameByBlogPostID";
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@BlogPostID", blogID);
 
@@ -405,8 +417,8 @@ namespace CircularLogic.Data
             blogPost.UserID = (string)dr["UserID"];
             blogPost.Title = (string)dr["Title"];
             blogPost.HtmlContent = (string)dr["TextBody"];
-            blogPost.PostTime = (DateTime)dr["PostTime"];
-            blogPost.Expiration = (DateTime)dr["ExpirationTime"];
+            blogPost.PostTime = dr["PostTime"] == DBNull.Value ? new DateTime() : (DateTime)dr["PostTime"];
+            blogPost.Expiration = dr["ExpirationTime"] == DBNull.Value ? new DateTime() : (DateTime)dr["ExpirationTime"];
             blogPost.UpdateTime = (DateTime)dr["UpdateTime"];
             blogPost.CreationTime = (DateTime)dr["CreationTime"];
             blogPost.IsApproved = (bool)dr["IsApproved"];
@@ -435,8 +447,8 @@ namespace CircularLogic.Data
         private Category CategoryFromReader(SqlDataReader dr)
         {
             Category cat = new Category();
-            cat.CategoryID = (int) dr["CategoryID"];
-            cat.Name = (string) dr["CategoryName"];
+            cat.CategoryID = (int)dr["CategoryID"];
+            cat.Name = (string)dr["CategoryName"];
             return cat;
         }
 
