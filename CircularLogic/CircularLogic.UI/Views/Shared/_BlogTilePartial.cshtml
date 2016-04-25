@@ -1,0 +1,27 @@
+﻿@model CircularLogic.UI.Models.BlogPostViewModel
+
+<div class="blog-tile">
+    <div class="tile-title">
+        <div class="tile-date">@Model.BlogPost.CreationTime.ToShortDateString()</div>
+    </div>
+    <div class="tile-image-container">
+        <div class="tile-image">
+            <img src="" style='height: 100%; width: 100%; object-fit: contain'>
+        </div>
+    </div>
+    <div class="tile-title-text-container">
+        <div class="tile-title-text ">@Model.BlogPost.Title</div>
+    </div>
+    <div class="tile-author-container">
+        <div class="tile-author">@Model.ContributorName</div>
+    </div>
+    <div class="tile-tags-container">
+        <div class="tile-tags">
+            @foreach (var tag in Model.BlogPost.Tags)
+            {
+                tag.Name + ", ";
+            }
+        </div>
+    </div>
+    <div class="tile-fadeout" />
+</div>

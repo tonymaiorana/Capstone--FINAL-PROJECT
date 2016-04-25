@@ -15,7 +15,7 @@
         <li>
             <a href="#2" data-toggle="tab">Category Management</a>
         </li>
-        <li>
+        <li class="disabled">
             <a href="#3" data-toggle="tab">User Management</a>
         </li>
     </ul>
@@ -202,8 +202,10 @@
 @section scripts{
     <script type="text/javascript">
         var uri = "../api/categoryAPI";
-        $(document).ready(function() {
+        $(document).ready(function () {
+            
             $('.catDelete').click(function() {
+                var closestTR = $(this).closest('tr');
                 var t = this.id;
                 var OtherPost = {
                     id: t,
@@ -212,7 +214,7 @@
                 $.post(uri, OtherPost)
                     .done(function() {
                         alert("Success");
-                        $(this).closest('tr').remove();
+                        closestTR.remove();
                     })
                     .fail(function(jqXhr, status, err) {
                         alert((status + ' - ' + err));
@@ -242,24 +244,54 @@
     </script>
 
     <script type="text/javascript">
-        $(document).ready(function() {
-            $('#newQueue').on('click', function() {
+        var uri = "../api/adminAPI";
+
+        function setCheckBoxes(buttonID, checkBoxClass) {
+            $(buttonID).on('click', function() {
                 var allowedBlogPosts = [];
-                $('input.newCB.allow').each(function() {
+                var deniedBlogPosts = [];
+                var rowsChanged = [];
+                $('input.' + checkBoxClass + '.allow').each(function() {
                     if (this.checked) {
                         allowedBlogPosts.push($(this).closest('tr').find('input.hidden').val());
-                    }
+                        rowsChanged.push($(this).closest('tr'));
+                    };
                 });
+                $('input.' + checkBoxClass + '.deny').each(function() {
+                    if (this.checked) {
+                        deniedBlogPosts.push($(this).closest('tr').find('input.hidden').val());
+                        rowsChanged.push($(this).closest('tr'));
+                    };
+                });
+                var AllowDeny = {
+                    allowedBP: allowedBlogPosts,
+                    deniedBP: deniedBlogPosts
+                };
+                $.post(uri, AllowDeny)
+                    .done(function() {
+                        alert("Success");
+                        rowsChanged.forEach(function(item) {
+                            item.remove();
+                        });
+                    })
+                    .fail(function(jqXhr, status, err) {
+                        alert((status + ' - ' + err));
+                    });
             });
+        };
+
+        $(document).ready(function() {
+            setCheckBoxes('#newQueue', 'newCB');
+            setCheckBoxes('#editQueue', 'editCB');
+            setCheckBoxes('#deleteQueue', 'deleteCB');
+
         });
     </script>
 
-    @*
-        -add link to view a blog post
-        *@
+
 }
 
-
+@*    -add link to view a blog post    *@
 @*
     The page will have 3 tabs inside the body
 
