@@ -215,6 +215,8 @@ namespace CircularLogic.Data
                     }
                 }
             }
+            GetAllTagNameByBlogPostID(blogPost.BlogPostID);
+            GetBlogImageByBlogID(blogPost.BlogPostID);
             return blogPost;
         }
 
@@ -264,6 +266,11 @@ namespace CircularLogic.Data
                         blogPosts.Add(BlogPostFromReader(dr));
                     }
                 }
+            }
+            foreach (BlogPost blogPost in blogPosts)
+            {
+                blogPost.Tags = GetAllTagNameByBlogPostID(blogPost.BlogPostID);
+                blogPost.Image = GetBlogImageByBlogID(blogPost.BlogPostID);
             }
             return blogPosts;
         }
@@ -339,6 +346,11 @@ namespace CircularLogic.Data
                     {
                         blogPosts.Add(BlogPostFromReader(dr));
                     }
+                }
+                foreach (BlogPost blogPost in blogPosts)
+                {
+                    blogPost.Tags = GetAllTagNameByBlogPostID(blogPost.BlogPostID);
+                    blogPost.Image = GetBlogImageByBlogID(blogPost.BlogPostID);
                 }
             }
             return blogPosts;
