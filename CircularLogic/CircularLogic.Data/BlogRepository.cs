@@ -253,7 +253,7 @@ namespace CircularLogic.Data
                 new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = "GetAllBlogPost";
+                cmd.CommandText = "GetAllBlogs";
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Connection = cn;
@@ -488,6 +488,6 @@ namespace CircularLogic.Data
                     return bps;
                 }
             }
-        } 
+        }
     }
 }
