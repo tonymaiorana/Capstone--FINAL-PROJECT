@@ -31,6 +31,5 @@ namespace CircularLogic.Models
 
         public Image Image { get; set; }
         public Category Category { get; set; }
-        public QueueAction QueueAction { get; set; }
     }
 }

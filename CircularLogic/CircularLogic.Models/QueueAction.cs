@@ -2,7 +2,7 @@
 {
     public enum QueueAction
     {
-        New,
+        New = 1,
         Edit,
         Delete,
         Original

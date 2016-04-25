@@ -44,7 +44,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach (BlogPost bp in Model.BlogPosts.Where(b => b.QueueAction == QueueAction.New))
+                                @foreach (QueuedBP bp in Model.BlogPosts.Where(b => b.QueueAction == QueueAction.New))
                                 {
                                     <tr>
                                         <td>
@@ -52,7 +52,7 @@
                                             <input type="hidden" value="@bp.BlogPostID" class="hidden new"/>
                                         </td>
                                         <td>@bp.UserID</td>
-                                        <td>@bp.CreationTime.ToShortDateString()</td>
+                                        <td>@bp.CreationTime.Value.ToShortDateString()</td>
                                         <td>
                                             <input type="checkbox" class="newCB allow"/>
                                         </td>
@@ -91,7 +91,7 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                @foreach (BlogPost bp in Model.BlogPosts.Where(b => b.QueueAction == QueueAction.Edit))
+                                @foreach (QueuedBP bp in Model.BlogPosts.Where(b => b.QueueAction == QueueAction.Edit))
                                 {
                                     <tr>
                                         <td>
@@ -99,7 +99,7 @@
                                             <input type="hidden" value="@bp.BlogPostID" class="hidden edit"/>
                                         </td>
                                         <td>@bp.UserID</td>
-                                        <td>@bp.CreationTime.ToShortDateString()</td>
+                                        <td>@bp.CreationTime.Value.ToShortDateString()</td>
                                         <td>
                                             <input type="checkbox" class="editCB allow"/>
                                         </td>
@@ -137,7 +137,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach (BlogPost bp in Model.BlogPosts.Where(b => b.QueueAction == QueueAction.Delete))
+                                @foreach (QueuedBP bp in Model.BlogPosts.Where(b => b.QueueAction == QueueAction.Delete))
                                 {
                                     <tr>
                                         <td>
@@ -145,7 +145,7 @@
                                             <input type="hidden" value="@bp.BlogPostID" class="hidden delete"/>
                                         </td>
                                         <td>@bp.UserID</td>
-                                        <td>@bp.CreationTime.ToShortDateString()</td>
+                                        <td>@bp.CreationTime.Value.ToShortDateString()</td>
                                         <td>
                                             <input type="checkbox" class="deleteCB allow"/>
                                         </td>
@@ -182,9 +182,19 @@
                         {
                             <td>@c.Key.Name</td>
                             <td>@c.Value</td>
-                            <td>
+                            <td>@if (c.Value > 0)
+                                {
+                                    <button class="btn btn-danger btn-sm catDelete" type="submit" id=@Html.Raw(c.Key.CategoryID)>
+                                        <span class="glyphicon glyphicon-trash disabled"></span>
+                                    </button>
+                            }
+                            else
+                            {
                                 <button class="btn btn-danger btn-sm catDelete" type="submit" id=@Html.Raw(c.Key.CategoryID)>
-                                    <span class="glyphicon glyphicon-trash"></span></button>
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            }
+
                             </td>
                         }
                         </tbody>

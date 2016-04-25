@@ -439,5 +439,41 @@ namespace CircularLogic.Data
             cat.Name = (string) dr["CategoryName"];
             return cat;
         }
+
+        public List<QueuedBP> GetAdminQueue()
+        {
+            List<QueuedBP> bps = new List<QueuedBP>();
+            using (SqlConnection cn =
+                new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "GetAdminQueue";
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Connection = cn;
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        QueuedBP qbp = new QueuedBP();
+                        qbp.BlogPostID = (int)dr["BlogPostID"];
+                        int temp;
+                        int.TryParse(dr["OrigBlogPostID"].ToString(), out temp);
+                        qbp.OrigBlogPostID = temp;
+                        qbp.NewBlogPostID = (int)dr["NewBlogPostID"];
+                        qbp.QueueAction = (QueueAction)(int)dr["QueueActionID"];
+                        qbp.ContentQueueID = (int)dr["ContentQueueID"];
+                        qbp.UserID = (string)dr["UserID"];
+                        qbp.Title = (string)dr["Title"];
+                        qbp.CreationTime = (DateTime)dr["CreationTime"];
+                        bps.Add(qbp);
+                    }
+                    return bps;
+                }
+            }
+        } 
     }
 }
