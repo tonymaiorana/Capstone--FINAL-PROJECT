@@ -486,6 +486,96 @@ namespace CircularLogic.Data
                     return bps;
                 }
             }
+        }
+
+        public void AdminQueueUpdate(int[] allow, int[] deny)
+        {
+            if (allow != null && allow.Length > 0)
+            {
+                foreach (int i in allow)
+                {
+                    using (
+                    SqlConnection cn =
+                        new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
+                    {
+                        SqlCommand cmd = new SqlCommand();
+                        cmd.CommandText = "AdminQueueUpdate";
+                        cmd.Parameters.AddWithValue("@ContentQueueID", i);
+                        cmd.Parameters.AddWithValue("@Allow", 1);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Connection = cn;
+                        cn.Open();
+                        cmd.ExecuteNonQuery();
+                        cn.Close();
+                    }
+                }
+            }
+
+            if (deny != null && deny.Length > 0)
+            {
+                foreach (int i in deny)
+                {
+                    using (
+                   SqlConnection cn =
+                       new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
+                    {
+                        SqlCommand cmd = new SqlCommand();
+                        cmd.CommandText = "AdminQueueUpdate";
+                        cmd.Parameters.AddWithValue("@ContentQueueID", i);
+                        cmd.Parameters.AddWithValue("@Allow", 0);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Connection = cn;
+                        cn.Open();
+                        cmd.ExecuteNonQuery();
+                        cn.Close();
+                    }
+                }
+            }
+
+           
+        }
+
+        public void DeleteCategory(int id)
+        {
+            using (
+               SqlConnection cn =
+                   new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.CommandText = "DeleteCategory";
+                    cmd.Parameters.AddWithValue("@CategoryID", id);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection = cn;
+                    cn.Open();
+                    cmd.ExecuteNonQuery();
+                    cn.Close();
+                }
+            
+        }
+
+        public Dictionary<Category, int> GetCategoryCount()
+        {
+            Dictionary<Category, int> categoryDict = new Dictionary<Category, int>();
+            using (SqlConnection cn =
+                new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "CategoryCount";
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Connection = cn;
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        categoryDict.Add(CategoryFromReader(dr), int.Parse(dr["TotalMentions"].ToString()));
+                    }
+                }
+            }
+            return categoryDict;
         } 
     }
 }

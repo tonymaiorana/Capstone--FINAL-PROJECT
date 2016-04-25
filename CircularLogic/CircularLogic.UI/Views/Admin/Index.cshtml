@@ -49,7 +49,7 @@
                                     <tr>
                                         <td>
                                             @bp.Title
-                                            <input type="hidden" value="@bp.BlogPostID" class="hidden new"/>
+                                            <input type="hidden" value="@bp.ContentQueueID" class="hidden new"/>
                                         </td>
                                         <td>@bp.UserID</td>
                                         <td>@bp.CreationTime.Value.ToShortDateString()</td>
@@ -96,7 +96,7 @@
                                     <tr>
                                         <td>
                                             @bp.Title
-                                            <input type="hidden" value="@bp.BlogPostID" class="hidden edit"/>
+                                            <input type="hidden" value="@bp.ContentQueueID" class="hidden edit"/>
                                         </td>
                                         <td>@bp.UserID</td>
                                         <td>@bp.CreationTime.Value.ToShortDateString()</td>
@@ -142,7 +142,7 @@
                                     <tr>
                                         <td>
                                             @bp.Title
-                                            <input type="hidden" value="@bp.BlogPostID" class="hidden delete"/>
+                                            <input type="hidden" value="@bp.ContentQueueID" class="hidden delete"/>
                                         </td>
                                         <td>@bp.UserID</td>
                                         <td>@bp.CreationTime.Value.ToShortDateString()</td>
@@ -180,22 +180,25 @@
                         <tbody>
                         @foreach (KeyValuePair<Category, int> c in Model.CategoryCountDictionary)
                         {
-                            <td>@c.Key.Name</td>
-                            <td>@c.Value</td>
-                            <td>@if (c.Value > 0)
-                                {
-                                    <button class="btn btn-danger btn-sm catDelete" type="submit" id=@Html.Raw(c.Key.CategoryID)>
-                                        <span class="glyphicon glyphicon-trash disabled"></span>
-                                    </button>
-                            }
-                            else
-                            {
-                                <button class="btn btn-danger btn-sm catDelete" type="submit" id=@Html.Raw(c.Key.CategoryID)>
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                </button>
-                            }
+                            <tr>
+                                <td>@c.Key.Name</td>
+                                <td>@c.Value</td>
+                                <td>
+                                    @if (c.Value > 0)
+                                    {
+                                        <button class="btn btn-danger btn-sm catDelete disabled" type="submit" id=@Html.Raw(c.Key.CategoryID)>
+                                            <span class="glyphicon glyphicon-trash "></span>
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-danger btn-sm catDelete" type="submit" id=@Html.Raw(c.Key.CategoryID)>
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </button>
+                                    }
 
-                            </td>
+                                </td>
+                            </tr>
                         }
                         </tbody>
                     </table>
@@ -211,18 +214,20 @@
 
 @section scripts{
     <script type="text/javascript">
-        var uri = "../api/categoryAPI";
+        var uri = "/api/categoryAPI";
         $(document).ready(function () {
-            
             $('.catDelete').click(function() {
                 var closestTR = $(this).closest('tr');
                 var t = this.id;
                 var OtherPost = {
                     id: t,
                     type: 'DELETE'
-                }
+                };
                 $.post(uri, OtherPost)
                     .done(function() {
+                        
+                    })
+                    .success(function() {
                         alert("Success");
                         closestTR.remove();
                     })
@@ -254,7 +259,7 @@
     </script>
 
     <script type="text/javascript">
-        var uri = "../api/adminAPI";
+        var uriAdmin = "../api/adminAPI";
 
         function setCheckBoxes(buttonID, checkBoxClass) {
             $(buttonID).on('click', function() {
@@ -277,7 +282,7 @@
                     allowedBP: allowedBlogPosts,
                     deniedBP: deniedBlogPosts
                 };
-                $.post(uri, AllowDeny)
+                $.post(uriAdmin, AllowDeny)
                     .done(function() {
                         alert("Success");
                         rowsChanged.forEach(function(item) {
