@@ -32,19 +32,17 @@ namespace CircularLogic.UI.Controllers
 
         // Post / BlogPost
         [HttpPost]
-        public ActionResult CreateBlogPost(BlogPostViewModel blogVM)
+        public ActionResult CreateBlogPost(BlogPost blogPost)
         {
-            _repo.CreateBlogPost(blogVM.BlogPost);
+            _repo.CreateBlogPost(blogPost);
 
             return RedirectToAction("BlogHome");
         }
 
-        public ActionResult BlogPostDetail(BlogPostViewModel blogPost)
+        public ActionResult BlogPostDetail(int blogPostID)
         {
-            BlogPost newBlogPost = blogPost.BlogPost;
-            _repo.CreateBlogPost(newBlogPost);
-
-            return View();
+            BlogPost blogPost = _repo.GetBlogPostByBlogID(blogPostID);
+            return View(blogPost);
         }
 
         public ActionResult BlogHome()

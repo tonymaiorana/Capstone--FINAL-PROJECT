@@ -6,20 +6,18 @@
 
 <h2>CreateBlogPost</h2>
 
-@using (Html.BeginForm("CreateBlogPost", "BlogPost", FormMethod.Post, new {@class="form-horizontal"}))
+@using (Html.BeginForm("CreateBlogPost", "BlogPost", FormMethod.Post, new { @class = "form-horizontal" }))
 {
 
     <h4>Blog Post</h4>
-    <hr/>
+    <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-
     <div class="form-group">
-        @Html.LabelFor(model => model.BlogPost.Title, new {@class = "control-label "})
+        @Html.LabelFor(model => model.BlogPost.Title, new { @class = "control-label " })
         @Html.EditorFor(model => model.BlogPost.Title, new { HtmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.BlogPost.Title, "", new {@class = "text-danger"})
+        @Html.ValidationMessageFor(model => model.BlogPost.Title, "", new { @class = "text-danger" })
     </div>
-
 
     <div class="form-group">
         @Html.TextAreaFor(model => model.BlogPost.HtmlContent)
@@ -27,13 +25,12 @@
 
     <div class="form-group">
         @*@Html.LabelFor(model => model.BlogPost.Tags,new {@class = "control-label"})*@
-        <input type="text" name="tags" placeholder="Tags" class="tagsManager form-control"/>
+        <input type="text" name="tags" placeholder="Tags" class="tagsManager form-control" />
         <input type="hidden" value="" name="hiddenTagList">
     </div>
 
-
     <div class="form-group">
-        @Html.LabelFor(model => model.BlogPost.Image.Name, new {@class = "control-label"})
+        @Html.LabelFor(model => model.BlogPost.Image.Name, new { @class = "control-label" })
         @Html.EditorFor(model => model.BlogPost.Image.Name, new { HtmlAttributes = new { @class = "form-control" } })
     </div>
 
@@ -43,13 +40,13 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.BlogPost.Category, new {@class = "control-label"})
-        @Html.DropDownListFor(model => model.BlogPost.Category.Name, Model.CategoryList, new { @class = "form-control" })
+        @Html.LabelFor(model => model.BlogPost.Category, new { @class = "control-label" })
+        @Html.DropDownList("BlogPost.Category.CategoryID", Model.CategoryList, new { @class = "form-control" })
     </div>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default"/>
+            <input type="submit" value="Create" class="btn btn-default" />
         </div>
     </div>
 
