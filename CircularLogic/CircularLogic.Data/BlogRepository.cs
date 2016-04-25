@@ -268,6 +268,31 @@ namespace CircularLogic.Data
             return blogPosts;
         }
 
+        public List<Category> GetAllCategories()
+        {
+            List<Category> categoryList = new List<Category>();
+            using (SqlConnection cn =
+                new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "GetAllCategories";
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Connection = cn;
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        categoryList.Add(CategoryFromReader(dr));
+                    }
+                }
+            }
+            return categoryList;
+        }
+
         public List<BlogPost> GetAllBlogPostByCategoryID(int categoryID)
         {
             List<BlogPost> blogPosts = new List<BlogPost>();
@@ -380,6 +405,14 @@ namespace CircularLogic.Data
             img.ImageData = (string)dr["ImageData"];
             img.Name = (string)dr["Name"];
             return img;
+        }
+
+        private Category CategoryFromReader(SqlDataReader dr)
+        {
+            Category cat = new Category();
+            cat.CategoryID = (int) dr["CategoryID"];
+            cat.Name = (string) dr["CategoryName"];
+            return cat;
         }
     }
 }
