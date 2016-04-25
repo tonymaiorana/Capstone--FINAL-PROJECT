@@ -1,8 +1,10 @@
 ﻿using CircularLogic.Data;
 using CircularLogic.Models;
 using CircularLogic.UI.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Web;
@@ -22,10 +24,13 @@ namespace CircularLogic.UI.Controllers
         }
 
         // GET: BlogPost / Create
+        [Authorize]
         public ActionResult CreateBlogPost()
         {
             string name = User.Identity.Name;
-            string id = new ApplicationDbContext().Users.FirstOrDefault(u => u.UserName == name).Id;
+            var firstOrDefault = new ApplicationDbContext().Users.FirstOrDefault(u => u.UserName == name);
+
+            string id = firstOrDefault.Id;
             var CreateBlogPostVM = new BlogPostViewModel(new BlogPost() { UserID = id }, _repo.GetAllCategories());
             return View("CreateBlogPost", CreateBlogPostVM);
         }

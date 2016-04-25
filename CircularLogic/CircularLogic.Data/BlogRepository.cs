@@ -229,6 +229,7 @@ namespace CircularLogic.Data
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = "GetBlogImageByBlogID";
                 cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@BlogID", blogID);
 
                 cmd.Connection = cn;
 
@@ -391,7 +392,7 @@ namespace CircularLogic.Data
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = "GetAllTagNameByBlogPostID";
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@BlogPostID", blogID);
+                cmd.Parameters.AddWithValue("@BlogID", blogID);
 
                 cmd.Connection = cn;
 
@@ -414,7 +415,7 @@ namespace CircularLogic.Data
 
             blogPost.BlogPostID = (int)dr["BlogPostID"];
             blogPost.Category.CategoryID = (int)dr["CategoryID"];
-            blogPost.UserID = (string)dr["UserID"];
+            blogPost.UserID = (string)dr["UserName"];
             blogPost.Title = (string)dr["Title"];
             blogPost.HtmlContent = (string)dr["TextBody"];
             blogPost.PostTime = dr["PostTime"] == DBNull.Value ? new DateTime() : (DateTime)dr["PostTime"];
@@ -422,8 +423,9 @@ namespace CircularLogic.Data
             blogPost.UpdateTime = (DateTime)dr["UpdateTime"];
             blogPost.CreationTime = (DateTime)dr["CreationTime"];
             blogPost.IsApproved = (bool)dr["IsApproved"];
-            TagFromReader(dr);
-            ImageFromReader(dr);
+            blogPost.Tags = GetAllTagNameByBlogPostID(blogPost.BlogPostID);
+            blogPost.Image = GetBlogImageByBlogID(blogPost.BlogPostID);
+
             return blogPost;
         }
 
