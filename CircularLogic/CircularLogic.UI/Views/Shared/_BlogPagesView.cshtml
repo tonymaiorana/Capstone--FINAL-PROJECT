@@ -33,7 +33,10 @@
 </div>
 <div class="container body-content">
     <div class="row">
-        <div id="SocialShare" class="col-md-1" lass="share-affix" style="left: 0px; right: auto; top: 40%"></div>
+        <div class="col-md-1">
+            <div id="SocialShare" class="col-md-1" lass="share-affix" style="left: 0px; right: auto; top: 65%">
+            </div>
+        </div>
         <div class="col-md-9">
             @RenderBody()
             <hr/>
@@ -49,7 +52,7 @@
 @Scripts.Render("~/bundles/bootstrap")
 <script src="~/Scripts/app/jquery.share.js"></script>
 <script type="text/javascript">
-    $('#demo4')
+    $('#SocialShare')
         .share({
             networks: ['twitter', 'facebook', 'googleplus'],
             orientation: 'vertical',
