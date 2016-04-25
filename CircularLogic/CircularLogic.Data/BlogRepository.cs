@@ -415,7 +415,8 @@ namespace CircularLogic.Data
 
             blogPost.BlogPostID = (int)dr["BlogPostID"];
             blogPost.Category.CategoryID = (int)dr["CategoryID"];
-            blogPost.UserID = (string)dr["UserName"];
+            blogPost.Category.Name = (string)dr["CategoryName"];
+            blogPost.UserID = (string)dr["UserID"];
             blogPost.Title = (string)dr["Title"];
             blogPost.HtmlContent = (string)dr["TextBody"];
             blogPost.PostTime = dr["PostTime"] == DBNull.Value ? new DateTime() : (DateTime)dr["PostTime"];
@@ -490,7 +491,6 @@ namespace CircularLogic.Data
             }
         }
 
-
         public void AdminQueueUpdate(int[] allow, int[] deny)
         {
             if (allow != null && allow.Length > 0)
@@ -534,8 +534,6 @@ namespace CircularLogic.Data
                     }
                 }
             }
-
-           
         }
 
         public void DeleteCategory(int id)
@@ -543,17 +541,16 @@ namespace CircularLogic.Data
             using (
                SqlConnection cn =
                    new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
-                {
-                    SqlCommand cmd = new SqlCommand();
-                    cmd.CommandText = "DeleteCategory";
-                    cmd.Parameters.AddWithValue("@CategoryID", id);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Connection = cn;
-                    cn.Open();
-                    cmd.ExecuteNonQuery();
-                    cn.Close();
-                }
-            
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "DeleteCategory";
+                cmd.Parameters.AddWithValue("@CategoryID", id);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Connection = cn;
+                cn.Open();
+                cmd.ExecuteNonQuery();
+                cn.Close();
+            }
         }
 
         public Dictionary<Category, int> GetCategoryCount()
@@ -579,7 +576,6 @@ namespace CircularLogic.Data
                 }
             }
             return categoryDict;
-        } 
-
+        }
     }
 }
