@@ -55,10 +55,10 @@
 <script type="text/javascript">
     $('#SocialShare')
         .share({
-            networks: ['twitter', 'facebook', 'googleplus'],
+            networks: ['twitter', 'facebook', 'googleplus', 'email'],
             orientation: 'vertical',
             theme: 'square',
-            urlToShare: 'http://www.in1.com',
+            urlToShare: '@Request.Url.AbsoluteUri',
             affix: 'left center'
         });
 </script>
