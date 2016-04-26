@@ -1,5 +1,6 @@
 ﻿@model CircularLogic.UI.Models.BlogPostViewModel
 
+<a href="@Url.Action("BlogPostDetail", "BlogPost", new {id = Model.BlogPost.BlogPostID})">
 <div class="blog-tile">
     <div class="tile-title">
         <div class="tile-date">@Model.BlogPost.CreationTime.ToShortDateString()</div>
@@ -25,3 +26,4 @@
     </div>
     <div class="tile-fadeout"> </div>
 </div>
+</a>
