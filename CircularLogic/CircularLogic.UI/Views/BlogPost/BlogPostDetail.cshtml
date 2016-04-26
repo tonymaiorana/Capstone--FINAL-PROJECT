@@ -1,5 +1,4 @@
-﻿@model CircularLogic.Models.BlogPost
-
+﻿@model CircularLogic.UI.Models.BlogPostViewModel
 @{
     ViewBag.Title = "BlogPostDetail";
 }
@@ -7,21 +6,21 @@
 
 <div class="row">
     <div class="col-md-12">
-        <h2>@Model.Title</h2>
-        <h3>@Model.UserID</h3>
-        <h4>@Model.PostTime.GetValueOrDefault(DateTime.Now)</h4>
-        <div class="postHeader"><img src="@Model.Image" alt="" /></div>
+        <h2>@Model.BlogPost.Title</h2>
+        <h3>@Model.User.FirstName @Model.User.LastName</h3>
+        <h4>@Model.BlogPost.CreationTime.Date.ToShortDateString()</h4>
+        <div class="postHeader"><img src="@Model.BlogPost.Image" alt="" /></div>
 
         <div class="postContent">
-            @Html.Raw(Model.HtmlContent)
+            @Html.Raw(Model.BlogPost.HtmlContent)
         </div>
 
         <div class="postTags">
-            @foreach (string tag in Model.Tags.Select(r => r.Name))
+            @foreach (string tag in Model.BlogPost.Tags.Select(r => r.Name))
             {
                 <span>@tag </span>
             }
         </div>
-        <h5>@Model.Category.Name</h5>
+        <h5>@Model.BlogPost.Category.Name</h5>
     </div>
 </div>
