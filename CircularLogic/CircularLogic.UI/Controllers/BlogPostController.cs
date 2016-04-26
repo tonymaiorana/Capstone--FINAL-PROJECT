@@ -83,7 +83,14 @@ namespace CircularLogic.UI.Controllers
         {
             blogPost.CreationTime = DateTime.Now;
             blogPost.UpdateTime = DateTime.Now;
-
+            if (User.IsInRole("Admin"))
+            {
+                blogPost.IsApproved = true;
+            }
+            else
+            {
+                blogPost.IsApproved = false;
+            }
             _repo.CreateBlogPost(blogPost);
 
             return RedirectToAction("BlogHomePage");

@@ -52,6 +52,7 @@ namespace CircularLogic.Data
                 cmd.Parameters.AddWithValue("@TextBody", blogPost.HtmlContent);
                 cmd.Parameters.AddWithValue("@UpdateTime", blogPost.UpdateTime);
                 cmd.Parameters.AddWithValue("@CreationTime", blogPost.CreationTime);
+                cmd.Parameters.AddWithValue("@IsApproved", blogPost.IsApproved);
 
                 SqlParameter outputParam = new SqlParameter("@BlogID", SqlDbType.Int)
                 {
