@@ -86,13 +86,14 @@ namespace CircularLogic.UI.Controllers
 
             _repo.CreateBlogPost(blogPost);
 
-            return RedirectToAction("BlogHome");
+            return RedirectToAction("BlogHomePage");
         }
 
         public ActionResult BlogPostDetail(int id)
         {
             BlogPost blogPost = _repo.GetBlogPostByBlogID(id);
-            return View(blogPost);
+            BlogPostViewModel blogPostVM = new BlogPostViewModel(blogPost);
+            return View(blogPostVM);
         }
 
         public ActionResult BlogHomePage()
