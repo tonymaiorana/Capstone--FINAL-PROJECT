@@ -95,7 +95,7 @@ namespace CircularLogic.UI.Controllers
             return View(blogPost);
         }
 
-        public ActionResult BlogHome()
+        public ActionResult BlogHomePage()
         {
             var allPosts = _repo.GetAllBlogPosts().Where(p => p.IsApproved).OrderByDescending(p => p.CreationTime);
 
