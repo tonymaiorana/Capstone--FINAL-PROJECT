@@ -89,9 +89,9 @@ namespace CircularLogic.UI.Controllers
             return RedirectToAction("BlogHome");
         }
 
-        public ActionResult BlogPostDetail(int blogPostID)
+        public ActionResult BlogPostDetail(int id)
         {
-            BlogPost blogPost = _repo.GetBlogPostByBlogID(blogPostID);
+            BlogPost blogPost = _repo.GetBlogPostByBlogID(id);
             return View(blogPost);
         }
 
