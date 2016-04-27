@@ -129,5 +129,10 @@ namespace CircularLogic.UI.Controllers
             }
             return View("BlogHomePage", listOfBlogViewModels);
         }
+
+        public ActionResult AddCategory()
+        {
+            return PartialView("AddCategory");
+        }
     }
 }

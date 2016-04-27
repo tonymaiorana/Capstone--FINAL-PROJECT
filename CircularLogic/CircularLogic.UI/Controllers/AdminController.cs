@@ -26,15 +26,15 @@ namespace CircularLogic.UI.Controllers
                 bp.UserName = context.Users.ToList().FirstOrDefault(u => u.Id == bp.UserID).UserName;
             }
             aivm.CategoryCountDictionary = _repo.GetCategoryCount();
+            aivm.BlogPostHistory = _repo.GetAllBlogPosts().Where(p => p.UserID == User.Identity.GetUserId()).ToList();
             return View(aivm);
         }
 
-        public ActionResult History()
-        {
-            List<BlogPost> userHistory =
-                _repo.GetAllBlogPosts().Where(p => p.UserID == User.Identity.GetUserId()).ToList();
-            return View();
-        }
+      
 
+        public ActionResult AddCategory()
+        {
+            return PartialView("AddCategory");
+        }
     }
 }

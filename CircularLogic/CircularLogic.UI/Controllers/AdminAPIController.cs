@@ -23,5 +23,13 @@ namespace CircularLogic.UI.Controllers
             var response = Request.CreateResponse(HttpStatusCode.Accepted);
             return response;
         }
+
+        [HttpPost]
+        public HttpResponseMessage DeleteBlogPost(int id)
+        {
+           // delete
+            var response = Request.CreateResponse(HttpStatusCode.Accepted);
+            return response;
+        }
     }
 }

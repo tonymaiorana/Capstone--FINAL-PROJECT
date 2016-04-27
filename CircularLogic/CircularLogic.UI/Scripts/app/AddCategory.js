@@ -1,4 +1,5 @@
-﻿var Category = {
+﻿jQuery.ajaxSetup({ async: false });
+var Category = {
     Name: "",
     Color: ""
 };
@@ -20,12 +21,12 @@ $(document).ready(function () {
     };
             $.post('/api/categoryAPI', OtherPost)
                 .done(function () {
-
+                    jQuery.ajaxSetup({ async: true });
                 })
                 .success(function () {
                     Snarl.addNotification({
                         title: 'Category Added',
-                        text: 'The category has been successfully added'
+                        text: 'The category ' + catName + 'has been successfully added'
                     });
                 })
                 .fail(function (jqXhr, status, err) {

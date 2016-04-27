@@ -44,7 +44,7 @@
 
                             <li class="divider"></li>
                             <li><a href="#" id="loadCatModal">Add Category</a></li>
-                            <li>@Html.ActionLink("Blog", "Index", "Admin")</li>
+                            <li>@Html.ActionLink("Admin Queue", "Index", "Admin")</li>
                         </ul>
                     </li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
@@ -64,17 +64,25 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/app/snarl.min.js")
     @RenderSection("scripts", required: false)
 <script type="text/javascript">
-    $("img").error(function() {
-        $(this).hide();
+    $(document).ready(function() {
+        $("img").error(function() {
+            $(this).hide();
+        });
+        jQuery.ajaxSetup({ async: false });
+        $('#loadCatModal').click(function() {
+            $('#addCatModalHolder').load('AddCategory');
+            @*@{Html.RenderAction("AddCategory", "Home");}*@
+            $("#myModal").modal();
+            
+
+        });
+
     });
-    $('#loadCatModal').click(function () {
-        $('#addCatModalHolder').load('Home/AddCategory');
-        @*@{Html.RenderAction("AddCategory", "Home");}*@
-        $("#myModal").modal();
-    });
-</script>
+        </script>
+
 </body>
 </html>
