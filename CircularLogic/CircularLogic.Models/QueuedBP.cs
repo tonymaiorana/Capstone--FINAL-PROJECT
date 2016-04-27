@@ -16,5 +16,6 @@ namespace CircularLogic.Models
         public int OrigBlogPostID { get; set; }
         public int NewBlogPostID { get; set; }
         public QueueAction QueueAction { get; set; }
+        public string UserName { get; set; }
     }
 }

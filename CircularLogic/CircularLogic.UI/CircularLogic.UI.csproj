@@ -184,6 +184,7 @@
     <Compile Include="Controllers\CategoryAPIController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TagAPIController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -276,11 +277,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\app\AddCategory.js" />
     <Content Include="Scripts\app\blogPostValidation.js" />
+    <Content Include="Scripts\app\bloodhound.js" />
     <Content Include="Scripts\app\jquery-validate-defaults.js" />
     <Content Include="Scripts\app\bootstrap-tagmanager.css" />
     <Content Include="Scripts\app\bootstrap-tagmanager.js" />
     <Content Include="Scripts\app\jquery.share.js" />
+    <Content Include="Scripts\app\jscolor.min.js" />
     <Content Include="Scripts\app\snarl.min.css" />
     <Content Include="Scripts\app\snarl.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -512,6 +516,8 @@
     <Content Include="Views\BlogPost\BlogPostDetail.cshtml" />
     <Content Include="Views\Shared\_BlogPagesView.cshtml" />
     <Content Include="Views\BlogPost\BlogHomePage.cshtml" />
+    <Content Include="Views\Admin\History.cshtml" />
+    <Content Include="Views\Shared\AddCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

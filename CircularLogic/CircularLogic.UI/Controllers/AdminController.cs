@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using CircularLogic.Data;
 using CircularLogic.Models;
 using CircularLogic.UI.Models;
+using Microsoft.AspNet.Identity;
 
 namespace CircularLogic.UI.Controllers
 {
@@ -19,13 +20,20 @@ namespace CircularLogic.UI.Controllers
         {
             AdminIndexVM aivm = new AdminIndexVM();
             aivm.BlogPosts = _repo.GetAdminQueue();
-            //aivm.BlogPosts = new List<BlogPost>();
-            //aivm.BlogPosts.Add(new BlogPost() {CreationTime = DateTime.Now, Title  = "Test Title", QueueAction = QueueAction.New} );
-            //aivm.BlogPosts.Add(new BlogPost() {CreationTime = DateTime.Now, Title  = "Test Title", QueueAction = QueueAction.New, BlogPostID = 5});
-            //aivm.CategoryCountDictionary = new Dictionary<Category, int>();
-            //aivm.CategoryCountDictionary.Add(new Category() {CategoryID = 5, Name = "Test"}, 3);
+            var context = new ApplicationDbContext();
+            foreach (QueuedBP bp in aivm.BlogPosts)
+            {
+                bp.UserName = context.Users.ToList().FirstOrDefault(u => u.Id == bp.UserID).UserName;
+            }
             aivm.CategoryCountDictionary = _repo.GetCategoryCount();
             return View(aivm);
+        }
+
+        public ActionResult History()
+        {
+            List<BlogPost> userHistory =
+                _repo.GetAllBlogPosts().Where(p => p.UserID == User.Identity.GetUserId()).ToList();
+            return View();
         }
 
     }

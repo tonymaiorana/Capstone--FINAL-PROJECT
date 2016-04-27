@@ -1,0 +1,57 @@
+﻿@model CircularLogic.Models.Category
+@*
+    -Name of category
+        +check if it exists
+    -Color of category
+        +check if it exists
+        + #e79c00 (logo Orange)
+
+    - AJAX add the category if it is Gucci
+
+    -SNARL the entry on the main page
+
+    @{Html.RenderPartial("AddCategory");}
+*@
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add a Category</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon3">Name:</span>
+                        <input type="text" class="form-control" id="catName" aria-describedby="basic-addon3">
+                    </div>
+                </div>
+                <br/>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button class="jscolor {valueElement:'chosen-value', onFineChange:'setTextColor(this)', closable:true,closeText:'Close'} btn btn-primary" id="jscButton">
+                                Pick a color
+                            </button>
+                        </span>
+                        <input id="chosen-value" value="000000" class="form-control"/>
+                    </div>
+                </div>
+
+                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="addCatBtn" data-dismiss="modal">Create</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript" src="~/Scripts/app/AddCategory.js" defer="defer"></script>
+@Scripts.Render("~/Scripts/app/jscolor.min.js")
+
+

@@ -53,9 +53,13 @@
 @Scripts.Render("~/bundles/bootstrap")
 <script src="~/Scripts/app/jquery.share.js"></script>
 <script type="text/javascript">
+    $("img").error(function () {
+        $(this).hide();
+    });
+
     $('#SocialShare')
         .share({
-            networks: ['twitter', 'facebook', 'googleplus', 'email'],
+            networks: ['twitter', 'facebook', 'googleplus'],
             orientation: 'vertical',
             theme: 'square',
             urlToShare: '@Request.Url.AbsoluteUri',
