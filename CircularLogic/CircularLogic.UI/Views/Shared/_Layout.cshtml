@@ -24,6 +24,29 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Blog", "BlogHomePage", "BlogPost")</li>
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Admin <b class="caret"></b></a>
+                        <ul class="dropdown-menu" id="menu1">
+                            <li>
+                                <a href="#">Blog <i class="glyphicon glyphicon-chevron-right pull-right"></i></a>
+                                <ul class="dropdown-menu sub-menu">
+                                    <li>@Html.ActionLink("Create", "CreateBlogPost", "BlogPost")</li>
+                                    <li>@Html.ActionLink("History", "History", "Admin")</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Static Page <i class="glyphicon glyphicon-chevron-right pull-right"></i></a>
+                                <ul class="dropdown-menu sub-menu">
+                                    <li><a href="#">Static Page</a></li>
+                                    <li><a href="#">Static Page</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="divider"></li>
+                            <li><a href="#" id="loadCatModal">Add Category</a></li>
+                            <li>@Html.ActionLink("Blog", "Index", "Admin")</li>
+                        </ul>
+                    </li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
@@ -33,6 +56,7 @@
     </div>
     <div class="container body-content">
         @RenderBody()
+        <div id="addCatModalHolder"></div>
         <hr />
         <footer>
             <p>@DateTime.Now.ToShortDateString() - Circular Logic &copy;</p>
@@ -42,5 +66,15 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+<script type="text/javascript">
+    $("img").error(function() {
+        $(this).hide();
+    });
+    $('#loadCatModal').click(function () {
+        $('#addCatModalHolder').load('Home/AddCategory');
+        @*@{Html.RenderAction("AddCategory", "Home");}*@
+        $("#myModal").modal();
+    });
+</script>
 </body>
 </html>

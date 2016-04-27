@@ -26,5 +26,11 @@ namespace CircularLogic.UI.Controllers
 
             return View();
         }
+
+        public ActionResult AddCategory()
+        {
+
+            return PartialView("AddCategory");
+        }
     }
 }

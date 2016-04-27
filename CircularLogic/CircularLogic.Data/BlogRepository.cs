@@ -12,7 +12,7 @@ namespace CircularLogic.Data
 {
     public class BlogRepository
     {
-        private int AddACategory(Category category)
+        public int AddACategory(Category category)
         {
             using (SqlConnection cn =
                 new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
@@ -20,6 +20,7 @@ namespace CircularLogic.Data
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = "AddACategory";
                 cmd.Parameters.AddWithValue("@Name", category.Name);
+                cmd.Parameters.AddWithValue("@Color", category.Color);
 
                 SqlParameter outputParam = new SqlParameter("@CategoryID", SqlDbType.Int)
                 {
@@ -186,7 +187,7 @@ namespace CircularLogic.Data
                 {
                     t.TagID = AddATag(t);
                 }
-                BridgePostTag(t.TagID, blogPost.BlogPostID);
+                BridgePostTag(blogPost.BlogPostID, t.TagID);
             }
 
             //returns the actual blog we just put everything in??

@@ -91,6 +91,20 @@ namespace CircularLogic.UI.Controllers
             {
                 blogPost.IsApproved = false;
             }
+            string[] tags = this.Request.Form["hiddenTagListA"].Split(',');
+            List<Tag> existingTags = _repo.GetAllTags();
+            foreach (string s in tags)
+            {
+                Tag tag = existingTags.FirstOrDefault(t => t.Name.ToUpper() == s.ToUpper());
+                if (tag != null)
+                {
+                    blogPost.Tags.Add(tag);
+                }
+                else
+                {
+                    blogPost.Tags.Add(new Tag() {Name = s, TagID = 0});
+                }
+            }
             _repo.CreateBlogPost(blogPost);
 
             return RedirectToAction("BlogHomePage");

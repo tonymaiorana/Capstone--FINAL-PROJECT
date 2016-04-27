@@ -15,7 +15,7 @@
         <li>
             <a href="#2" data-toggle="tab">Category Management</a>
         </li>
-        <li class="disabled">
+        <li class="disabled hidden">
             <a href="#3" data-toggle="tab">User Management</a>
         </li>
     </ul>
@@ -51,7 +51,7 @@
                                             @bp.Title
                                             <input type="hidden" value="@bp.ContentQueueID" class="hidden new"/>
                                         </td>
-                                        <td>@bp.UserID</td>
+                                        <td>@bp.UserName</td>
                                         <td>@bp.CreationTime.Value.ToShortDateString()</td>
                                         <td>
                                             <input type="checkbox" class="newCB allow"/>

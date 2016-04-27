@@ -27,7 +27,11 @@
     <div class="form-group">
         @*@Html.LabelFor(model => model.BlogPost.Tags,new {@class = "control-label"})*@
         <input type="text" name="tags" placeholder="Tags" class="tagsManager form-control" />
+        <span id="tagContainer"></span>
+
+
         <input type="hidden" value="" name="hiddenTagList">
+        @Html.Hidden("hiddenTagListA")
     </div>
 
     <div class="form-group">
@@ -69,20 +73,25 @@
     </script>
     <script src="~/Scripts/app/bootstrap3-typeahead.min.js"></script>
     <script src="~/Scripts/app/bootstrap-tagmanager.js"></script>
+    <script src="~/Scripts/app/bloodhound.js"></script>
     <script type="text/javascript">
         $(function () {
-            $(".tagsManager").tagsManager({
-                prefilled: [],
-                CapitalizeFirstLetter: true,
-                preventSubmitOnEnter: true,
-                typeahead: true,
-                typeaheadAjaxSource: null,
-                typeaheadSource: ["MVC", "JavaScript", "SQL", ".NET/C#", "Web APIs", "Databases", "Project Management", "Web Development", "Jr Deveeloper"],
-                delimeters: [44, 188, 13],
-                backspace: [8],
-                blinkBGColor_1: '#FFFF9C',
-                blinkBGColor_2: '#CDE69C',
-                hiddenTagListName: 'hiddenTagListA'
+            $.get("../api/tagapi", function (data) {
+                $(".tagsManager").tagsManager({
+                    prefilled: [],
+                    CapitalizeFirstLetter: true,
+                    preventSubmitOnEnter: true,
+                    typeahead: true,
+                    //typeaheadAjaxSource: tags,
+                    //typeaheadSource: ["MVC", "JavaScript", "SQL", ".NET/C#", "Web APIs", "Databases", "Project Management", "Web Development", "Jr Deveeloper"],
+                    typeaheadSource: data,
+                    delimeters: [44, 188, 13],
+                    backspace: [8],
+                    blinkBGColor_1: '#FFFF9C',
+                    blinkBGColor_2: '#CDE69C',
+                    tagsContainer: $('#tagContainer'),
+                    hiddenTagListName: 'hiddenTagListA'
+                });
             });
         });
     </script>
