@@ -30,7 +30,14 @@ namespace CircularLogic.UI.Controllers
             return View(aivm);
         }
 
-      
+        public ActionResult ContributorHistory()
+        {
+            AdminIndexVM aivm = new AdminIndexVM();
+            var userID = User.Identity.GetUserId();
+            aivm.BlogPosts = _repo.GetAdminQueue().Where(p => p.UserID == userID).ToList();
+            aivm.BlogPostHistory = _repo.GetAllBlogPosts().Where(p => p.UserID == userID).ToList();
+            return View(aivm);
+        }
 
         public ActionResult AddCategory()
         {

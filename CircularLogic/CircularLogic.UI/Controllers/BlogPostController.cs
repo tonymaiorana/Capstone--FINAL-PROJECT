@@ -134,5 +134,42 @@ namespace CircularLogic.UI.Controllers
         {
             return PartialView("AddCategory");
         }
+
+        public ActionResult EditBlog(int id)
+        {
+            BlogPostViewModel bpvm = new BlogPostViewModel(_repo.GetBlogPostByBlogID(id), _repo.GetAllCategories());
+            return View(bpvm);
+        }
+
+        [HttpPost]
+        public ActionResult EditBlog(BlogPost blogPost)
+        {
+            blogPost.CreationTime = DateTime.Now;
+            blogPost.UpdateTime = DateTime.Now;
+            if (User.IsInRole("Admin"))
+            {
+                blogPost.IsApproved = true;
+            }
+            else
+            {
+                blogPost.IsApproved = false;
+            }
+            string[] tags = this.Request.Form["hiddenTagListA"].Split(',');
+            List<Tag> existingTags = _repo.GetAllTags();
+            foreach (string s in tags)
+            {
+                Tag tag = existingTags.FirstOrDefault(t => t.Name.ToUpper() == s.ToUpper());
+                if (tag != null)
+                {
+                    blogPost.Tags.Add(tag);
+                }
+                else
+                {
+                    blogPost.Tags.Add(new Tag() { Name = s, TagID = 0 });
+                }
+            }
+            _repo.EditABlogPost(blogPost);
+            return View();
+        }
     }
 }

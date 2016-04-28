@@ -54,6 +54,11 @@ namespace CircularLogic.Data
                 cmd.Parameters.AddWithValue("@UpdateTime", blogPost.UpdateTime);
                 cmd.Parameters.AddWithValue("@CreationTime", blogPost.CreationTime);
                 cmd.Parameters.AddWithValue("@IsApproved", blogPost.IsApproved);
+                if (blogPost.BlogPostID > 0)
+                {
+                    cmd.Parameters.AddWithValue("@IsEdit", true);
+                    cmd.Parameters.AddWithValue("@BlogPostID", blogPost.BlogPostID);
+                }
 
                 SqlParameter outputParam = new SqlParameter("@BlogID", SqlDbType.Int)
                 {
@@ -70,6 +75,41 @@ namespace CircularLogic.Data
 
                 int blogID = int.Parse(outputParam.SqlValue.ToString());
                 return blogID;
+            }
+        }
+
+        public BlogPost EditABlogPost(BlogPost blogPost)
+        {
+            if (blogPost.IsApproved)
+            {
+                int bpid = blogPost.BlogPostID;
+                CreateBlogPost(blogPost);
+                DeleteABlog(bpid, true);
+            }
+            else
+            {
+                CreateBlogPost(blogPost);
+            }
+
+            return blogPost;
+        }
+
+        public void DeleteABlog(int id, bool admin)
+        {
+            using (
+                SqlConnection cn =
+                    new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "DeleteABlog";
+                cmd.Parameters.AddWithValue("@BlogPostID", id);
+                cmd.Parameters.AddWithValue("@IsAdmin", admin);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Connection = cn;
+                cn.Open();
+                cmd.ExecuteNonQuery();
+                cn.Close();
             }
         }
 

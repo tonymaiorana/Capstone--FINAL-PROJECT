@@ -278,6 +278,8 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\app\AddCategory.js" />
+    <Content Include="Scripts\app\Administrative.min.js" />
+    <Content Include="Scripts\app\AdministrativeJS.js" />
     <Content Include="Scripts\app\blogPostValidation.js" />
     <Content Include="Scripts\app\bloodhound.js" />
     <Content Include="Scripts\app\jquery-validate-defaults.js" />
@@ -287,6 +289,8 @@
     <Content Include="Scripts\app\jscolor.min.js" />
     <Content Include="Scripts\app\snarl.min.css" />
     <Content Include="Scripts\app\snarl.min.js" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\app\bootstrap-tagmanager.less" />
@@ -517,6 +521,8 @@
     <Content Include="Views\Shared\_BlogPagesView.cshtml" />
     <Content Include="Views\BlogPost\BlogHomePage.cshtml" />
     <Content Include="Views\Shared\AddCategory.cshtml" />
+    <Content Include="Views\BlogPost\EditBlog.cshtml" />
+    <Content Include="Views\Admin\ContributorHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

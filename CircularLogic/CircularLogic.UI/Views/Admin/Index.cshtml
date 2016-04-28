@@ -51,7 +51,7 @@
                             {
                                 <tr>
                                     <td>
-                                        @bp.Title
+                                    @Html.ActionLink(@bp.Title, "BlogPostDetail", "BlogPost", new { id = @bp.BlogPostID }, new { target = "_blank" })
                                         <input type="hidden" value="@bp.ContentQueueID" class="hidden new"/>
                                     </td>
                                     <td>@bp.UserName</td>
@@ -98,7 +98,7 @@
                             {
                                 <tr>
                                     <td>
-                                        @bp.Title
+                                        @Html.ActionLink(@bp.Title, "BlogPostDetail", "BlogPost", new { id = @bp.BlogPostID }, new { target = "_blank" })
                                         <input type="hidden" value="@bp.ContentQueueID" class="hidden edit"/>
                                     </td>
                                     <td>@bp.UserID</td>
@@ -144,7 +144,7 @@
                             {
                                 <tr>
                                     <td>
-                                        @bp.Title
+                                        @Html.ActionLink(@bp.Title, "BlogPostDetail", "BlogPost", new { id = @bp.BlogPostID }, new { target = "_blank" })
                                         <input type="hidden" value="@bp.ContentQueueID" class="hidden delete"/>
                                     </td>
                                     <td>@bp.UserID</td>
@@ -210,7 +210,7 @@
                     @*<div class="panel-footer">Panel Footer</div>*@
                 </div>
             </div>
-            <div class="tab-pane" id="User_Management">
+            <div class="tab-pane hidden" id="User_Management">
                 <h3>Coming Soon</h3>
             </div>
         <div class="tab-pane" id="Post_History">
@@ -231,12 +231,12 @@
                             @foreach (BlogPost bp in Model.BlogPostHistory)
                             {
                                 <tr>
-                                    <td>@bp.Title</td>
+                                    <td>@Html.ActionLink(@bp.Title, "BlogPostDetail", "BlogPost", new { id = @bp.BlogPostID }, new { target = "_blank" })</td>
                                     <td>@bp.CreationTime.ToShortDateString()</td>
                                     <td>
-                                        <button class="btn btn-warning btn-sm editBlog" type="submit" id=@Html.Raw(bp.BlogPostID)>
-                                            <span class="glyphicon glyphicon-edit"></span>
-                                        </button>
+                                        <a href="@Url.Action("EditBlog", "BlogPost", new {id = @bp.BlogPostID})" class="btn btn-warning btn-sm" >
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        </a>
                                         <button class="btn btn-danger btn-sm deleteBlog" type="submit" id=@Html.Raw(bp.BlogPostID)>
                                             <span class="glyphicon glyphicon-ban-circle"></span>
                                         </button>
@@ -250,155 +250,4 @@
         </div>
     </div>
     </div>
-    @section scripts{
-        @*<script src="~/Scripts/app/snarl.min.js"></script>*@
-        <script type="text/javascript">
-            var uri = "/api/categoryAPI";
-            $(document).ready(function () {
-                $('.catDelete').click(function () {
-                    var closestTR = $(this).closest('tr');
-                    var t = this.id;
-                    var OtherPost = {
-                        id: t,
-                        type: 'DELETE'
-                    };
-                    $.post(uri, OtherPost)
-                        .done(function () {
-
-                        })
-                        .success(function () {
-                            Snarl.addNotification({
-                                title: 'Category Removed',
-                                text: 'The category has been successful'
-                            });
-                            closestTR.remove();
-                        })
-                        .fail(function (jqXhr, status, err) {
-                            alert((status + ' - ' + err));
-                        });
-                });
-
-                $('.deleteBlog').click(function () {
-                    var did = this.id;
-                    $.ajax({
-                        type: "POST",
-                        url: "/api/AdminAPI/DeleteBlogPost/"+did,
-                        async: true
-                    });
-                    //var deleteBlogPost = "/api/AdminAPI/DeleteBlogPost";
-                    //var id = {
-                    //    id: this.id
-                    //};
-                    //$.post(deleteBlogPost,id);
-                });
-            });
-        </script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('input.newCB').on('change', function () {
-                    $(this).closest('tr').find('input.newCB').not(this).prop('checked', false);
-                });
-
-                $('input.editCB').on('change', function () {
-                    $(this).closest('tr').find('input.editCB').not(this).prop('checked', false);
-                });
-
-                $('input.deleteCB').on('change', function () {
-                    $(this).closest('tr').find('input.deleteCB').not(this).prop('checked', false);
-                });
-
-                $('#newQueue').on('click', function () {
-
-                });
-            });
-        </script>
-
-        <script type="text/javascript">
-            var uriAdmin = "../api/adminAPI";
-
-            function setCheckBoxes(buttonID, checkBoxClass) {
-                $(buttonID).on('click', function () {
-                    var allowedBlogPosts = [];
-                    var deniedBlogPosts = [];
-                    var rowsChanged = [];
-                    $('input.' + checkBoxClass + '.allow').each(function () {
-                        if (this.checked) {
-                            allowedBlogPosts.push($(this).closest('tr').find('input.hidden').val());
-                            rowsChanged.push($(this).closest('tr'));
-                        };
-                    });
-                    $('input.' + checkBoxClass + '.deny').each(function () {
-                        if (this.checked) {
-                            deniedBlogPosts.push($(this).closest('tr').find('input.hidden').val());
-                            rowsChanged.push($(this).closest('tr'));
-                        };
-                    });
-                    var AllowDeny = {
-                        allowedBP: allowedBlogPosts,
-                        deniedBP: deniedBlogPosts
-                    };
-                    $.post(uriAdmin, AllowDeny)
-                        .done(function () {
-                            Snarl.addNotification({
-                                title: 'Success',
-                                text: 'The your queue has been successfully updated'
-                            });
-                            rowsChanged.forEach(function (item) {
-                                item.remove();
-                            });
-                        })
-                        .fail(function (jqXhr, status, err) {
-                            alert((status + ' - ' + err));
-                        });
-                });
-            };
-
-            $(document).ready(function () {
-                setCheckBoxes('#newQueue', 'newCB');
-                setCheckBoxes('#editQueue', 'editCB');
-                setCheckBoxes('#deleteQueue', 'deleteCB');
-
-            });
-        </script>
-
-
-    }
-
-    @*    -add link to view a blog post    *@
-    @*
-        The page will have 3 tabs inside the body
-
-        Post Queue  |  Category Management  |  User Management
-
-        The 1st will
-
-            Display a table of Admin Queue Posts
-                Pannel with tables in body for the grouping
-                get them as sorted by Add / Edit / Delete
-                    and then ordered by most recent
-                        if time allows dynamic angular sorting?
-
-            Title  |  Author  |  Date Submitted  |  Approve  |  Deny  |
-            Link      string       date string     checkbox   checkbox
-
-
-                Title will be a link to view the post in question most likely a modal,
-            allowing editing on page with a Delete button and an Approve button.
-            These buttons will preform their individual actions immediately and update
-            this pages table.
-
-            Checkboxes only one can be selected at a time but they can also select neither
-            this will all be in a form and at the bottom the admin can hit submit to process
-            multiple check boxes.
-
-
-        The Second will
-
-            Category Name  |  Count  |  Delete
-
-            Display a table of all categories with their mention count and a button to delete them
-                if mention count > 0 throw error requiring the user to re-categorize before deleting
-                else Delete it and update table on page
-
-        The Third will allow the Admin to set user roles
-    *@
+    @section scripts{<script src="~/Scripts/app/Administrative.min.js"></script>}

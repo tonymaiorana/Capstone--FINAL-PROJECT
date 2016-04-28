@@ -65,7 +65,8 @@
 
     @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/Scripts/app/snarl.min.js")
+        @Scripts.Render("~/Scripts/app/snarl.min.js")
+        <script src="~/Scripts/bootbox.min.js"></script>
     @RenderSection("scripts", required: false)
 <script type="text/javascript">
     $(document).ready(function() {

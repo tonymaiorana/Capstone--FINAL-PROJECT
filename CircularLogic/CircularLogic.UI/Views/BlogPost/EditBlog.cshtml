@@ -1,0 +1,100 @@
+﻿@model CircularLogic.UI.Models.BlogPostViewModel
+@{
+    ViewBag.Title = "EditBlog";
+}
+
+<h2>EditBlog</h2>
+
+@using (Html.BeginForm("EditBlog", "BlogPost", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+
+    <h4>Blog Post</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.HiddenFor(model => model.BlogPost.UserID)
+        @Html.LabelFor(model => model.BlogPost.Title, new { @class = "control-label " })
+        @Html.EditorFor(model => model.BlogPost.Title, new { HtmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.BlogPost.Title, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.TextAreaFor(model => model.BlogPost.HtmlContent)
+    </div>
+
+    <div class="form-group">
+        <input type="text" name="tags" placeholder="Tags" class="tagsManager form-control" />
+        <span id="tagContainer"></span>
+
+
+        <input type="hidden" value="" name="hiddenTagList">
+        @Html.Hidden("hiddenTagListA")
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.BlogPost.Image.Name, new { @class = "control-label" })
+        @Html.EditorFor(model => model.BlogPost.Image.Name, new { HtmlAttributes = new { @class = "form-control" } })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.BlogPost.Image.ImageData, new { @class = "control-label" })
+        @Html.EditorFor(model => model.BlogPost.Image.ImageData, new { HtmlAttributes = new { @class = "form-control" } })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.BlogPost.Category, new { @class = "control-label" })
+        @Html.DropDownList("BlogPost.Category.CategoryID", Model.CategoryList, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.ActionLink("Cancel", null, null, null, new {href = Request.UrlReferrer, @class = "btn btn-danger"})
+        <input type="submit" value="Edit" class="btn btn-success" style="margin-left: 50px"/>
+    </div>
+}
+
+
+@section scripts
+{
+    <script src="~/scripts/tinymce/tinymce.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/app/jquery-validate-defaults.js"></script>
+    <script src="~/Scripts/app/blogPostValidation.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            tinyMCE.init({
+                mode: "textareas",
+                theme: "modern",
+                convert_newlines_to_brs: true
+            });
+        });
+    </script>
+    <script src="~/Scripts/app/bootstrap3-typeahead.min.js"></script>
+    <script src="~/Scripts/app/bootstrap-tagmanager.js"></script>
+    <script type="text/javascript">
+        var myArray = [];
+
+    @foreach (var d in Model.BlogPost.Tags)
+        {
+            @:myArray.push("@d.Name");
+        }
+
+        $(function () {
+            $.get("/api/tagapi", function (data) {
+                $(".tagsManager").tagsManager({
+                    prefilled: myArray,
+                    CapitalizeFirstLetter: true,
+                    preventSubmitOnEnter: true,
+                    typeahead: true,
+                    typeaheadSource: data,
+                    delimeters: [44, 188, 13],
+                    backspace: [8],
+                    blinkBGColor_1: '#FFFF9C',
+                    blinkBGColor_2: '#CDE69C',
+                    tagsContainer: $('#tagContainer'),
+                    hiddenTagListName: 'hiddenTagListA'
+                });
+            });
+        });
+    </script>
+}

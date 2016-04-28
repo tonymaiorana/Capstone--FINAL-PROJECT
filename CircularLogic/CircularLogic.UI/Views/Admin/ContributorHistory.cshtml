@@ -1,0 +1,94 @@
+﻿@using CircularLogic.Models
+@model CircularLogic.UI.Models.AdminIndexVM
+@{
+    ViewBag.Title = "ContributorHistory";
+}
+
+<h2>ContributorHistory</h2>
+
+<div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                    Posted Blogs
+                </a>
+            </h4>
+        </div>
+        <div id="collapse1" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Publish Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (BlogPost bp in Model.BlogPostHistory)
+                    {
+                            <tr>
+                                <td>@Html.ActionLink(@bp.Title, "BlogPostDetail", "BlogPost", new { id = @bp.BlogPostID }, new { target = "_blank" })</td>
+                                <td>@bp.CreationTime.ToShortDateString()</td>
+                                <td>
+                                    <a href="@Url.Action("EditBlog", "BlogPost", new {id = @bp.BlogPostID})" class="btn btn-warning btn-sm">
+                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                    </a>
+                                    <button class="btn btn-danger btn-sm deleteBlogReq" type="submit" id=@Html.Raw(bp.BlogPostID)>
+                                        <span class="glyphicon glyphicon-ban-circle"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                    Awaiting Approval
+                </a>
+            </h4>
+        </div>
+        <div id="collapse2" class="panel-collapse collapse">
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Action</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (QueuedBP bp in Model.BlogPosts)
+            {
+                            <tr>
+                                <td>@Html.ActionLink(@bp.Title, "BlogPostDetail", "BlogPost", new { id = @bp.NewBlogPostID }, new { target = "_blank" })</td>
+                                <td>@bp.QueueAction.ToString()</td>
+                                <td>
+                                    @if (bp.QueueAction == QueueAction.Edit)
+                                    {
+                                        @Html.ActionLink(@bp.Title, "BlogPostDetail", "BlogPost", new { id = @bp.OrigBlogPostID }, new { target = "_blank" });
+                                    }
+                                    <button class="btn btn-danger btn-sm deleteQueuedAction" type="submit" id=@Html.Raw(bp.ContentQueueID)>
+                                        <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+<script src="~/Scripts/app/Administrative.min.js"></script>
+}
