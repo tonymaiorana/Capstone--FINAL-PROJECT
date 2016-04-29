@@ -13,7 +13,7 @@ namespace CircularLogic.Data
     public class StaticPageRepository
     {
 
-        private int AddAStaticPage(StaticPage newStaticPage)
+        public int AddAStaticPage(StaticPage newStaticPage)
         {
             using (
                 SqlConnection cn =

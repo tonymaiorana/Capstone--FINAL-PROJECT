@@ -1,0 +1,52 @@
+﻿@model CircularLogic.Models.StaticPage
+
+@{
+    ViewBag.Title = "AddStaticPage";
+}
+@using (Html.BeginForm("AddStaticPage", "StaticPage", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <h3>Create A Static Page</h3>
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Title, new { @class = "control-label" })
+        @Html.EditorFor(m => m.Title, new { HtmlAttributes = new { @class = "form-control" } })
+    </div>
+
+    <div class="form-group">
+        @Html.TextAreaFor(m => m.HtmlContent)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Image.Name, new { @class = "control-label" })
+        @Html.EditorFor(m => m.Image.Name, new { HtmlAttributes = new { @class = "form-control" } })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Image.ImageData, new { @class = "control-label" })
+        @Html.EditorFor(model => model.Image.ImageData, new { HtmlAttributes = new { @class = "form-control" } })
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+@section scripts
+{
+    <script src="~/scripts/tinymce/tinymce.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/app/jquery-validate-defaults.js"></script>
+    <script src="~/Scripts/app/blogPostValidation.js"></script>
+    <script type="text/javascript">
+        $(document)
+            .ready(function () {
+                tinyMCE.init({
+                    mode: "textareas",
+                    theme: "modern",
+                    convert_newlines_to_brs: true
+                });
+            });
+    </script>
+}
