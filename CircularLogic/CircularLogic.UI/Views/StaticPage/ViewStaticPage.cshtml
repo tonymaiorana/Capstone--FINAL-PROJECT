@@ -4,5 +4,18 @@
     ViewBag.Title = "ViewStaticPage";
 }
 
-<h2>ViewStaticPage</h2>
+<h2>@Model.Title</h2>
+<div class="row">
+    @if (!(Model.Image.ImageData == null))
+    {
+        <div class="col-md-12">
+            <img src="@Model.Image.ImageData" alt="@Model.Image.Name" />
+        </div>
+    }
 
+    <div class="col-md-12">>
+        <div class="postContent">
+            @Html.Raw(Model.HtmlContent)
+        </div>
+    </div>
+</div>

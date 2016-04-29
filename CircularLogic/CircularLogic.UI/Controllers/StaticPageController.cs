@@ -35,7 +35,7 @@ namespace CircularLogic.UI.Controllers
         public ActionResult ViewStaticPage(int id)
         {
             var viewStaticPage = _repo.GetStaticPageByStaticPageID(id);
-            return View();
+            return View(viewStaticPage);
         }
     }
 }
