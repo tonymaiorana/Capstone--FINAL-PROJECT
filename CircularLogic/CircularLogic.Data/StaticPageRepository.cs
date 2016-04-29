@@ -123,7 +123,7 @@ namespace CircularLogic.Data
                 new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = "GetStaticImageByBStaticID";
+                cmd.CommandText = "GetStaticImageByStaticPageID";
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@StaticPageID", staticID);
 
