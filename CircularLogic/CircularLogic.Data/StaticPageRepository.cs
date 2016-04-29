@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CircularLogic.Models;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -6,13 +7,11 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CircularLogic.Models;
 
 namespace CircularLogic.Data
 {
     public class StaticPageRepository
     {
-
         public int AddAStaticPage(StaticPage newStaticPage)
         {
             using (
@@ -111,11 +110,11 @@ namespace CircularLogic.Data
         {
             StaticPage staticPage = new StaticPage();
 
-            staticPage.StaticID = (int) dr["StaticPageID"];
-            staticPage.Title = (string) dr["Title"];
-            staticPage.HtmlContent = (string) dr["TextBody"];
-            staticPage.UpdateTime = (DateTime) dr["UpdateTime"];
-            staticPage.CreationTime = (DateTime) dr["CreationTime"];
+            staticPage.StaticID = (int)dr["StaticPageID"];
+            staticPage.Title = (string)dr["Title"];
+            staticPage.HtmlContent = (string)dr["TextBody"];
+            staticPage.UpdateTime = (DateTime)dr["UpdateTime"];
+            staticPage.CreationTime = (DateTime)dr["CreationTime"];
             staticPage.Image = GetStaticImageByStaticID(staticPage.StaticID);
 
             return staticPage;
@@ -150,9 +149,9 @@ namespace CircularLogic.Data
         private Image ImageFromReader(SqlDataReader dr)
         {
             Image img = new Image();
-            img.ImageID = (int) dr["ImageID"];
-            img.ImageData = (string) dr["ImageData"];
-            img.Name = (string) dr["Name"];
+            img.ImageID = (int)dr["ImageID"];
+            img.ImageData = (string)dr["ImageData"];
+            img.Name = (string)dr["Name"];
             return img;
         }
 
@@ -181,7 +180,7 @@ namespace CircularLogic.Data
                 cn.Close();
 
                 int imageID = int.Parse(outputParam.SqlValue.ToString());
-                BridgeStaticImage(staticID ,imageID);
+                BridgeStaticImage(staticID, imageID);
                 return imageID;
             }
         }
@@ -226,7 +225,6 @@ namespace CircularLogic.Data
 
         private void BridgeStaticImage(int staticId, int imageId)
         {
-
             using (SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand();
@@ -240,6 +238,31 @@ namespace CircularLogic.Data
                 cmd.ExecuteNonQuery();
                 cn.Close();
             }
+        }
+
+        public List<StaticPage> GetAllStaticPages()
+        {
+            var result = new List<StaticPage>();
+            using (SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "GetAllStaticPages";
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Connection = cn;
+                cn.Open();
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        var staticPage = StaticPageFromReader(dr);
+                        result.Add(staticPage);
+                    }
+                }
+                cn.Close();
+            }
+
+            return result;
         }
     }
 }

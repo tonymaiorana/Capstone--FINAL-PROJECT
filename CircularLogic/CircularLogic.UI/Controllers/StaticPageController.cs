@@ -29,7 +29,7 @@ namespace CircularLogic.UI.Controllers
 
             int id = _repo.AddAStaticPage(staticPage);
 
-            return RedirectToAction("ViewStaticPage", new {id = id});
+            return RedirectToAction("ViewStaticPage", new { id = id });
         }
 
         public ActionResult ViewStaticPage(int id)
@@ -41,7 +41,8 @@ namespace CircularLogic.UI.Controllers
         public ActionResult UpdateStaticPage(int id)
         {
             StaticPage spVM = new StaticPage();
-            return View();
+            spVM = _repo.GetStaticPageByStaticPageID(id);
+            return View(spVM);
         }
 
         [HttpPost]
@@ -57,19 +58,23 @@ namespace CircularLogic.UI.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult DeleteStaticPage(StaticPage staticPage)
         {
-            staticPage = _repo.GetStaticPageByStaticPageID(staticPage.StaticID);
-            staticPage.DeleteTime = DateTime.Now;
-            staticPage.IsDeleted = true;
-
-            _repo.UpdateAStaticPage(staticPage);
-            return View();
+            _repo.DeleteStaticPageByID(staticPage.StaticID);
+            return RedirectToAction("Index");
         }
 
-        public ActionResult DeleteStaticPage(int staticID)
+        public ActionResult DeleteStaticPage(int id)
         {
-            var staticPageID = _repo.GetStaticPageByStaticPageID(staticID);
+            var staticPageID = _repo.GetStaticPageByStaticPageID(id);
 
             return View(staticPageID);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult Index()
+        {
+            var models = _repo.GetAllStaticPages();
+
+            return View(models);
         }
     }
 }
