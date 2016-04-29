@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.Mvc;
 
 namespace CircularLogic.Models
 {
@@ -6,6 +7,7 @@ namespace CircularLogic.Models
     {
         public int StaticID { get; set; }
         public string Title { get; set; }
+        [AllowHtml]
         public string HtmlContent { get; set; }
         public string RouteValue { get; set; }
         public bool IsDeleted { get; set; }
