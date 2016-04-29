@@ -29,13 +29,13 @@ namespace CircularLogic.UI.Controllers
 
             int id = _repo.AddAStaticPage(staticPage);
 
-            return RedirectToAction("ViewStaticPage", id);
+            return RedirectToAction("ViewStaticPage", new {id = id});
         }
 
         public ActionResult ViewStaticPage(int id)
         {
             var viewStaticPage = _repo.GetStaticPageByStaticPageID(id);
-            return View();
+            return View(viewStaticPage);
         }
 
         public ActionResult UpdateStaticPage(int id)
