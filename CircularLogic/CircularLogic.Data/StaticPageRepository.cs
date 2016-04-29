@@ -15,7 +15,9 @@ namespace CircularLogic.Data
 
         public int AddAStaticPage(StaticPage newStaticPage)
         {
-            using (SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
+            using (
+                SqlConnection cn =
+                    new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = "AddAStaticPage";
@@ -37,12 +39,13 @@ namespace CircularLogic.Data
                 cmd.ExecuteNonQuery();
                 cn.Close();
 
+                int staticID = int.Parse(outputParam.SqlValue.ToString());
+
                 if (newStaticPage.Image != null)
                 {
-                    newStaticPage.Image.ImageID = AddAnImage(newStaticPage.Image);
+                    newStaticPage.Image.ImageID = AddAnImage(newStaticPage.Image, staticID);
                 }
 
-                int staticID = int.Parse(outputParam.SqlValue.ToString());
                 return staticID;
             }
         }
@@ -51,7 +54,9 @@ namespace CircularLogic.Data
         {
             StaticPage updatedStaticPage = new StaticPage();
 
-            using (SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
+            using (
+                SqlConnection cn =
+                    new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = "UpdateAStaticPage";
@@ -106,11 +111,11 @@ namespace CircularLogic.Data
         {
             StaticPage staticPage = new StaticPage();
 
-            staticPage.StaticID = (int)dr["StaticPageID"];
-            staticPage.Title = (string)dr["Title"];
-            staticPage.HtmlContent = (string)dr["TextBody"];
-            staticPage.UpdateTime = (DateTime)dr["UpdateTime"];
-            staticPage.CreationTime = (DateTime)dr["CreationTime"];
+            staticPage.StaticID = (int) dr["StaticPageID"];
+            staticPage.Title = (string) dr["Title"];
+            staticPage.HtmlContent = (string) dr["TextBody"];
+            staticPage.UpdateTime = (DateTime) dr["UpdateTime"];
+            staticPage.CreationTime = (DateTime) dr["CreationTime"];
             staticPage.Image = GetStaticImageByStaticID(staticPage.StaticID);
 
             return staticPage;
@@ -145,13 +150,13 @@ namespace CircularLogic.Data
         private Image ImageFromReader(SqlDataReader dr)
         {
             Image img = new Image();
-            img.ImageID = (int)dr["ImageID"];
-            img.ImageData = (string)dr["ImageData"];
-            img.Name = (string)dr["Name"];
+            img.ImageID = (int) dr["ImageID"];
+            img.ImageData = (string) dr["ImageData"];
+            img.Name = (string) dr["Name"];
             return img;
         }
 
-        private int AddAnImage(Image image)
+        private int AddAnImage(Image image, int staticID)
         {
             using (
                 SqlConnection cn =
@@ -176,6 +181,7 @@ namespace CircularLogic.Data
                 cn.Close();
 
                 int imageID = int.Parse(outputParam.SqlValue.ToString());
+                BridgeStaticImage(staticID ,imageID);
                 return imageID;
             }
         }
@@ -202,11 +208,31 @@ namespace CircularLogic.Data
 
         public void DeleteStaticPageByID(int id)
         {
-            using (SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
+            using (
+                SqlConnection cn =
+                    new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = "DeleteAStaticPage";
                 cmd.Parameters.AddWithValue("@StaticPageID", id);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Connection = cn;
+                cn.Open();
+                cmd.ExecuteNonQuery();
+                cn.Close();
+            }
+        }
+
+        private void BridgeStaticImage(int staticId, int imageId)
+        {
+
+            using (SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "BridgeStaticImage";
+                cmd.Parameters.AddWithValue("@StaticPageID", staticId);
+                cmd.Parameters.AddWithValue("@ImageID", imageId);
 
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Connection = cn;
