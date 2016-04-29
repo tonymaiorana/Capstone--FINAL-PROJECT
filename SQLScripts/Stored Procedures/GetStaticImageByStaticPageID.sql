@@ -18,7 +18,7 @@ GO
 -- Create date: 4/29/2016
 -- Description:	fetches the image associated with a static page
 -- =============================================
-CREATE PROCEDURE GetStaticImageByBStaticID 
+CREATE PROCEDURE GetStaticImageByStaticPageID 
 	-- Add the parameters for the stored procedure here
 	@StaticPageID int
 AS

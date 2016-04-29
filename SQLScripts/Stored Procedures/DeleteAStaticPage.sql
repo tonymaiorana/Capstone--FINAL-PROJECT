@@ -16,15 +16,11 @@ GO
 -- =============================================
 -- Author:		William Poulson
 -- Create date: 4/29/2016
--- Description:	updates content for static pages 
+-- Description:	soft deletes a static page
 -- =============================================
-CREATE PROCEDURE UpdateStaticPageContent
+CREATE PROCEDURE DeleteAStaticPage 
 	-- Add the parameters for the stored procedure here
-	@StaticPageID int,
-	@Title varchar(150),
-	@TextBody varchar(MAX),
-	@UpdateTime datetime
-
+	@StaticPageID int
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -33,8 +29,7 @@ BEGIN
 
     -- Insert statements for procedure here
 	UPDATE StaticPage
-	SET Title = @Title, TextBody = @TextBody, UpdateTime = @UpdateTime
-		WHERE StaticPageID = @StaticPageID
-			
+		SET IsDeleted = 1, DeletedTime = GETDATE()
+	WHERE StaticPageID = @StaticPageID
 END
 GO
