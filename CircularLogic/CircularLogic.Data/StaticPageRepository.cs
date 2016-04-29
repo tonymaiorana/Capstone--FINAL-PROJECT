@@ -199,5 +199,21 @@ namespace CircularLogic.Data
                 cn.Close();
             }
         }
+
+        public void DeleteStaticPageByID(int id)
+        {
+            using (SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "DeleteAStaticPage";
+                cmd.Parameters.AddWithValue("@StaticPageID", id);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Connection = cn;
+                cn.Open();
+                cmd.ExecuteNonQuery();
+                cn.Close();
+            }
+        }
     }
 }
