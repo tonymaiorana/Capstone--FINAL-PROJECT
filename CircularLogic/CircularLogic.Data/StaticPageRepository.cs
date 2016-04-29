@@ -13,11 +13,9 @@ namespace CircularLogic.Data
     public class StaticPageRepository
     {
 
-        private int AddAStaticPage(StaticPage newStaticPage)
+        public int AddAStaticPage(StaticPage newStaticPage)
         {
-            using (
-                SqlConnection cn =
-                    new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
+            using (SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = "AddAStaticPage";
@@ -39,8 +37,41 @@ namespace CircularLogic.Data
                 cmd.ExecuteNonQuery();
                 cn.Close();
 
+                if (newStaticPage.Image != null)
+                {
+                    newStaticPage.Image.ImageID = AddAnImage(newStaticPage.Image);
+                }
+
                 int staticID = int.Parse(outputParam.SqlValue.ToString());
                 return staticID;
+            }
+        }
+
+        public StaticPage UpdateAStaticPage(StaticPage staticPage)
+        {
+            StaticPage updatedStaticPage = new StaticPage();
+
+            using (SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "UpdateAStaticPage";
+                cmd.Parameters.AddWithValue("@StaticPageID", staticPage.StaticID);
+                cmd.Parameters.AddWithValue("@Title", staticPage.Title);
+                cmd.Parameters.AddWithValue("@TextBody", staticPage.HtmlContent);
+                cmd.Parameters.AddWithValue("@UpdateTime", staticPage.UpdateTime);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Connection = cn;
+                cn.Open();
+                cmd.ExecuteNonQuery();
+                cn.Close();
+
+                if (staticPage.Image != null)
+                {
+                    UpdateAnImage(staticPage.Image, staticPage.StaticID);
+                }
+
+                return updatedStaticPage;
             }
         }
 
@@ -85,7 +116,6 @@ namespace CircularLogic.Data
             return staticPage;
         }
 
-
         private Image GetStaticImageByStaticID(int staticID)
         {
             Image img = new Image();
@@ -119,6 +149,55 @@ namespace CircularLogic.Data
             img.ImageData = (string)dr["ImageData"];
             img.Name = (string)dr["Name"];
             return img;
+        }
+
+        private int AddAnImage(Image image)
+        {
+            using (
+                SqlConnection cn =
+                    new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "AddAnImage";
+                cmd.Parameters.AddWithValue("@Name", image.Name);
+                cmd.Parameters.AddWithValue("@ImageData", image.ImageData);
+
+                SqlParameter outputParam = new SqlParameter("@ImageID", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                };
+
+                cmd.Parameters.Add(outputParam);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Connection = cn;
+                cn.Open();
+                cmd.ExecuteNonQuery();
+                cn.Close();
+
+                int imageID = int.Parse(outputParam.SqlValue.ToString());
+                return imageID;
+            }
+        }
+
+        private void UpdateAnImage(Image image, int staticID)
+        {
+            using (
+                SqlConnection cn =
+                    new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "AddAnImage";
+                cmd.Parameters.AddWithValue("@StaticPageID", staticID);
+                cmd.Parameters.AddWithValue("@Name", image.Name);
+                cmd.Parameters.AddWithValue("@ImageData", image.ImageData);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Connection = cn;
+                cn.Open();
+                cmd.ExecuteNonQuery();
+                cn.Close();
+            }
         }
     }
 }
