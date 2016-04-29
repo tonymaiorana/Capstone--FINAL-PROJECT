@@ -527,6 +527,8 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\StaticPage\AddStaticPage.cshtml" />
     <Content Include="Views\StaticPage\ViewStaticPage.cshtml" />
+    <Content Include="Views\StaticPage\UpdateStaticPage.cshtml" />
+    <Content Include="Views\StaticPage\DeleteStaticPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
