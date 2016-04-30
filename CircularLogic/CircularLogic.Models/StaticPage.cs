@@ -9,6 +9,7 @@ namespace CircularLogic.Models
         public string Title { get; set; }
         [AllowHtml]
         public string HtmlContent { get; set; }
+        public string LinkName { get; set; }
         public string RouteValue { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime UpdateTime { get; set; }

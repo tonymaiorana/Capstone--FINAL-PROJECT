@@ -2,25 +2,30 @@
 @{
     ViewBag.Title = "BlogPostDetail";
 }
-<h2>Blog Post Details</h2>
-
 <div class="row">
-    <div class="col-md-12">
-        <h2>@Model.BlogPost.Title</h2>
-        <h3>@Model.User.FirstName @Model.User.LastName</h3>
-        <h4>@Model.BlogPost.CreationTime.Date.ToShortDateString()</h4>
-        <div class="postHeader"><img src="@Model.BlogPost.Image.ImageData" alt="" /></div>
-
-        <div class="postContent">
-            @Html.Raw(Model.BlogPost.HtmlContent)
-        </div>
-
-        <div class="postTags">
-            @foreach (string tag in Model.BlogPost.Tags.Select(r => r.Name))
+    <div class="col-md-6 offest3">
+        <div class="col-md-12 details">
+            <h2>@Model.BlogPost.Title</h2>
+            <h3>@Model.User.FirstName @Model.User.LastName</h3>
+            <h4>@Model.BlogPost.CreationTime.Date.ToShortDateString()</h4>
+            @if (!(Model.BlogPost.Image.ImageData == null))
             {
-                <span>@tag </span>
+                <div class="postHeader image">
+                    <img src="@Model.BlogPost.Image.ImageData" alt="@Model.BlogPost.Image.Name" />
+                </div>
             }
+
+            <div class="postContent">
+                @Html.Raw(Model.BlogPost.HtmlContent)
+            </div>
+
+            <div class="postTags">
+                @foreach (string tag in Model.BlogPost.Tags.Select(r => r.Name))
+            {
+                    <span>@tag </span>
+                }
+            </div>
+            <h5>@Model.BlogPost.Category.Name</h5>
         </div>
-        <h5>@Model.BlogPost.Category.Name</h5>
     </div>
 </div>
