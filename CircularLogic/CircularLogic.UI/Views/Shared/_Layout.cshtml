@@ -4,10 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-            @Styles.Render("~/Content/css")
-        @Styles.Render("~/Scripts/app/snarl.min.css")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Scripts/app/snarl.min.css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -35,10 +34,10 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="#">Static Page <i class="glyphicon glyphicon-chevron-right pull-right"></i></a>
+                                <a href="#">Static Page<i class="glyphicon glyphicon-chevron-right pull-right"></i></a>
                                 <ul class="dropdown-menu sub-menu">
-                                    <li><a href="#">Static Page</a></li>
-                                    <li><a href="#">Static Page</a></li>
+                                    <li>@Html.ActionLink("Add", "AddStaticPage", "StaticPage")</li>
+                                    <li>@Html.ActionLink("Manage", "Index", "StaticPage")</li>
                                 </ul>
                             </li>
 
@@ -64,26 +63,24 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @Scripts.Render("~/Scripts/app/snarl.min.js")
-        <script src="~/Scripts/bootbox.min.js"></script>
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/app/snarl.min.js")
+    <script src="~/Scripts/bootbox.min.js"></script>
     @RenderSection("scripts", required: false)
-<script type="text/javascript">
-    $(document).ready(function() {
-        $("img").error(function() {
-            $(this).hide();
-        });
-        jQuery.ajaxSetup({ async: false });
-        $('#loadCatModal').click(function() {
-            $('#addCatModalHolder').load('AddCategory');
-            @*@{Html.RenderAction("AddCategory", "Home");}*@
-            $("#myModal").modal();
-            
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("img").error(function () {
+                $(this).hide();
+            });
+            jQuery.ajaxSetup({ async: false });
+            $('#loadCatModal').click(function () {
+                $('#addCatModalHolder').load('AddCategory');
+                @*@{Html.RenderAction("AddCategory", "Home");}*@
+                $("#myModal").modal();
+
+            });
 
         });
-
-    });
-        </script>
-
+    </script>
 </body>
 </html>
