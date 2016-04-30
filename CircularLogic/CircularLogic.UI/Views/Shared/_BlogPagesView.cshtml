@@ -4,13 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Dev's Round Table</title>
-    <link href="~/Content/tileTest.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href="~/Content/tile.css" rel="stylesheet">
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/jquery.share.css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
-<body>
+<body style="background-color: #DCDCDC; min-height: 100%;">
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -34,18 +35,20 @@
 </div>
 <div class="container body-content">
     <div class="row">
-        <div class="col-md-1">
+        <div class="col-md-1" style="background-color: #A9A9A9; width: 82px; min-height: 100%;">
             <div id="SocialShare" class="col-md-1" lass="share-affix" style="left: 0px; right: auto; top: 65%">
             </div>
         </div>
         <div class="col-md-9">
             @RenderBody()
-            <hr/>
-            <footer>
-                <p>@DateTime.Now.ToShortDateString() - Circular Logic &copy;</p>
-            </footer>
         </div>
-        <div class="col-md-2"></div>
+        <div class="col-md-2" style="background-color: #A9A9A9;"></div>
+    </div>
+    <div class="row">
+        <hr />
+        <footer>
+            <p>@DateTime.Now.ToShortDateString() - Circular Logic &copy;</p>
+        </footer>
     </div>
 </div>
 
