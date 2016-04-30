@@ -1,21 +1,21 @@
 ﻿@model CircularLogic.Models.StaticPage
-
 @{
     ViewBag.Title = "ViewStaticPage";
 }
+<div class="col-md-12 details">
+    <h2 class="staticTitle">@Model.Title</h2>
+    <div class="row image">
+        @if (!(Model.Image.ImageData == null))
+        {
+            <div class="staticImage">
+                <img src="@Model.Image.ImageData" alt="@Model.Image.Name" />
+            </div>
+        }
 
-<h2>@Model.Title</h2>
-<div class="row">
-    @if (!(Model.Image.ImageData == null))
-    {
-        <div class="col-md-12">
-            <img src="@Model.Image.ImageData" alt="@Model.Image.Name" />
-        </div>
-    }
-
-    <div class="col-md-12" text-align="center">
-        <div class="postContent">
-            @Html.Raw(Model.HtmlContent)
+        <div class="staticContent">
+            <div class="postContent">
+                @Html.Raw(Model.HtmlContent)
+            </div>
         </div>
     </div>
 </div>
