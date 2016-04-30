@@ -171,5 +171,10 @@ namespace CircularLogic.UI.Controllers
             _repo.EditABlogPost(blogPost);
             return View();
         }
+
+        public ActionResult Blogs()
+        {
+            return View();
+        }
     }
 }

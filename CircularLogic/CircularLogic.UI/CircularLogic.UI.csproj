@@ -179,6 +179,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminAPIController.cs" />
+    <Compile Include="Controllers\BlogPostAPIController.cs" />
     <Compile Include="Controllers\BlogPostController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CategoryAPIController.cs" />
@@ -192,6 +193,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminIndexVM.cs" />
     <Compile Include="Models\AllowDeny.cs" />
+    <Compile Include="Models\BlogPostPreview.cs" />
     <Compile Include="Models\BlogPostViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -200,6 +202,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AngularViews\BlogSearchList.html" />
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -291,8 +294,18 @@
     <Content Include="Scripts\app\AddCategory.js" />
     <Content Include="Scripts\app\Administrative.min.js" />
     <Content Include="Scripts\app\AdministrativeJS.js" />
+    <Content Include="Scripts\app\AngularLib\angular-animate.js" />
+    <Content Include="Scripts\app\AngularLib\angular-loader.js" />
+    <Content Include="Scripts\app\AngularLib\angular-mocks.js" />
+    <Content Include="Scripts\app\AngularLib\angular-route.min.js" />
+    <Content Include="Scripts\app\AngularLib\angular-sanitize.js" />
+    <Content Include="Scripts\app\AngularLib\angular-scenario.js" />
+    <Content Include="Scripts\app\AngularLib\angular-touch.js" />
+    <Content Include="Scripts\app\AngularLib\angular.js" />
     <Content Include="Scripts\app\blogPostValidation.js" />
+    <Content Include="Scripts\app\BlogSearchApp.js" />
     <Content Include="Scripts\app\bloodhound.js" />
+    <Content Include="Scripts\app\AngularLib\dirPagination.js" />
     <Content Include="Scripts\app\jquery-validate-defaults.js" />
     <Content Include="Scripts\app\bootstrap-tagmanager.css" />
     <Content Include="Scripts\app\bootstrap-tagmanager.js" />
@@ -540,6 +553,7 @@
     <Content Include="Views\StaticPage\UpdateStaticPage.cshtml" />
     <Content Include="Views\StaticPage\DeleteStaticPage.cshtml" />
     <Content Include="Views\StaticPage\Index.cshtml" />
+    <Content Include="Views\BlogPost\Blogs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
