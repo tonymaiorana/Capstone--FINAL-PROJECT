@@ -23,7 +23,7 @@
 	width: 320px;
 	height: 510px;	
 	box-shadow: 8px 8px 5px grey;
-	
+    background-color: white;
 }
 
 .tile-title {
@@ -37,6 +37,7 @@
 	width: 320px;
 	overflow: hidden;
 	text-overflow: ellipsis;
+    background-color: white;
 }
 
 .tile-title-text {
@@ -60,6 +61,7 @@
 	height: 192px;
 	width: 320px;
 	overflow: hidden;
+    background-color: white;
 }
 
 .tile-image {
@@ -71,6 +73,7 @@
 	height: 220px;
 	text-overflow: ellipsis;
 	overflow: hidden;
+    background-color: white;
 }
 .tile-textbody {
 	font-family: 'Open Sans', sans-serif;
@@ -111,6 +114,7 @@
 	height: 40px;
 	text-overflow: ellipsis;
 	overflow: hidden;
+    background-color: white;
 }
 
 .tile-author {
@@ -127,6 +131,7 @@
 	height: 40px;
 	text-overflow: ellipsis;
 	overflow: hidden;
+    background-color: white;
 }
 
 .tile-category {
@@ -143,6 +148,7 @@
 	height: 106px;
 	text-overflow: ellipsis;
 	overflow: hidden;
+    background-color: white;
 }
 
 .tile-tags {
