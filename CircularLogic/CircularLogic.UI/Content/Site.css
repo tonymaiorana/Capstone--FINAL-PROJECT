@@ -226,26 +226,11 @@ input[type="checkbox"] {
         transform: rotate(-360deg);
       }
 }
-.letter.Activate {
-    -webkit-animation: fader 5s  linear, rotate 50s infinite linear;
-    }
 
-.swhiteSpace.Activate {
-    -webkit-animation: rotate 50s infinite linear;
-}
-
-
-@keyframes fader {
-
-  100%   { opacity: 0; }
-  75%   { opacity: .25; }
-  50%   { opacity: .5; }
-  25%   { opacity: .75; }
-  0% { opacity: 1; }
-}
 
 .fullLogo.Activate {
-   -webkit-animation: blowUP 5s infinite linear;
+   -webkit-animation: blowUP 5s linear, deflate 5s linear;
+   -webkit-animation-delay: 0s, 5s;
 }
 
 @keyframes blowUP {
@@ -255,4 +240,17 @@ input[type="checkbox"] {
     to   {
         transform: scale(2, 2);
       }
+}
+@keyframes deflate {
+      from {
+          transform: scale(2, 2);
+      }
+    to   {
+        transform: scale(1, 1);
+      }
+}
+
+.logo-wrap {
+    height: 400px;
+    width: 400px;
 }
