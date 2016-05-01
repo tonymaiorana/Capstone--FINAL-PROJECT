@@ -1,4 +1,14 @@
-﻿body {
+﻿footer .glyphicon {
+   font-size: 20px;
+   margin-bottom: 20px;
+   color: #e79c00 ;
+}
+
+footer > a:visited { 
+    color: #dcdcdc;
+}
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
