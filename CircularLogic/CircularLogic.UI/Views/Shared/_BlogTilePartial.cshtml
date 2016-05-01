@@ -3,7 +3,7 @@
 <a href="@Url.Action("BlogPostDetail", "BlogPost", new {id = Model.BlogPost.BlogPostID})" class="tile-link">
 <div class="blog-tile">
     <div class="tile-title">
-        <div class="tile-date">@Model.BlogPost.CreationTime.ToShortDateString()</div>
+        <div class="tile-date">@Model.BlogPost.CreationTime.ToString("MMM dd yyyy")</div>
     </div>
     <div class="tile-image-container">
         <div class="tile-image">

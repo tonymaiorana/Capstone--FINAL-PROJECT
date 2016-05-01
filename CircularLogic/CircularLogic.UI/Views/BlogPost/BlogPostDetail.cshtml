@@ -14,18 +14,19 @@
                     <img src="@Model.BlogPost.Image.ImageData" alt="@Model.BlogPost.Image.Name" />
                 </div>
             }
-
+            <br/>
             <div class="postContent">
                 @Html.Raw(Model.BlogPost.HtmlContent)
             </div>
+            <br/>
 
             <div class="postTags">
-                @foreach (string tag in Model.BlogPost.Tags.Select(r => r.Name))
+                Tags: @foreach (string tag in Model.BlogPost.Tags.Select(r => r.Name))
             {
-                    <span>@tag </span>
+                    <span>@tag</span>
                 }
             </div>
-            <h5>@Model.BlogPost.Category.Name</h5>
+            <h5>Category: @Model.BlogPost.Category.Name</h5>
         </div>
     </div>
 </div>

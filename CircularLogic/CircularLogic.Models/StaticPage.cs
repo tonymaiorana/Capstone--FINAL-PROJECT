@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Web.Mvc;
 
 namespace CircularLogic.Models
@@ -9,6 +10,8 @@ namespace CircularLogic.Models
         public string Title { get; set; }
         [AllowHtml]
         public string HtmlContent { get; set; }
+
+        [DisplayName("Link Text")]
         public string LinkName { get; set; }
         public string RouteValue { get; set; }
         public bool IsDeleted { get; set; }

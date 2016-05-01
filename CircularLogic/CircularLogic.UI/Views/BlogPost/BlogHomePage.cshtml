@@ -7,39 +7,17 @@
 
 <h2>The Dev's Round Table</h2>
 
-@for (int i = 0; i < Model.Count; i++)
-{
-    if (i%2 == 0)
-    {
-        <div class="row tile-row-space"></div>
-    }
 
-
-    if ((i%2 == 0) && (i <= Model.Count - 2))
-    {
-        <div class="row">
-            <div class="col-md-4 tile-spacer">
-                @Html.Partial("_BlogTilePartial", Model[i])
-            </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-4 tile-spacer">
-                @Html.Partial("_BlogTilePartial", Model[i+1])
-            </div>
-        </div>
-        
-    }
-
-    if ((i%2 == 0) && (i == Model.Count - 1) && (Model.Count%2 != 0))
-    {
-        <div class="row">
-            <div class="col-md-4 tile-spacer">
-                @Html.Partial("_BlogTilePartial", Model[i])
-            </div>
-        </div>
-    }
-
-    if (i == 9)
-    {
-        break;
-    }
+@{
+    var results = (from bp in Model
+                   orderby bp.BlogPost.CreationTime descending
+                   select bp).Take(12);
 }
+
+    @foreach (var blogPostViewModel in results)
+    {
+        <div class="col-md-3 col-sm-6 col-xs-12 tile-spacer">
+            @Html.Partial("_BlogTilePartial", blogPostViewModel)
+        </div>
+    }
+<div class="row"></div>

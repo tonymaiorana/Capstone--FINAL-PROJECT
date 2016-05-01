@@ -1,13 +1,13 @@
 ﻿#wrapper {
-  padding-left: 250px;
-  padding-right: 250px;
+  padding-left: 100px;
+  padding-right: 450px;
   transition: all 0.4s ease 0s;
 }
 
 #sidebar-wrapper-left {
-  margin-left: -250px;
-  left: 250px;
-  width: 250px;
+  margin-left: -75px;
+  left: 75px;
+  width: 75px;
   background: #a9a9a9;
   position: fixed;
   height: 100%;
@@ -17,9 +17,9 @@
 }
 
 #sidebar-wrapper-right {
-  margin-right: -250px;
-  right: 250px;
-  width: 250px;
+  margin-right: -400px;
+  right: 400px;
+  width: 400px;
   background: #a9a9a9;
   position: fixed;
   height: 100%;
