@@ -23,7 +23,6 @@ namespace CircularLogic.UI.Controllers
             return View();
         }
 
-
         // GET: BlogPost / Create
         [Authorize]
         public ActionResult CreateBlogPost()
@@ -138,7 +137,7 @@ namespace CircularLogic.UI.Controllers
 
         public JsonResult GetTagCloudTags()
         {
-            return Json(_repo.GetAllSumOfTags().Select(model => new { text = model.Name, weight = model.Weight, html = new { myId = model.TagCloudID } }), JsonRequestBehavior.AllowGet);
+            return Json(_repo.GetAllSumOfTags().Select(model => new { text = model.Name, weight = model.Weight, html = new { myId = model.TagCloudID, Class = "tagLink" } }), JsonRequestBehavior.AllowGet);
         }
     }
 }
