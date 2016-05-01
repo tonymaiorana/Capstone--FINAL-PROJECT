@@ -58,29 +58,29 @@
             </div>
         </div>
     </div>
-<div id="wrapper">
-    <!-- Left Sidebar -->
-    <div id="sidebar-wrapper-left">
-        <div id="SocialShare" lass="share-affix" style="left: 0; right: auto; top: 65%">
+    <div id="wrapper">
+        <!-- Left Sidebar -->
+        <div id="sidebar-wrapper-left">
+            <div id="SocialShare" lass="share-affix" style="left: 0; right: auto; top: 65%">
+            </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div id="sidebar-wrapper-right">
+            <div id="tags"> </div>
+        </div>
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid xyz">
+                @RenderBody()
+                <hr />
+                <footer>
+                    <p>@DateTime.Now.ToShortDateString() - Circular Logic &copy;</p>
+                </footer>
+            </div>
         </div>
     </div>
-
-    <!-- Right Sidebar -->
-    <div id="sidebar-wrapper-right">
-        <div id="tags"> </div>
-    </div>
-
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
-        <div class="container-fluid xyz">
-            @RenderBody()
-            <hr/>
-            <footer>
-                <p>@DateTime.Now.ToShortDateString() - Circular Logic &copy;</p>
-            </footer>
-        </div>
-    </div>
-</div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
@@ -104,9 +104,14 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $.getJSON('@Url.Action("GetTagCloudTags", "BlogPost")', function (data) {
-                $("#tags").jQCloud(data, { width: 500, height: 350 });
+                $("#tags").jQCloud(data, { width: 400, height: 250 });
+            });
+            $(document).on("click", ".tagLink", function (event) {
+                var tag = $(this);
+                alert(tag.attr("myId"));
             });
         });
+        @*TODO: Input URL routing for tags (Hannah)*@
     </script>
 </body>
 </html>
