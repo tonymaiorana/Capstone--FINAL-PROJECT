@@ -1,15 +1,19 @@
 ﻿<!DOCTYPE html>
-<html>
+<html style="margin: 0; min-height: 100%; width: 100%;">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Dev's Round Table</title>
-    <link href="~/Content/tileTest.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href="~/Content/tile.css" rel="stylesheet">
+    <link href="~/Content/left-sidebar.css" rel="stylesheet">
+    <link href="~/Content/right-sidebar.css" rel="stylesheet">
+
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/jquery.share.css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
+<body style="min-height: 100%;">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -24,6 +28,29 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Blog", "BlogHomePage", "BlogPost")</li>
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Admin <b class="caret"></b></a>
+                        <ul class="dropdown-menu" id="menu1">
+                            <li>
+                                <a href="#">Blog <i class="glyphicon glyphicon-chevron-right pull-right"></i></a>
+                                <ul class="dropdown-menu sub-menu">
+                                    <li>@Html.ActionLink("Create", "CreateBlogPost", "BlogPost")</li>
+                                    <li>@Html.ActionLink("History", "History", "Admin")</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Static Page<i class="glyphicon glyphicon-chevron-right pull-right"></i></a>
+                                <ul class="dropdown-menu sub-menu">
+                                    <li>@Html.ActionLink("Add", "AddStaticPage", "StaticPage")</li>
+                                    <li>@Html.ActionLink("Manage", "Index", "StaticPage")</li>
+                                </ul>
+                            </li>
+
+                            <li class="divider"></li>
+                            <li><a href="#" id="loadCatModal">Add Category</a></li>
+                            <li>@Html.ActionLink("Admin Queue", "Index", "Admin")</li>
+                        </ul>
+                    </li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
@@ -31,33 +58,38 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        <div class="row">
-            <div class="col-md-1">
-                <div id="SocialShare" class="col-md-1" lass="share-affix" style="left: 0px; right: auto; top: 65%">
-                </div>
+    <div id="wrapper">
+        <!-- Left Sidebar -->
+        <div id="sidebar-wrapper-left">
+            <div id="SocialShare" class="col-md-1" lass="share-affix" style="left: 0px; right: auto; top: 65%">
             </div>
+        </div>
 
-            <div class="col-md-9">
-                @RenderBody()
-                <hr />
-                <footer>
-                    <p>@DateTime.Now.ToShortDateString() - Circular Logic &copy;</p>
-                </footer>
-            </div>
-            <div class="col-md-2">
-                <div id="myCanvasContainer">
-                    <canvas width="300" height="300" id="myCanvas">
-                        <p></p>
-                    </canvas>
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid xyz">
+                <div class="row">
+                </div>
+                <div class="col-md-9">
+                    @RenderBody()
+                    <hr />
+                    <footer>
+                        <p>@DateTime.Now.ToShortDateString() - Circular Logic &copy;</p>
+                    </footer>
                 </div>
             </div>
         </div>
+        @*<div id="sidebar-wrapper-right">
+                <div id="SocialShare" class="col-md-1" lass="share-affix" style="left: 0px; right: auto; top: 65%">
+                </div>
+            </div>*@
+        @*Note: Hannah - Input snippet for plugin here.*@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     <script src="~/Scripts/app/jquery.share.js"></script>
+    <script src="~/Scripts/app/sidebar_menu.js"></script>
     <script type="text/javascript">
         $("img").error(function () {
             $(this).hide();
@@ -71,35 +103,6 @@
                 urlToShare: '@Request.Url.AbsoluteUri',
                 affix: 'left center'
             });
-    </script>
-    <script src="~/Scripts/app/jquery.tagcanvas.js" type="text/javascript"></script>
-    <script src="~/Scripts/app/jquery.tagcanvas.min.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        window.onload = function () {
-            try {
-                TagCanvas.Start('myCanvas', 'myTags');
-            } catch (e) {
-                // something went wrong, hide the canvas container
-                document.getElementById('myCanvasContainer').style.display = 'none';
-            }
-        };
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            if (!$('#myCanvas').tagcanvas({
-                textColour: '#ffffff',
-                outlineThickness: 1,
-                maxSpeed: 0.03,
-                depth: 0.75
-            })) {
-                // TagCanvas failed to load
-                $('#myCanvasContainer').hide();
-            }
-            // your other jQuery stuff here...
-        });
-        $('#myCanvas').tagcanvas({
-            depth: 0.75
-        }, 'myTags');
     </script>
     @RenderSection("scripts", required: false)
 </body>

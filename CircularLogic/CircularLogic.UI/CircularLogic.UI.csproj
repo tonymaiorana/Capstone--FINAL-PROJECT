@@ -179,6 +179,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminAPIController.cs" />
+    <Compile Include="Controllers\BlogPostAPIController.cs" />
     <Compile Include="Controllers\BlogPostController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CategoryAPIController.cs" />
@@ -192,6 +193,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminIndexVM.cs" />
     <Compile Include="Models\AllowDeny.cs" />
+    <Compile Include="Models\BlogPostPreview.cs" />
     <Compile Include="Models\BlogPostViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -200,6 +202,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AngularViews\BlogSearchList.html" />
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -221,6 +224,8 @@
     <Content Include="Content\Logos\CL_150x150.png" />
     <Content Include="Content\Logos\CL_250x250--NS.png" />
     <Content Include="Content\Logos\CL_250x250.png" />
+    <Content Include="Content\left-sidebar.css" />
+    <Content Include="Content\right-sidebar.css" />
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -283,7 +288,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
-    <Content Include="Content\tileTest.css" />
+    <Content Include="Content\tile.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -291,8 +296,18 @@
     <Content Include="Scripts\app\AddCategory.js" />
     <Content Include="Scripts\app\Administrative.min.js" />
     <Content Include="Scripts\app\AdministrativeJS.js" />
+    <Content Include="Scripts\app\AngularLib\angular-animate.js" />
+    <Content Include="Scripts\app\AngularLib\angular-loader.js" />
+    <Content Include="Scripts\app\AngularLib\angular-mocks.js" />
+    <Content Include="Scripts\app\AngularLib\angular-route.min.js" />
+    <Content Include="Scripts\app\AngularLib\angular-sanitize.js" />
+    <Content Include="Scripts\app\AngularLib\angular-scenario.js" />
+    <Content Include="Scripts\app\AngularLib\angular-touch.js" />
+    <Content Include="Scripts\app\AngularLib\angular.js" />
     <Content Include="Scripts\app\blogPostValidation.js" />
+    <Content Include="Scripts\app\BlogSearchApp.js" />
     <Content Include="Scripts\app\bloodhound.js" />
+    <Content Include="Scripts\app\AngularLib\dirPagination.js" />
     <Content Include="Scripts\app\jquery-validate-defaults.js" />
     <Content Include="Scripts\app\bootstrap-tagmanager.css" />
     <Content Include="Scripts\app\bootstrap-tagmanager.js" />
@@ -300,6 +315,7 @@
     <Content Include="Scripts\app\jquery.tagcanvas.js" />
     <Content Include="Scripts\app\jquery.tagcanvas.min.js" />
     <Content Include="Scripts\app\jscolor.min.js" />
+    <Content Include="Scripts\app\sidebar_menu.js" />
     <Content Include="Scripts\app\snarl.min.css" />
     <Content Include="Scripts\app\snarl.min.js" />
     <Content Include="Scripts\app\StaticPageValidation.js" />
@@ -542,6 +558,7 @@
     <Content Include="Views\StaticPage\UpdateStaticPage.cshtml" />
     <Content Include="Views\StaticPage\DeleteStaticPage.cshtml" />
     <Content Include="Views\StaticPage\Index.cshtml" />
+    <Content Include="Views\BlogPost\Blogs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
