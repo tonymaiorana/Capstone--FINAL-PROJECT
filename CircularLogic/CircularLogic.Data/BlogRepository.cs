@@ -368,6 +368,32 @@ namespace CircularLogic.Data
             return tagList;
         }
 
+        public List<TagCloudTag> GetAllSumOfTags()
+        {
+            List<TagCloudTag> cloudTag = new List<TagCloudTag>();
+
+            using (SqlConnection cn =
+              new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "GetAllSumOfTags";
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Connection = cn;
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        cloudTag.Add(TagCloudFromReader(dr));
+                    }
+                }
+            }
+            return cloudTag;
+        }
+
         public List<BlogPost> GetAllBlogPostByCategoryID(int categoryID)
         {
             List<BlogPost> blogPosts = new List<BlogPost>();
@@ -478,6 +504,15 @@ namespace CircularLogic.Data
             tag.TagID = (int)dr["TagID"];
             tag.Name = (string)dr["TagName"];
             return tag;
+        }
+
+        private TagCloudTag TagCloudFromReader(SqlDataReader dr)
+        {
+            TagCloudTag tagCloud = new TagCloudTag();
+            tagCloud.TagCloudID = (int)dr["TagID"];
+            tagCloud.Name = (string)dr["TagName"];
+            tagCloud.Weight = (int)dr["TagCount"];
+            return tagCloud;
         }
 
         private Image ImageFromReader(SqlDataReader dr)

@@ -78,6 +78,7 @@
     <Compile Include="QueuedBP.cs" />
     <Compile Include="StaticPage.cs" />
     <Compile Include="Tag.cs" />
+    <Compile Include="TagCloudTag.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -297,6 +297,8 @@
     <Content Include="Scripts\app\bootstrap-tagmanager.css" />
     <Content Include="Scripts\app\bootstrap-tagmanager.js" />
     <Content Include="Scripts\app\jquery.share.js" />
+    <Content Include="Scripts\app\jquery.tagcanvas.js" />
+    <Content Include="Scripts\app\jquery.tagcanvas.min.js" />
     <Content Include="Scripts\app\jscolor.min.js" />
     <Content Include="Scripts\app\snarl.min.css" />
     <Content Include="Scripts\app\snarl.min.js" />
