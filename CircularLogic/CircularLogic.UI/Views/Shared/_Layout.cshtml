@@ -31,7 +31,7 @@
                             <a href="#">Blog <i class="glyphicon glyphicon-chevron-right pull-right"></i></a>
                             <ul class="dropdown-menu sub-menu">
                                 <li>@Html.ActionLink("Create", "CreateBlogPost", "BlogPost")</li>
-                                <li>@Html.ActionLink("History", "History", "Admin")</li>
+                                <li>@Html.ActionLink("History", "ContributorHistory", "Admin")</li>
                             </ul>
                         </li>
                         <li>
@@ -79,7 +79,7 @@
             });
             jQuery.ajaxSetup({ async: false });
             $('#loadCatModal').click(function () {
-                $('#addCatModalHolder').load('AddCategory');
+                $('#addCatModalHolder').load('/Admin/AddCategory');
                 @*@{Html.RenderAction("AddCategory", "Home");}*@
                 $("#myModal").modal();
 
