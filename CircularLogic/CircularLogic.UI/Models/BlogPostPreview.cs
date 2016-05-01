@@ -11,5 +11,6 @@ namespace CircularLogic.UI.Models
         public string Author { get; set; }
         public int ID { get; set; }
         public string Category { get; set; }
+        public List<string> Tags { get; set; }
     }
 }

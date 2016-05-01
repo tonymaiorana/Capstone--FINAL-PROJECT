@@ -30,7 +30,8 @@ namespace CircularLogic.UI.Controllers
                     Author = fullname,
                     Category = post.Category.Name,
                     ID = post.BlogPostID,
-                    Title = post.Title
+                    Title = post.Title,
+                    Tags = post.Tags.Select(t => t.Name).ToList()
                 };
                 listToReturn.Add(bpp);
             }

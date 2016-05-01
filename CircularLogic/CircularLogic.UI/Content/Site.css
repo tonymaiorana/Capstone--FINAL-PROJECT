@@ -188,3 +188,69 @@ input[type="checkbox"] {
     top: 11px;
     left: -6px;
 }
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
+
+.logo.Activate{
+    transform-origin: 125px 125px;
+    -webkit-animation: pop 5s  linear;
+    }
+@-webkit-keyframes pop {
+    from {
+      transform: matrix(1,0,0,1,0,0);
+      }
+    to   {
+        transform: matrix(1.5,0,0,1.5,0,0);
+      /*transform: matrix(2,0,0,2,-115,-115);*/
+      }
+}
+
+
+.letter {
+    transform-origin: 125px 125px;
+     -webkit-animation: rotate 50s infinite linear;
+}
+
+.swhiteSpace {
+    transform-origin: 125px 125px;
+     -webkit-animation: rotate 50s infinite linear;
+}
+
+@-webkit-keyframes rotate {
+    from {
+        transform: rotate(0);
+      }
+    to   {
+        transform: rotate(-360deg);
+      }
+}
+
+
+.fullLogo.Activate {
+   -webkit-animation: blowUP 5s linear, deflate 5s linear;
+   -webkit-animation-delay: 0s, 5s;
+}
+
+@keyframes blowUP {
+      from {
+          transform: scale(1, 1);
+      }
+    to   {
+        transform: scale(2, 2);
+      }
+}
+@keyframes deflate {
+      from {
+          transform: scale(2, 2);
+      }
+    to   {
+        transform: scale(1, 1);
+      }
+}
+
+.logo-wrap {
+    height: 400px;
+    width: 400px;
+}
