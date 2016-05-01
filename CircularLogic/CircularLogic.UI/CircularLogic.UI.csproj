@@ -224,6 +224,8 @@
     <Content Include="Content\Logos\CL_150x150.png" />
     <Content Include="Content\Logos\CL_250x250--NS.png" />
     <Content Include="Content\Logos\CL_250x250.png" />
+    <Content Include="Content\left-sidebar.css" />
+    <Content Include="Content\right-sidebar.css" />
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -311,6 +313,7 @@
     <Content Include="Scripts\app\bootstrap-tagmanager.js" />
     <Content Include="Scripts\app\jquery.share.js" />
     <Content Include="Scripts\app\jscolor.min.js" />
+    <Content Include="Scripts\app\sidebar_menu.js" />
     <Content Include="Scripts\app\snarl.min.css" />
     <Content Include="Scripts\app\snarl.min.js" />
     <Content Include="Scripts\app\StaticPageValidation.js" />
