@@ -18,10 +18,5 @@ namespace CircularLogic.UI.Controllers
         {
             return _repo.GetAllTags().Select(p => p.Name).ToList();
         }
-
-        public List<string> GetTagCloudTags()
-        {
-            return _repo.GetAllSumOfTags().Select(p => p.Name).ToList();
-        }
     }
 }

@@ -511,7 +511,7 @@ namespace CircularLogic.Data
             TagCloudTag tagCloud = new TagCloudTag();
             tagCloud.TagCloudID = (int)dr["TagID"];
             tagCloud.Name = (string)dr["TagName"];
-            tagCloud.Weight = (int)dr["TagCount"];
+            tagCloud.Weight = (int)dr["Weight"];
             return tagCloud;
         }
 

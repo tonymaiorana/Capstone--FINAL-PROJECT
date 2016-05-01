@@ -217,6 +217,8 @@
     <Content Include="Content\Images\social-icons.png" />
     <Content Include="Content\Images\tjHeadshot.jpg" />
     <Content Include="Content\Images\tonyHeadshot.jpg" />
+    <Content Include="Content\jqcloud.css" />
+    <Content Include="Content\jqcloud.min.css" />
     <Content Include="Content\jquery.share.css" />
     <Content Include="Content\Logos\CL_100x100--NS.png" />
     <Content Include="Content\Logos\CL_100x100.png" />
@@ -308,12 +310,13 @@
     <Content Include="Scripts\app\BlogSearchApp.js" />
     <Content Include="Scripts\app\bloodhound.js" />
     <Content Include="Scripts\app\AngularLib\dirPagination.js" />
+    <Content Include="Scripts\app\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Scripts\app\jqcloud.js" />
+    <Content Include="Scripts\app\jqcloud.min.js" />
     <Content Include="Scripts\app\jquery-validate-defaults.js" />
     <Content Include="Scripts\app\bootstrap-tagmanager.css" />
     <Content Include="Scripts\app\bootstrap-tagmanager.js" />
     <Content Include="Scripts\app\jquery.share.js" />
-    <Content Include="Scripts\app\jquery.tagcanvas.js" />
-    <Content Include="Scripts\app\jquery.tagcanvas.min.js" />
     <Content Include="Scripts\app\jscolor.min.js" />
     <Content Include="Scripts\app\sidebar_menu.js" />
     <Content Include="Scripts\app\snarl.min.css" />
@@ -326,6 +329,9 @@
     <Content Include="Scripts\app\bootstrap-tagmanager.less" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Scripts\app\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\app\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Scripts\app\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\app\bootstrap3-typeahead.js" />
     <Content Include="Scripts\app\bootstrap3-typeahead.min.js" />

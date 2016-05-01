@@ -102,7 +102,7 @@ namespace CircularLogic.UI.Controllers
                 }
                 else
                 {
-                    blogPost.Tags.Add(new Tag() {Name = s, TagID = 0});
+                    blogPost.Tags.Add(new Tag() { Name = s, TagID = 0 });
                 }
             }
             _repo.CreateBlogPost(blogPost);
@@ -175,6 +175,11 @@ namespace CircularLogic.UI.Controllers
         public ActionResult Blogs()
         {
             return View();
+        }
+
+        public JsonResult GetTagCloudTags()
+        {
+            return Json(_repo.GetAllSumOfTags().Select(model => new { text = model.Name, weight = model.Weight, html = new { myId = model.TagCloudID } }), JsonRequestBehavior.AllowGet);
         }
     }
 }
