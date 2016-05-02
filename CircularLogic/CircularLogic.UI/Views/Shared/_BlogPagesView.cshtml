@@ -81,7 +81,6 @@
             </div>
         </div>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     <script src="~/Scripts/app/jquery.share.js"></script>
@@ -108,10 +107,10 @@
             });
             $(document).on("click", ".tagLink", function (event) {
                 var tag = $(this);
-                alert(tag.attr("myId"));
+                var url = '@Url.Action("BlogHomePage","BlogPost")';
+                window.location.href = url + "?tagId=" + tag.attr("myId");
             });
         });
-        @*TODO: Input URL routing for tags (Hannah)*@
     </script>
 </body>
 </html>

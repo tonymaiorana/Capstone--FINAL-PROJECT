@@ -51,7 +51,7 @@
         removeOverflowing: true,
         afterCloudRender: null,
         autoResize: true,
-        colors: ["#E79000", "#D19516", "#BB9A2D", "#A69F43", "#90A45A", "#feb24c", "#fed976", "#ffeda0", "#ffffcc"],
+        colors: ["#800026", "#bd0026", "#e31a1c", "#fc4e2a", "#fd8d3c", "#feb24c", "#fed976", "#ffeda0", "#ffffcc"],
         fontSize: {
             from: 0.1,
             to: 0.02

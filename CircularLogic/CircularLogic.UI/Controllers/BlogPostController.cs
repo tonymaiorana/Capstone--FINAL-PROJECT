@@ -75,10 +75,13 @@ namespace CircularLogic.UI.Controllers
             return View(blogPostVM);
         }
 
-        public ActionResult BlogHomePage()
+        public ActionResult BlogHomePage(int? tagId)
         {
-            var allPosts = _repo.GetAllBlogPosts().Where(p => p.IsApproved).OrderByDescending(p => p.CreationTime);
-
+            IOrderedEnumerable<BlogPost> allPosts = _repo.GetAllBlogPosts().Where(p => p.IsApproved).OrderByDescending(p => p.CreationTime);
+            if (tagId.HasValue)
+            {
+                allPosts = allPosts.Where(p => p.Tags.Any(t => t.TagID == tagId.Value)).OrderByDescending(p => p.CreationTime);
+            }
             var listOfBlogViewModels = new List<BlogPostViewModel>();
             foreach (var blogPost in allPosts)
             {
@@ -137,7 +140,12 @@ namespace CircularLogic.UI.Controllers
 
         public JsonResult GetTagCloudTags()
         {
-            return Json(_repo.GetAllSumOfTags().Select(model => new { text = model.Name, weight = model.Weight, html = new { myId = model.TagCloudID, Class = "tagLink" } }), JsonRequestBehavior.AllowGet);
+            return Json(_repo.GetAllSumOfTags().Select(model => new
+            {
+                text = model.Name,
+                weight = model.Weight,
+                html = new { myId = model.TagCloudID, Class = "tagLink" }
+            }), JsonRequestBehavior.AllowGet);
         }
     }
 }
