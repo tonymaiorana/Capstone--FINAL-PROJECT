@@ -84,8 +84,8 @@
         <script type="text/javascript">
             $(document).ready(function() {
                 $(".logo-wrap").click(function() {
-                    $(this).animate({ height: 800, width: 800 }, 5000, function () {
-                        $(this).animate({ height: 250, width: 250 }, 5000, function () { });
+                    $(this).animate({ height: $(window).height(), width: $(window).height() }, 5000, function () {
+                        $(this).animate({ height: 250 }, 5000, function () { });
                         $("#abtCL").show();
                         $("#abtCLB").show();
                     });

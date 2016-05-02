@@ -62,8 +62,14 @@
         @RenderBody()
         <div id="addCatModalHolder"></div>
         <hr />
-        <footer>
-            <p>@DateTime.Now.ToShortDateString() - Circular Logic &copy;</p>
+        <footer class="container-fluid text-center">
+            <a href="#myPage" title="To Top">
+                <span class="glyphicon glyphicon-chevron-up"></span>
+            </a>
+            <br />
+            <img src="~/Content/Logos/CL_100x100.png" />
+            <br />
+            <p>@DateTime.Now.ToShortDateString()</p>
         </footer>
     </div>
 

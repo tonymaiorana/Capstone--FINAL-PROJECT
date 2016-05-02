@@ -28,29 +28,33 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Blog", "BlogHomePage", "BlogPost")</li>
-                    <li class="dropdown">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Admin <b class="caret"></b></a>
-                        <ul class="dropdown-menu" id="menu1">
-                            <li>
-                                <a href="#">Blog <i class="glyphicon glyphicon-chevron-right pull-right"></i></a>
-                                <ul class="dropdown-menu sub-menu">
-                                    <li>@Html.ActionLink("Create", "CreateBlogPost", "BlogPost")</li>
-                                    <li>@Html.ActionLink("History", "History", "Admin")</li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">Static Page<i class="glyphicon glyphicon-chevron-right pull-right"></i></a>
-                                <ul class="dropdown-menu sub-menu">
-                                    <li>@Html.ActionLink("Add", "AddStaticPage", "StaticPage")</li>
-                                    <li>@Html.ActionLink("Manage", "Index", "StaticPage")</li>
-                                </ul>
-                            </li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Admin <b class="caret"></b></a>
+                            <ul class="dropdown-menu" id="menu1">
+                                <li>
+                                    <a href="#">Blog <i class="glyphicon glyphicon-chevron-right pull-right"></i></a>
+                                    <ul class="dropdown-menu sub-menu">
+                                        <li>@Html.ActionLink("Create", "CreateBlogPost", "BlogPost")</li>
+                                        <li>@Html.ActionLink("History", "ContributorHistory", "Admin")</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Static Page<i class="glyphicon glyphicon-chevron-right pull-right"></i></a>
+                                    <ul class="dropdown-menu sub-menu">
+                                        <li>@Html.ActionLink("Add", "AddStaticPage", "StaticPage")</li>
+                                        <li>@Html.ActionLink("Manage", "Index", "StaticPage")</li>
+                                    </ul>
+                                </li>
 
-                            <li class="divider"></li>
-                            <li><a href="#" id="loadCatModal">Add Category</a></li>
-                            <li>@Html.ActionLink("Admin Queue", "Index", "Admin")</li>
-                        </ul>
-                    </li>
+                                <li class="divider"></li>
+                                <li><a href="#" id="loadCatModal">Add Category</a></li>
+                                <li>@Html.ActionLink("Admin Queue", "Index", "Admin")</li>
+                            </ul>
+                        </li>
+                    }
+                    @{Html.RenderAction("MenuDropDown", "StaticPage");}
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
@@ -78,7 +82,7 @@
             </div>
             <div style="margin: 50px; width: 300px">
                 <h2 style="text-align: center;">About Our Blog</h2>
-                <p style="font-size: 12px;">
+                <p style="font-size: 10px;">
                     The Dev’s Round Table is a blog managed by our in house development team.
                     We utilize this blog to share our team’s view on core programming principles with the world.
                     Posts touch on a wide range of topics from low level topics such as assembly languages to high
