@@ -3,9 +3,10 @@
 @{
     ViewBag.Title = "Index";
 }
+
 <div class="container">
     <h2>Manage Static Pages</h2>
-    <table class="table table-bordered">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>
@@ -16,7 +17,8 @@
                 </th>
                 <th></th>
             </tr>
-
+        </thead>
+        <tbody>
             @foreach (var item in Model)
             {
                 <tr>
@@ -24,26 +26,27 @@
                         @Html.DisplayFor(modelItem => item.Title)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.HtmlContent)
+                        @Html.Raw(item.HtmlContent)
                     </td>
                     <td>
-                        <a href="@Url.Action("UpdateStaticPage", new {id = item.StaticID})">
-                                <i class="glyphicon glyphicon-edit"></i>
-                                <span style="font-size:2em" class="sr-only">Edit</span>
-                            </a>
-                            <a href="@Url.Action("DeleteStaticPage", new {id = item.StaticID})">
-                                <i class="glyphicon glyphicon-trash"></i>
-                                <span style="font-size:2em" class="sr-only">Delete</span>
-                            </a>
-                            <a href="@Url.Action("ViewStaticPage", new {id = item.StaticID})">
-                                <i class="glyphicon glyphicon-eye-open"></i>
-                                <span style="font-size:2em" class="sr-only">View</span>
-                            </a>
+                        <a title="Update" class="btn btn-success" href="@Url.Action("UpdateStaticPage", new {id = item.StaticID})">
+                            <i class="glyphicon glyphicon-edit"></i>
+                            <span style="font-size:2em" class="sr-only">Edit</span>
+                        </a>
+                        <a title="Delete" class="btn btn-danger" href="@Url.Action("DeleteStaticPage", new {id = item.StaticID})">
+                            <i class="glyphicon glyphicon-trash"></i>
+                            <span style="font-size:2em" class="sr-only">Delete</span>
+                        </a>
+                        <a title="View" class="btn btn-primary" href="@Url.Action("ViewStaticPage", new {id = item.StaticID})">
+                            <i class="glyphicon glyphicon-eye-open"></i>
+                            <span style="font-size:2em" class="sr-only">View</span>
+                        </a>
                         @*@Html.ActionLink("Edit", "UpdateStaticPage", new { id = item.StaticID }) |
-                        @Html.ActionLink("View", "ViewStaticPage", new { id = item.StaticID }) |
-                        @Html.ActionLink("Delete", "DeleteStaticPage", new { id = item.StaticID })*@
+                            @Html.ActionLink("View", "ViewStaticPage", new { id = item.StaticID }) |
+                            @Html.ActionLink("Delete", "DeleteStaticPage", new { id = item.StaticID })*@
                     </td>
                 </tr>
             }
+        </tbody>
     </table>
 </div>

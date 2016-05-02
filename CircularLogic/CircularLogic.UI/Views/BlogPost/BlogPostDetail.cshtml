@@ -24,10 +24,10 @@
             <div class="postTags">
                 Tags: @foreach (string tag in Model.BlogPost.Tags.Select(r => r.Name))
             {
-                    <span>@tag</span>
+                    <strong>@tag</strong>
                 }
             </div>
-            <h5>Category: @Model.BlogPost.Category.Name</h5>
+            <h5>Category: <strong>@Model.BlogPost.Category.Name</strong></h5>
         </div>
     </div>
 </div>
