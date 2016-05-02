@@ -564,6 +564,7 @@
     <Content Include="Views\StaticPage\DeleteStaticPage.cshtml" />
     <Content Include="Views\StaticPage\Index.cshtml" />
     <Content Include="Views\BlogPost\Blogs.cshtml" />
+    <Content Include="Views\Shared\_StaticList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

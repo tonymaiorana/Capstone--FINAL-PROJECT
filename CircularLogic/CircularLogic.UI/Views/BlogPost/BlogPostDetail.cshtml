@@ -1,17 +1,18 @@
 ﻿@model CircularLogic.UI.Models.BlogPostViewModel
 @{
     ViewBag.Title = "BlogPostDetail";
+    Layout = "~/Views/Shared/_BlogPagesView.cshtml";
 }
 <div class="row">
-    <div class="col-md-6 offest3">
-        <div class="col-md-12 details">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-12 details"  style="text-align: left;">
             <h2>@Model.BlogPost.Title</h2>
             <h3>@Model.User.FirstName @Model.User.LastName</h3>
             <h4>@Model.BlogPost.CreationTime.Date.ToShortDateString()</h4>
             @if (!(Model.BlogPost.Image.ImageData == null))
             {
                 <div class="postHeader image">
-                    <img src="@Model.BlogPost.Image.ImageData" alt="@Model.BlogPost.Image.Name" />
+                    <img src="@Model.BlogPost.Image.ImageData" alt="@Model.BlogPost.Image.Name" style="max-width: 586px; margin-left: auto; margin-right: auto; display: block;"/>
                 </div>
             }
             <br/>

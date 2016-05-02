@@ -1,0 +1,10 @@
+﻿@model List<CircularLogic.Models.StaticPage>
+<li class="dropdown">
+    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Static Pages <b class="caret"></b></a>
+    <ul class="dropdown-menu" id="menu2">
+       @foreach (var m in Model)
+       {
+        <li>@Html.ActionLink(@m.Title, "ViewStaticPage", "StaticPage", new {id=@m.StaticID}, null)</li>
+       }
+    </ul>
+</li>

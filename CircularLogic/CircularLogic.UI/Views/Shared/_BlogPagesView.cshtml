@@ -13,7 +13,7 @@
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/jqcloud.min.css" rel="stylesheet" />
 </head>
-<body style="min-height: 100%;">
+<body style="min-height: 100%;" id="myPage" data-spy="scroll" data-target=".navbar">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -68,18 +68,46 @@
         <!-- Right Sidebar -->
         <div id="sidebar-wrapper-right">
             <div id="tags"> </div>
+            <div class="fb-page" data-href="https://www.facebook.com/circlog/" data-width="250" data-small-header="false"
+                 data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" style="margin-left: 75px; margin-top: 35px;">
+                <div class="fb-xfbml-parse-ignore">
+                    <blockquote cite="https://www.facebook.com/circlog/"><a href="https://www.facebook.com/circlog/">Circular Logic</a></blockquote>
+                </div></div>
+            <div style="margin-left: 75px; margin-top: 35px; margin-bottom: -15px;">
+                <a href="https://twitter.com/circularlogic" class="twitter-follow-button" data-show-count="false" data-size="large">"Follow @("@")username"</a>
+            </div>
+            <div style="margin: 50px; width: 300px">
+                <h2 style="text-align: center;">About Our Blog</h2>
+                <p style="font-size: 12px;">
+                    The Dev’s Round Table is a blog managed by our in house development team.
+                    We utilize this blog to share our team’s view on core programming principles with the world.
+                    Posts touch on a wide range of topics from low level topics such as assembly languages to high
+                    level concepts like user experience. Our hope is that this blog can provide a window for our
+                    clients to observe our development strategies and reference for other development teams to get
+                    insight into our team’s thought process. The blog has also proven to be a useful training tool
+                    for new team members of all skill levels, as it helps bring them up to speed with the types of
+                    concepts they will see implemented on projects and insight into the core value of our development team.
+                </p>
+            </div>
         </div>
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid xyz">
                 @RenderBody()
-                <hr />
-                <footer>
-                    <p>@DateTime.Now.ToShortDateString() - Circular Logic &copy;</p>
-                </footer>
             </div>
         </div>
+
+        <hr />
+        <footer class="container-fluid text-center">
+            <a href="#myPage" title="To Top">
+                <span class="glyphicon glyphicon-chevron-up"></span>
+            </a>
+            <br />
+            <img src="~/Content/Logos/CL_100x100.png" />
+            <br />
+            <p>@DateTime.Now.ToShortDateString()</p>
+        </footer>
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
@@ -98,6 +126,7 @@
                 affix: 'left center'
             });
     </script>
+
     <script src="~/Scripts/app/jqcloud.js"></script>
     @RenderSection("scripts", required: false)
     <script type="text/javascript">
@@ -111,6 +140,49 @@
                 window.location.href = url + "?tagId=" + tag.attr("myId");
             });
         });
+    </script>
+    <script>
+        $(document).ready(function () {
+            // Add smooth scrolling to all links in navbar + footer link
+            $("footer a[href='#myPage']").on('click', function (event) {
+
+                // Prevent default anchor click behavior
+                event.preventDefault();
+
+                // Store hash
+                var hash = this.hash;
+
+                // Using jQuery's animate() method to add smooth page scroll
+                // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top
+                }, 900, function () {
+
+                    // Add hash (#) to URL when done scrolling (default click behavior)
+                    window.location.hash = hash;
+                });
+            });
+        })
+    </script>
+    <div id="fb-root"></div>
+    <script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.6";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+    </script>
+    <script>
+        $(document).ready(function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0],
+                p = /^http:/.test(d.location) ? 'http' : 'https';
+            if (!d.getElementById(id)) {
+                js = d.createElement(s); js.id = id; js.src = p +
+                    '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs);
+            }
+        }(document, 'script', 'twitter-wjs'));
     </script>
 </body>
 </html>

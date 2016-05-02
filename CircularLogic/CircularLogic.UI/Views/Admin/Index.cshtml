@@ -101,7 +101,7 @@
                                         @Html.ActionLink(@bp.Title, "BlogPostDetail", "BlogPost", new { id = @bp.BlogPostID }, new { target = "_blank" })
                                         <input type="hidden" value="@bp.ContentQueueID" class="hidden edit"/>
                                     </td>
-                                    <td>@bp.UserID</td>
+                                    <td>@bp.UserName</td>
                                     <td>@bp.CreationTime.Value.ToShortDateString()</td>
                                     <td>
                                         <input type="checkbox" class="editCB allow"/>
@@ -147,7 +147,7 @@
                                         @Html.ActionLink(@bp.Title, "BlogPostDetail", "BlogPost", new { id = @bp.BlogPostID }, new { target = "_blank" })
                                         <input type="hidden" value="@bp.ContentQueueID" class="hidden delete"/>
                                     </td>
-                                    <td>@bp.UserID</td>
+                                    <td>@bp.UserName</td>
                                     <td>@bp.CreationTime.Value.ToShortDateString()</td>
                                     <td>
                                         <input type="checkbox" class="deleteCB allow"/>

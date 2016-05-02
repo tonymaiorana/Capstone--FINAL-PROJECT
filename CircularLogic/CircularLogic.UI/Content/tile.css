@@ -26,6 +26,10 @@
     background-color: white;
 }
 
+a > .blog-tile:active {
+    box-shadow: none;
+}
+
 .tile-title {
 	height: 45px;
 	background-color: #e79c00;
