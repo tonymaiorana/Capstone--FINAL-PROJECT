@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace CircularLogic.UI.Models
 {
@@ -12,5 +13,10 @@ namespace CircularLogic.UI.Models
         public int ID { get; set; }
         public string Category { get; set; }
         public List<string> Tags { get; set; }
+        public string Date { get; set; }
+        public string Image { get; set; }
+        public string Color { get; set; }
+        [AllowHtml]
+        public string Content { get; set; }
     }
 }

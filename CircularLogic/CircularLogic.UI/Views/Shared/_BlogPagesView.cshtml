@@ -117,8 +117,14 @@
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/app/snarl.min.js")
+    <script src="~/Scripts/bootbox.min.js"></script>
+    <script src="~/Scripts/app/AngularLib/angular.js"></script>
+    <script src="~/Scripts/app/AngularLib/angular-route.min.js"></script>
+    <script src="~/Scripts/app/AngularLib/dirPagination.js"></script>
     <script src="~/Scripts/app/jquery.share.js"></script>
-    <script src="~/Scripts/app/sidebars.js"></script>
+<script src="~/Scripts/app/sidebars.js"></script>
+
     <script type="text/javascript">
         $("img").error(function () {
             $(this).hide();
@@ -180,15 +186,34 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
     </script>
-    <script>
-        $(document).ready(function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0],
-                p = /^http:/.test(d.location) ? 'http' : 'https';
-            if (!d.getElementById(id)) {
-                js = d.createElement(s); js.id = id; js.src = p +
-                    '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs);
-            }
-        }(document, 'script', 'twitter-wjs'));
+<script>
+    $(document).ready(function(d, s, id) {
+        var js,
+            fjs = d.getElementsByTagName(s)[0],
+            p = /^http:/.test(d.location) ? 'http' : 'https';
+        if (!d.getElementById(id)) {
+            js = d.createElement(s);
+            js.id = id;
+            js.src = p +
+                '://platform.twitter.com/widgets.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }
+    }(document, 'script', 'twitter-wjs'));
+</script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("img").error(function () {
+                $(this).hide();
+            });
+            jQuery.ajaxSetup({ async: false });
+            $('#loadCatModal').click(function () {
+                $('#addCatModalHolder').load('/Admin/AddCategory');
+                @*@{Html.RenderAction("AddCategory", "Home");}*@
+                $("#myModal").modal();
+
+            });
+
+        });
     </script>
 </body>
 </html>

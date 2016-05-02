@@ -31,7 +31,10 @@ namespace CircularLogic.UI.Controllers
                     Category = post.Category.Name,
                     ID = post.BlogPostID,
                     Title = post.Title,
-                    Tags = post.Tags.Select(t => t.Name).ToList()
+                    Tags = post.Tags.Select(t => t.Name).ToList(),
+                    Image = post.Image.ImageData,
+                    Color = "#" + post.Category.Color,
+                    Date = post.CreationTime.ToString("MMM dd yyyy")
                 };
                 listToReturn.Add(bpp);
             }

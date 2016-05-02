@@ -1,3 +1,7 @@
+.tile-spacer >a{
+    width: 300px;
+}
+
 .tile-spacer > a:link {
     text-decoration: none;
     color: black;

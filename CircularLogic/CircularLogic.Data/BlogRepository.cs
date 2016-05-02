@@ -484,6 +484,7 @@ namespace CircularLogic.Data
             blogPost.BlogPostID = (int)dr["BlogPostID"];
             blogPost.Category.CategoryID = (int)dr["CategoryID"];
             blogPost.Category.Name = (string)dr["CategoryName"];
+            blogPost.Category.Color = dr["Color"].ToString();
             blogPost.UserID = (string)dr["UserID"];
             blogPost.Title = (string)dr["Title"];
             blogPost.HtmlContent = (string)dr["TextBody"];
@@ -529,6 +530,7 @@ namespace CircularLogic.Data
             Category cat = new Category();
             cat.CategoryID = (int)dr["CategoryID"];
             cat.Name = (string)dr["CategoryName"];
+            cat.Color = dr["Color"].ToString();
             return cat;
         }
 

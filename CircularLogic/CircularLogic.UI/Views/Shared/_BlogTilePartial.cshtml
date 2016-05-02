@@ -1,8 +1,10 @@
 ﻿@model CircularLogic.UI.Models.BlogPostViewModel
 
-<a href="@Url.Action("BlogPostDetail", "BlogPost", new {id = Model.BlogPost.BlogPostID})" class="tile-link">
+<a href="@Url.Action("BlogPostDetail", "BlogPost", new {id = Model.BlogPost.BlogPostID})" class="tile-link col-lg-3 col-md-4 col-sm-6 col-xs-12">
 <div class="blog-tile">
-    <div class="tile-title">
+    <div class="tile-title" @if(@Model.BlogPost.Category.Color.Length>1) {
+                                @:style="background-color: #@Model.BlogPost.Category.Color" 
+                                }>
         <div class="tile-date">@Model.BlogPost.CreationTime.ToString("MMM dd yyyy")</div>
     </div>
     <div class="tile-image-container">
