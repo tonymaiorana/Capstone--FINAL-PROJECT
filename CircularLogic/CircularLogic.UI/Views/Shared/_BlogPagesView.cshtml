@@ -28,7 +28,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Blog", "BlogHomePage", "BlogPost")</li>
-                    @if (User.IsInRole("Admin"))
+                    @if (User.IsInRole("Admin") || User.IsInRole("Contributor"))
                     {
                         <li class="dropdown">
                             <a href="#" data-toggle="dropdown" class="dropdown-toggle">Admin <b class="caret"></b></a>
@@ -40,14 +40,16 @@
                                         <li>@Html.ActionLink("History", "ContributorHistory", "Admin")</li>
                                     </ul>
                                 </li>
-                                <li>
-                                    <a href="#">Static Page<i class="glyphicon glyphicon-chevron-right pull-right"></i></a>
-                                    <ul class="dropdown-menu sub-menu">
-                                        <li>@Html.ActionLink("Add", "AddStaticPage", "StaticPage")</li>
-                                        <li>@Html.ActionLink("Manage", "Index", "StaticPage")</li>
-                                    </ul>
-                                </li>
-
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <li>
+                                        <a href="#">Static Page<i class="glyphicon glyphicon-chevron-right pull-right"></i></a>
+                                        <ul class="dropdown-menu sub-menu">
+                                            <li>@Html.ActionLink("Add", "AddStaticPage", "StaticPage")</li>
+                                            <li>@Html.ActionLink("Manage", "Index", "StaticPage")</li>
+                                        </ul>
+                                    </li>
+                                }
                                 <li class="divider"></li>
                                 <li><a href="#" id="loadCatModal">Add Category</a></li>
                                 <li>@Html.ActionLink("Admin Queue", "Index", "Admin")</li>
