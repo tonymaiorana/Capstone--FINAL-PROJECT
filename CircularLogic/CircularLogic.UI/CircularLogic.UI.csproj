@@ -318,6 +318,7 @@
     <Content Include="Scripts\app\bootstrap-tagmanager.js" />
     <Content Include="Scripts\app\jquery.share.js" />
     <Content Include="Scripts\app\jscolor.min.js" />
+    <Content Include="Scripts\app\konami.js" />
     <Content Include="Scripts\app\snarl.min.css" />
     <Content Include="Scripts\app\snarl.min.js" />
     <Content Include="Scripts\app\StaticPageValidation.js" />
