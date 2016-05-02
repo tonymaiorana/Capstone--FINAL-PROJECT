@@ -76,5 +76,10 @@ namespace CircularLogic.UI.Controllers
 
             return View(models);
         }
+
+        public PartialViewResult MenuDropDown()
+        {
+            return PartialView("_StaticList", _repo.GetAllStaticPages());
+        }
     }
 }
