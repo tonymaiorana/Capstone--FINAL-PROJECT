@@ -19,7 +19,8 @@
         <div class="masthead-image">
             <img src="~/Content/Images/lowPolyOrange2.jpg" />
         </div>
-    </div>*@
+    </div>
+    <div class="masthead-fadeout"> </div>*@
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -29,7 +30,7 @@
             </button>
             @Html.ActionLink("Circular Logic", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
         </div>
-        <div class="navbar-collapse collapse">
+        <div class="navbar-collapse collapse" style="padding-top: 50px;">
             <ul class="nav navbar-nav">
                 @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
                 <li>@Html.ActionLink("Blog", "Blogs", "BlogPost")</li>
@@ -69,6 +70,8 @@
         </div>
     </div>
 </div>
+
+
 <div class="container body-content">
 
     @RenderBody()

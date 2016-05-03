@@ -12,9 +12,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Title)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HtmlContent)
-                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.HtmlContent)
+                    </th>*@
                 <th></th>
             </tr>
         </thead>
@@ -25,9 +25,9 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Title)
                     </td>
-                    <td>
-                        @Html.Raw(item.HtmlContent)
-                    </td>
+                    @*<td>
+                            @Html.Raw(item.HtmlContent)
+                        </td>*@
                     <td>
                         <a title="Update" class="btn btn-success" href="@Url.Action("UpdateStaticPage", new {id = item.StaticID})">
                             <i class="glyphicon glyphicon-edit"></i>
