@@ -13,7 +13,13 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body style="min-height: 100%;" id="myPage" data-spy="scroll" data-target=".navbar">
+
 <div class="navbar navbar-inverse navbar-fixed-top">
+    @*<div class="masthead-container">
+        <div class="masthead-image">
+            <img src="~/Content/Images/lowPolyOrange2.jpg" />
+        </div>
+    </div>*@
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -26,7 +32,7 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
-                <li>@Html.ActionLink("Blog", "BlogHomePage", "BlogPost")</li>
+                <li>@Html.ActionLink("Blog", "Blogs", "BlogPost")</li>
                 @if (User.IsInRole("Admin") || User.IsInRole("Contributor"))
                 {
                     <li class="dropdown">
@@ -55,7 +61,7 @@
                         </ul>
                     </li>
                 }
-                @{Html.RenderAction("MenuDropDown","StaticPage");}
+                @{Html.RenderAction("MenuDropDown", "StaticPage");}
                 <li>@Html.ActionLink("About", "About", "Home")</li>
                 <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
             </ul>

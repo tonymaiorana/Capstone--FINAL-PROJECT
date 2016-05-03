@@ -272,3 +272,14 @@ input[type="checkbox"] {
 .tagLink:hover {
     cursor: url('Images/cursor.cur'), auto;
 }
+
+.masthead-image img{
+  width: 100%;
+  object-fit: contain
+}
+
+.masthead-container {
+  overflow: hidden;
+  height: 120px;
+  width: 100%;
+}
