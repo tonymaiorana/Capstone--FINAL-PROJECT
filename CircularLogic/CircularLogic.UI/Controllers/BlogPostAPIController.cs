@@ -34,7 +34,8 @@ namespace CircularLogic.UI.Controllers
                     Tags = post.Tags.Select(t => t.Name).ToList(),
                     Image = post.Image.ImageData,
                     Color = "#" + post.Category.Color,
-                    Date = post.CreationTime.ToString("MMM dd yyyy")
+                    Date = post.CreationTime.ToString("MMM dd yyyy"),
+                    DateTicks = post.CreationTime.Ticks
                 };
                 listToReturn.Add(bpp);
             }

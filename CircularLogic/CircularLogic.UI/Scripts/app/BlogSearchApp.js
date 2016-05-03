@@ -13,11 +13,12 @@
 app.controller('listdata',function($scope, $http){
 	$scope.posts = []; //declare an empty array
 	$http.get("/api/BlogPostAPI/GetPreviews").success(function(response){ 
-		$scope.posts = response;  //ajax request to fetch data into $scope.data
+	    $scope.posts = response;  //ajax request to fetch data into $scope.data
+	    $scope.sort('DateTicks');
 	});
 	
 	$scope.sort = function(keyname){
 		$scope.sortKey = keyname;   //set the sortKey to the param passed
-		$scope.reverse = !$scope.reverse; //if true make it false and vice versa
+		$scope.reverse = true; //if true make it false and vice versa
 	}
 });

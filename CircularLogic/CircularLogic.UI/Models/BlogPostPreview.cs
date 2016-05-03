@@ -18,5 +18,6 @@ namespace CircularLogic.UI.Models
         public string Color { get; set; }
         [AllowHtml]
         public string Content { get; set; }
+        public long DateTicks { get; set; }
     }
 }
