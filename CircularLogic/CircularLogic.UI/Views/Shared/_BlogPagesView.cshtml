@@ -148,8 +148,11 @@
             });
             $(document).on("click", ".tagLink", function (event) {
                 var tag = $(this);
+                var txt = tag[0].innerHTML;
+                $('#blgSearch').val(txt);
+                $('#blgSearch').trigger('input');
                 var url = '@Url.Action("BlogHomePage","BlogPost")';
-                window.location.href = url + "?tagId=" + tag.attr("myId");
+                //window.location.href = url + "?tagId=" + tag.attr("myId");
             });
         });
     </script>

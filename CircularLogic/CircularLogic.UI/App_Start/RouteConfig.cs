@@ -14,10 +14,17 @@ namespace CircularLogic.UI
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+               name: "BillSucks",
+               url: "BillSucks",
+               defaults: new { controller = "BlogPost", action = "BlogHomePage", id = UrlParameter.Optional }
+           );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+           
         }
     }
 }
