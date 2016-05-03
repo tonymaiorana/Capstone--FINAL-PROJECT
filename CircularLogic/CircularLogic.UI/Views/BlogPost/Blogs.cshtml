@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_BlogPagesView.cshtml";
 }
 
-<h2>Blogs</h2>
+<h2>Dev's Round Table</h2>
 
 <div ng-app="angularTable" ng-view="">
     <div class="bs-component ng-cloak" ng-controller="listdata">
@@ -17,7 +17,7 @@
         <div class="row">
             <div dir-paginate="post in posts|orderBy:sortKey:reverse|filter:search|itemsPerPage:12" ng-cloak>
                 <div class="tile-spacer">
-                    <a href="/BlogPost/BlogPostDetail/{{post.ID}}" class="tile-link col-lg-3 col-md-4 col-sm-6 col-xs-12" style="padding: 20px 0; margin: 5px 5px">
+                    <a href="/Blog/Post/{{post.ID}}" class="tile-link col-lg-3 col-md-4 col-sm-6 col-xs-12" style="padding: 20px 0; margin: 5px 5px">
                         <div class="blog-tile">
                             <div class="tile-title" ng-style="{'background-color': post.Color}">
                                 <div class="tile-date">{{post.Date}}</div>
