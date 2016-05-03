@@ -7,8 +7,9 @@
     <div class="col-md-8 col-md-offset-2">
         <div class="col-md-12 details"  style="text-align: left;">
             <h2>@Model.BlogPost.Title</h2>
-            <h3>@Model.User.FirstName @Model.User.LastName</h3>
-            <h4>@Model.BlogPost.CreationTime.Date.ToShortDateString()</h4>
+            <h5>Category: <strong style="color: #@Model.BlogPost.Category.Color">@Model.BlogPost.Category.Name</strong></h5>
+            <h4>Model.User.FirstName @Model.User.LastName</h4>
+            <h5>@Model.BlogPost.CreationTime.Date.ToShortDateString()</h5>
             @if (!(Model.BlogPost.Image.ImageData == null))
             {
                 <div class="postHeader image">
@@ -27,7 +28,6 @@
                     <strong>@tag</strong>
                 }
             </div>
-            <h5>Category: <strong>@Model.BlogPost.Category.Name</strong></h5>
         </div>
     </div>
 </div>
