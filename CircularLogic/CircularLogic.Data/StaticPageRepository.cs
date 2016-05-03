@@ -60,6 +60,7 @@ namespace CircularLogic.Data
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = "UpdateAStaticPage";
                 cmd.Parameters.AddWithValue("@StaticPageID", staticPage.StaticID);
+                //cmd.Parameters.AddWithValue("@LinkName", staticPage.LinkName);
                 cmd.Parameters.AddWithValue("@Title", staticPage.Title);
                 cmd.Parameters.AddWithValue("@TextBody", staticPage.HtmlContent);
                 cmd.Parameters.AddWithValue("@UpdateTime", staticPage.UpdateTime);
@@ -72,7 +73,20 @@ namespace CircularLogic.Data
 
                 if (staticPage.Image != null)
                 {
-                    UpdateAnImage(staticPage.Image, staticPage.StaticID);
+                    SqlCommand cmd2 = new SqlCommand("delete from StaticImage where StaticPageID = @StaticPageID");
+                    cmd2.Parameters.AddWithValue("@StaticPageID", staticPage.StaticID);
+                    cmd2.Connection = cn;
+                    cn.Open();
+                    cmd2.ExecuteNonQuery();
+                    cn.Close();
+                    if (staticPage.Image.ImageID > 0)
+                    {
+                        UpdateAnImage(staticPage.Image, staticPage.StaticID);
+                    }
+                    else
+                    {
+                        AddAnImage(staticPage.Image, staticPage.StaticID);
+                    }
                 }
 
                 return updatedStaticPage;
@@ -193,7 +207,7 @@ namespace CircularLogic.Data
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = "AddAnImage";
-                cmd.Parameters.AddWithValue("@StaticPageID", staticID);
+                cmd.Parameters.AddWithValue("@ImageID", image.ImageID);
                 cmd.Parameters.AddWithValue("@Name", image.Name);
                 cmd.Parameters.AddWithValue("@ImageData", image.ImageData);
 

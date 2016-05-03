@@ -11,11 +11,9 @@
                 <img src="@Model.Image.ImageData" alt="@Model.Image.Name" style="max-width: 586px; margin-left: auto; margin-right: auto; display: block;" />
             </div>
         }
-
+        <br />
         <div class="staticContent">
-            <div class="postContent">
-                @Html.Raw(Model.HtmlContent)
-            </div>
+            @Html.Raw(Model.HtmlContent)
         </div>
     </div>
 </div>
