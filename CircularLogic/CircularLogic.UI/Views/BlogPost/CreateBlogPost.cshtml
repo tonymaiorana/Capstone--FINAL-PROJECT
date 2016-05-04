@@ -4,7 +4,7 @@
     ViewBag.Title = "CreateBlogPost";
 }
 
-@using (Html.BeginForm("CreateBlogPost", "BlogPost", FormMethod.Post, new { @class = "form-horizontal" }))
+@using (Html.BeginForm("CreateBlogPost", "BlogPost", FormMethod.Post, new { @class = "form-horizontal", id = "createBlogPost" }))
 {
 
     <h3>Create A Blog Post</h3>
