@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Dev's Round Table</title>
+    <title>Dev's Round Table - @ViewBag.Title</title>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="~/Content/tile.css" rel="stylesheet">
     <link href="~/Content/sidebars.css" rel="stylesheet">
@@ -72,7 +72,7 @@
         </div>
 
         <!-- Right Sidebar -->
-        <div id="sidebar-wrapper-right">
+        <div id="sidebar-wrapper-right" class="hidden-phone hidden-xs">
             <div id="tags"> </div>
             <div class="fb-page" data-href="https://www.facebook.com/circlog/" data-width="250" data-small-header="false"
                  data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" style="margin-left: 75px; margin-top: 35px;">
@@ -82,7 +82,7 @@
             <div style="margin-left: 75px; margin-top: 35px; margin-bottom: -15px;">
                 <a href="https://twitter.com/circularlogic" class="twitter-follow-button" data-show-count="false" data-size="large">"Follow @("@")username"</a>
             </div>
-            <div style="margin: 50px; width: 300px">
+            @*<div style="margin: 50px; width: 300px">
                 <h2 style="text-align: center;">About Our Blog</h2>
                 <p style="font-size: 10px;">
                     The Dev’s Round Table is a blog managed by our in house development team.
@@ -94,12 +94,12 @@
                     for new team members of all skill levels, as it helps bring them up to speed with the types of
                     concepts they will see implemented on projects and insight into the core value of our development team.
                 </p>
-            </div>
+            </div>*@
         </div>
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
-            <div class="container-fluid xyz">
+            <div class="container-fluid">
                 @RenderBody()
             </div>
         </div>
@@ -144,7 +144,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $.getJSON('@Url.Action("GetTagCloudTags", "BlogPost")', function (data) {
-                $("#tags").jQCloud(data, { width: 400, height: 250 });
+                $("#tags").jQCloud(data, { width: 300, height: 350 });
             });
             $(document).on("click", ".tagLink", function (event) {
                 var tag = $(this);

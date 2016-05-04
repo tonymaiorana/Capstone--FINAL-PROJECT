@@ -72,6 +72,7 @@ namespace CircularLogic.UI.Controllers
         {
             BlogPost blogPost = _repo.GetBlogPostByBlogID(id);
             BlogPostViewModel blogPostVM = new BlogPostViewModel(blogPost);
+            ViewBag.Title = blogPostVM.BlogPost.Title;
             return View(blogPostVM);
         }
 
