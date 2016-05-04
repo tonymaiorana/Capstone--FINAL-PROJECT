@@ -29,16 +29,20 @@
         </dt>
 
         <dd>
-            <img src="@Model.Image.ImageData" />
+            <img src="@Model.Image.ImageData" style="max-width: 586px; margin-left: auto; margin-right: auto; display: block;"/>
+        </dd>
+        <dd>
+            <br/><br/>
+            @using (Html.BeginForm("DeleteStaticPage", "StaticPage", FormMethod.Post))
+            {
+                @Html.HiddenFor(model => model.StaticID)
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-danger"/>
+                    @Html.ActionLink("Cancel", null, null, null, new {href = Request.UrlReferrer, @class = "btn btn-default"})
+                </div>
+            }
         </dd>
     </dl>
 
-    @using (Html.BeginForm("DeleteStaticPage", "StaticPage", FormMethod.Post))
-    {
-        @Html.HiddenFor(model => model.StaticID)
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" />
-            @Html.ActionLink("Cancel", null, null, null, new { href = Request.UrlReferrer, @class = "btn btn-danger" })
-        </div>
-    }
+
 </div>

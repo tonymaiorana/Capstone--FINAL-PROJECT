@@ -73,16 +73,16 @@
 
         <!-- Right Sidebar -->
         <div id="sidebar-wrapper-right" class="hidden-phone hidden-xs">
-            <div id="tagsContainer" style="width: 100%; height: 45%;">
+            <div id="tagsContainer" style="width: 100%; height: 40%;">
                 <div id="tags"> </div>
             </div>
             <div class="fb-page" data-href="https://www.facebook.com/circlog/" data-width="250" data-small-header="false"
-                 data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" style="margin-left: 75px; margin-top: 35px;">
+                 data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" style="margin-left: 10%; margin-top: 2%;">
                 <div class="fb-xfbml-parse-ignore">
                     <blockquote cite="https://www.facebook.com/circlog/"><a href="https://www.facebook.com/circlog/">Circular Logic</a></blockquote>
                 </div>
             </div>
-            <div style="margin-left: 75px; margin-top: 35px; margin-bottom: -15px;">
+            <div style="margin-left: 10%; margin-top: 5%; margin-bottom: -15px;">
                 <a href="https://twitter.com/circularlogic" class="twitter-follow-button" data-show-count="false" data-size="large">"Follow @("@")username"</a>
             </div>
             @*<div style="margin: 50px; width: 300px">
@@ -116,7 +116,7 @@
             <br />
             <img src="~/Content/Logos/CL_100x100.png" />
             <br />
-            <p>@DateTime.Now.ToShortDateString()</p>
+            <p>Est. 2016, sponsored by Red Bull</p>
         </footer>
     </div>
     @Scripts.Render("~/bundles/jquery")
@@ -135,7 +135,7 @@
         });
         $('#SocialShare')
             .share({
-                networks: ['twitter', 'facebook', 'googleplus'],
+                networks: ['twitter', 'facebook', 'pinterest'],
                 orientation: 'vertical',
                 theme: 'square',
                 urlToShare: '@Request.Url.AbsoluteUri',

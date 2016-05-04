@@ -65,7 +65,7 @@ namespace CircularLogic.UI.Controllers
             }
             _repo.CreateBlogPost(blogPost);
 
-            return RedirectToAction("BlogHomePage");
+            return RedirectToAction("Blogs");
         }
 
         public ActionResult BlogPostDetail(int id)
@@ -131,7 +131,7 @@ namespace CircularLogic.UI.Controllers
                 }
             }
             _repo.EditABlogPost(blogPost);
-            return View();
+            return RedirectToAction("ContributorHistory", "Admin");
         }
 
         public ActionResult Blogs()
