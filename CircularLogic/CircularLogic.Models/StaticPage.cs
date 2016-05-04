@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Microsoft.Build.Framework;
+using System;
 using System.ComponentModel;
 using System.Web.Mvc;
-using Microsoft.Build.Framework;
 
 namespace CircularLogic.Models
 {
@@ -25,6 +25,7 @@ namespace CircularLogic.Models
         public DateTime UpdateTime { get; set; }
         public DateTime? CreationTime { get; set; }
         public DateTime? DeleteTime { get; set; }
+
         public Image Image { get; set; }
     }
 }
