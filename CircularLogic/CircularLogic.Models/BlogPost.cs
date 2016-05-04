@@ -29,6 +29,8 @@ namespace CircularLogic.Models
         public DateTime? Expiration { get; set; }
         public DateTime CreationTime { get; set; }
         public DateTime UpdateTime { get; set; }
+
+        [DisplayName("Tags")]
         public List<Tag> Tags { get; set; }
 
         public bool IsApproved { get; set; }
@@ -38,5 +40,6 @@ namespace CircularLogic.Models
 
         public Image Image { get; set; }
         public Category Category { get; set; }
+        public int Viewed { get; set; }
     }
 }

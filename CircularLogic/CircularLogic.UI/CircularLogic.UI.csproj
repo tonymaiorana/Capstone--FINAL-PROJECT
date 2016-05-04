@@ -210,6 +210,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\404image.png" />
     <Content Include="Content\Images\billHeadshot.jpg" />
     <Content Include="Content\Images\cursor.cur" />
     <Content Include="Content\Images\glyphicons-halflings-white.png" />
@@ -318,6 +319,7 @@
     <Content Include="Scripts\app\jquery-validate-defaults.js" />
     <Content Include="Scripts\app\bootstrap-tagmanager.css" />
     <Content Include="Scripts\app\bootstrap-tagmanager.js" />
+    <Content Include="Scripts\app\jquery.canvasjs.min.js" />
     <Content Include="Scripts\app\jquery.share.js" />
     <Content Include="Scripts\app\jscolor.min.js" />
     <Content Include="Scripts\app\konami.js" />

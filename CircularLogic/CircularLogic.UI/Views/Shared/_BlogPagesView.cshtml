@@ -73,12 +73,15 @@
 
         <!-- Right Sidebar -->
         <div id="sidebar-wrapper-right" class="hidden-phone hidden-xs">
-            <div id="tags"> </div>
+            <div id="tagsContainer" style="width: 100%; height: 45%;">
+                <div id="tags"> </div>
+            </div>
             <div class="fb-page" data-href="https://www.facebook.com/circlog/" data-width="250" data-small-header="false"
                  data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" style="margin-left: 75px; margin-top: 35px;">
                 <div class="fb-xfbml-parse-ignore">
                     <blockquote cite="https://www.facebook.com/circlog/"><a href="https://www.facebook.com/circlog/">Circular Logic</a></blockquote>
-                </div></div>
+                </div>
+            </div>
             <div style="margin-left: 75px; margin-top: 35px; margin-bottom: -15px;">
                 <a href="https://twitter.com/circularlogic" class="twitter-follow-button" data-show-count="false" data-size="large">"Follow @("@")username"</a>
             </div>
@@ -103,6 +106,7 @@
                 @RenderBody()
             </div>
         </div>
+        <div id="addCatModalHolder"></div>
 
         <hr />
         <footer class="container-fluid text-center">
@@ -123,7 +127,7 @@
     <script src="~/Scripts/app/AngularLib/angular-route.min.js"></script>
     <script src="~/Scripts/app/AngularLib/dirPagination.js"></script>
     <script src="~/Scripts/app/jquery.share.js"></script>
-<script src="~/Scripts/app/sidebars.js"></script>
+    <script src="~/Scripts/app/sidebars.js"></script>
 
     <script type="text/javascript">
         $("img").error(function () {
@@ -144,7 +148,9 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $.getJSON('@Url.Action("GetTagCloudTags", "BlogPost")', function (data) {
-                $("#tags").jQCloud(data, { width: 300, height: 350 });
+                $("#tags").jQCloud(data, { width: ('100%'), height: ('100%') });
+                window.dispatchEvent(new Event('resize'));
+
             });
             $(document).on("click", ".tagLink", function (event) {
                 var tag = $(this);
@@ -204,18 +210,18 @@
     }(document, 'script', 'twitter-wjs'));
 </script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $("img").error(function () {
-                $(this).hide();
-            });
+    $(document)
+        .ready(function() {
+            $("img")
+                .error(function() {
+                    $(this).hide();
+                });
             jQuery.ajaxSetup({ async: false });
-            $('#loadCatModal').click(function () {
-                $('#addCatModalHolder').load('/Admin/AddCategory');
-                @*@{Html.RenderAction("AddCategory", "Home");}*@
-                $("#myModal").modal();
-
-            });
-
+            $('#loadCatModal')
+                .click(function() {
+                    $('#addCatModalHolder').load('/Admin/AddCategory');
+                    $("#myModal").modal();
+                });
         });
     </script>
 </body>

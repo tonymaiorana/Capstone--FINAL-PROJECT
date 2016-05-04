@@ -4,7 +4,7 @@
     ViewBag.Title = "CreateBlogPost";
 }
 
-@using (Html.BeginForm("CreateBlogPost", "BlogPost", FormMethod.Post, new { @class = "form-horizontal" }))
+@using (Html.BeginForm("CreateBlogPost", "BlogPost", FormMethod.Post, new { @class = "form-horizontal", id = "createBlogPost" }))
 {
 
     <h3>Create A Blog Post</h3>
@@ -21,10 +21,10 @@
     <div class="form-group">
         @Html.TextAreaFor(model => model.BlogPost.HtmlContent)
     </div>
-
+    <br/>
     <div class="form-group">
-        @*@Html.LabelFor(model => model.BlogPost.Tags,new {@class = "control-label"})*@
-        <input type="text" name="tags" placeholder="Tags" class="tagsManager form-control" />
+        @Html.LabelFor(model => model.BlogPost.Tags,new {@class = "control-label"})
+        <input type="text" name="tags" placeholder="add a new tag" class="tagsManager form-control" />
         <span id="tagContainer"></span>
 
 
