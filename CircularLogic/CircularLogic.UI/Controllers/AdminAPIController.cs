@@ -28,7 +28,7 @@ namespace CircularLogic.UI.Controllers
         public HttpResponseMessage DeleteBlogPost(int id)
         {
             // repo delete blog post
-            //_repo.DeleteABlog(id, true);
+            _repo.DeleteABlog(id, true);
             var response = Request.CreateResponse(HttpStatusCode.Accepted);
             return response;
         }
@@ -37,7 +37,7 @@ namespace CircularLogic.UI.Controllers
         public HttpResponseMessage RequestDeleteBlogPost(int id)
         {
             // repo delete blog post
-            //_repo.DeleteABlog(id, false);
+            _repo.DeleteABlog(id, false);
             var response = Request.CreateResponse(HttpStatusCode.Accepted);
             return response;
         }
@@ -45,7 +45,7 @@ namespace CircularLogic.UI.Controllers
         public HttpResponseMessage DeleteQueuedAction(int id)
         {
             // repo delete blog post
-            //_repo.AdminQueueUpdate(null, new []{id});
+            _repo.AdminQueueUpdate(null, new []{id});
             var response = Request.CreateResponse(HttpStatusCode.Accepted);
             return response;
         }
