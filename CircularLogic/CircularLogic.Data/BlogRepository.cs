@@ -234,8 +234,12 @@ namespace CircularLogic.Data
             }
 
             blogPost.BlogPostID = AddABlogPost(blogPost);
-            blogPost.Image.ImageID = AddAnImage(blogPost.Image);
-            BridgeBlogImage(blogPost.BlogPostID, blogPost.Image.ImageID);
+            if(blogPost.Image.ImageData != null)
+            {
+                blogPost.Image.ImageID = AddAnImage(blogPost.Image);
+                BridgeBlogImage(blogPost.BlogPostID, blogPost.Image.ImageID);
+            }
+
 
             //Not sure if this is a list? blogPost.Tag wouldn't work??
             foreach (Tag t in blogPost.Tags)
