@@ -14,10 +14,6 @@
                 <input type="text" ng-model="search" class="form-control" placeholder="Search" id="blgSearch">
             </div>
         </form>
-        <div ng-repeat="category in Categories" class="btn-group inline pull-left">
-            <button class=".catName" value="{{category}}">{{category}}</button>
-        </div>
-
         <div class="row">
             <div dir-paginate="post in posts|orderBy:sortKey:reverse|filter:search|itemsPerPage:12" ng-cloak>
                 <div class="tile-spacer">
@@ -39,7 +35,7 @@
                             </div>
                             <div class="tile-tags-container">
                                 <div class="tile-tags">
-                                    <span ng-repeat="Tag in post.Tags">{{Tag}} </span>
+                                    <span ng-repeat="Tag in post.Tags track by $index">{{Tag}} </span>
                                 </div>
                             </div>
                             <div class="tile-fadeout"> </div>
@@ -88,15 +84,4 @@
     </div>
     </div>
 @section scripts
-{
-<script src="~/Scripts/app/BlogSearchApp.js"></script>
-    <script>
-        $(document).ready(function() {
-            $(document).on("click", ".catSearch", function () {
-                var catName = $(this).value();
-                $('#blgSearch').val(catName);
-                $('#blgSearch').trigger('input');
-            });
-        })
-       </script>
-}
+{<script src="~/Scripts/app/BlogSearchApp.js"></script>}
