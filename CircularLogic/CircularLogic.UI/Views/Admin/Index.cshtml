@@ -1,4 +1,5 @@
 ﻿@using CircularLogic.Models
+@using CircularLogic.UI.Models
 @model CircularLogic.UI.Models.AdminIndexVM
 @{
     ViewBag.Title = "Index";
@@ -24,148 +25,148 @@
     </ul>
 
     <div class="tab-content clearfix">
-    <div class="tab-pane active" id="Post_queue">
-        <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-                            New Blog Posts
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapse1" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <td>Title</td>
-                                <td>Author</td>
-                                <td>Date Submitted</td>
-                                <td>Approve</td>
-                                <td>Deny</td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach (QueuedBP bp in Model.BlogPosts.Where(b => b.QueueAction == QueueAction.New))
-                            {
-                                <tr>
-                                    <td>
-                                    @Html.ActionLink(@bp.Title, "BlogPostDetail", "BlogPost", new { id = @bp.BlogPostID }, new { target = "_blank" })
-                                        <input type="hidden" value="@bp.ContentQueueID" class="hidden new"/>
-                                    </td>
-                                    <td>@bp.UserName</td>
-                                    <td>@bp.CreationTime.Value.ToShortDateString()</td>
-                                    <td>
-                                        <input type="checkbox" class="newCB allow"/>
-                                    </td>
-                                    <td>
-                                        <input type="checkbox" class="newCB deny"/>
-                                    </td>
-                                </tr>
-                            }
-                            </tbody>
-                        </table>
-                        <button type="submit" class="btn btn-primary" id="newQueue">Submit</button>
+        <div class="tab-pane active" id="Post_queue">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                                New Blog Posts
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <td>Title</td>
+                                        <td>Author</td>
+                                        <td>Date Submitted</td>
+                                        <td>Approve</td>
+                                        <td>Deny</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (QueuedBP bp in Model.BlogPosts.Where(b => b.QueueAction == QueueAction.New))
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.ActionLink(@bp.Title, "BlogPostDetail", "BlogPost", new { id = @bp.BlogPostID }, new { target = "_blank" })
+                                                <input type="hidden" value="@bp.ContentQueueID" class="hidden new" />
+                                            </td>
+                                            <td>@bp.UserName</td>
+                                            <td>@bp.CreationTime.Value.ToShortDateString()</td>
+                                            <td>
+                                                <input type="checkbox" class="newCB allow" />
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" class="newCB deny" />
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <button type="submit" class="btn btn-primary" id="newQueue">Submit</button>
 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                                Edit Requests
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse2" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <td>Title</td>
+                                        <td>Author</td>
+                                        <td>Date Submitted</td>
+                                        <td>Approve</td>
+                                        <td>Deny</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        @foreach (QueuedBP bp in Model.BlogPosts.Where(b => b.QueueAction == QueueAction.Edit))
+                                        {
+                                        <tr>
+                                            <td>
+                                                @Html.ActionLink(@bp.Title, "BlogPostDetail", "BlogPost", new { id = @bp.BlogPostID }, new { target = "_blank" })
+                                                <input type="hidden" value="@bp.ContentQueueID" class="hidden edit" />
+                                            </td>
+                                            <td>@bp.UserName</td>
+                                            <td>@bp.CreationTime.Value.ToShortDateString()</td>
+                                            <td>
+                                                <input type="checkbox" class="editCB allow" />
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" class="editCB deny" />
+                                            </td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                <button type="submit" class="btn btn-primary" id="editQueue">Submit</button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                                    Delete Requests
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse3" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <td>Title</td>
+                                            <td>Author</td>
+                                            <td>Date Submitted</td>
+                                            <td>Approve</td>
+                                            <td>Deny</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (QueuedBP bp in Model.BlogPosts.Where(b => b.QueueAction == QueueAction.Delete))
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.ActionLink(@bp.Title, "BlogPostDetail", "BlogPost", new { id = @bp.BlogPostID }, new { target = "_blank" })
+                                                    <input type="hidden" value="@bp.ContentQueueID" class="hidden delete" />
+                                                </td>
+                                                <td>@bp.UserName</td>
+                                                <td>@bp.CreationTime.Value.ToShortDateString()</td>
+                                                <td>
+                                                    <input type="checkbox" class="deleteCB allow" />
+                                                </td>
+                                                <td>
+                                                    <input type="checkbox" class="deleteCB deny" />
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                <button type="submit" class="btn btn-primary" id="deleteQueue">Submit</button>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-                            Edit Requests
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapse2" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <td>Title</td>
-                                <td>Author</td>
-                                <td>Date Submitted</td>
-                                <td>Approve</td>
-                                <td>Deny</td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                            @foreach (QueuedBP bp in Model.BlogPosts.Where(b => b.QueueAction == QueueAction.Edit))
-                            {
-                                <tr>
-                                    <td>
-                                        @Html.ActionLink(@bp.Title, "BlogPostDetail", "BlogPost", new { id = @bp.BlogPostID }, new { target = "_blank" })
-                                        <input type="hidden" value="@bp.ContentQueueID" class="hidden edit"/>
-                                    </td>
-                                    <td>@bp.UserName</td>
-                                    <td>@bp.CreationTime.Value.ToShortDateString()</td>
-                                    <td>
-                                        <input type="checkbox" class="editCB allow"/>
-                                    </td>
-                                    <td>
-                                        <input type="checkbox" class="editCB deny"/>
-                                    </td>
-                                </tr>
-                            }
-                            </tbody>
-                        </table>
-                        <button type="submit" class="btn btn-primary" id="editQueue">Submit</button>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                            Delete Requests
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapse3" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <td>Title</td>
-                                <td>Author</td>
-                                <td>Date Submitted</td>
-                                <td>Approve</td>
-                                <td>Deny</td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach (QueuedBP bp in Model.BlogPosts.Where(b => b.QueueAction == QueueAction.Delete))
-                            {
-                                <tr>
-                                    <td>
-                                        @Html.ActionLink(@bp.Title, "BlogPostDetail", "BlogPost", new { id = @bp.BlogPostID }, new { target = "_blank" })
-                                        <input type="hidden" value="@bp.ContentQueueID" class="hidden delete"/>
-                                    </td>
-                                    <td>@bp.UserName</td>
-                                    <td>@bp.CreationTime.Value.ToShortDateString()</td>
-                                    <td>
-                                        <input type="checkbox" class="deleteCB allow"/>
-                                    </td>
-                                    <td>
-                                        <input type="checkbox" class="deleteCB deny"/>
-                                    </td>
-                                </tr>
-                            }
-                            </tbody>
-                        </table>
-                        <button type="submit" class="btn btn-primary" id="deleteQueue">Submit</button>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
             <div class="tab-pane" id="Category_Management">
                 <div class="panel panel-default">
@@ -178,6 +179,7 @@
                                 <tr>
                                     <td>Category Name</td>
                                     <td>Blogs in Category</td>
+                                    <td>Category Color</td>
                                     <td>Action</td>
                                 </tr>
                             </thead>
@@ -187,6 +189,10 @@
                                     <tr>
                                         <td>@c.Key.Name</td>
                                         <td>@c.Value</td>
+                                        <td>
+                                            @Html.Hidden("catColorID", c.Key.CategoryID)
+                                            <input class="jscolor {closable:true ,closeText:'Close me!'} form-control" value="#@c.Key.Color" onblur="update(this.jscolor, this)" style="width: 80px"/>
+                                        </td>
                                         <td>
                                             @if (c.Value > 0)
                                             {
@@ -210,44 +216,98 @@
                     @*<div class="panel-footer">Panel Footer</div>*@
                 </div>
             </div>
-            <div class="tab-pane hidden" id="User_Management">
-                <h3>Coming Soon</h3>
-            </div>
-        <div class="tab-pane" id="Post_History">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">Categories</h4>
-                </div>
+            <div class="tab-pane" id="User_Management">
                 <div class="panel-body">
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Title</th>
-                                <th>Publish Date</th>
-                                <th>Action</th>
+                                <td>User Name</td>
+                                <td>Role<td>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (BlogPost bp in Model.BlogPostHistory)
+                            @foreach (ApplicationUser u in Model.Users)
                             {
                                 <tr>
-                                    <td>@Html.ActionLink(@bp.Title, "BlogPostDetail", "BlogPost", new { id = @bp.BlogPostID }, new { target = "_blank" })</td>
-                                    <td>@bp.CreationTime.ToShortDateString()</td>
-                                    <td>
-                                        <a href="@Url.Action("EditBlog", "BlogPost", new {id = @bp.BlogPostID})" class="btn btn-warning btn-sm" >
-                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                        </a>
-                                        <button class="btn btn-danger btn-sm deleteBlog" type="submit" id=@Html.Raw(bp.BlogPostID)>
-                                            <span class="glyphicon glyphicon-ban-circle"></span>
-                                        </button>
-                                    </td>
+                                    <td>@u.UserName</td>
+                                    <td>@u.Roles.GetEnumerator()</td>
                                 </tr>
                             }
                         </tbody>
                     </table>
                 </div>
+
+            </div>
+            <div class="tab-pane" id="Post_History">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Categories</h4>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Publish Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (BlogPost bp in Model.BlogPostHistory)
+                                {
+                                    <tr>
+                                        <td>@Html.ActionLink(@bp.Title, "BlogPostDetail", "BlogPost", new { id = @bp.BlogPostID }, new { target = "_blank" })</td>
+                                        <td>@bp.CreationTime.ToShortDateString()</td>
+                                        <td>
+                                            <a href="@Url.Action("EditBlog", "BlogPost", new {id = @bp.BlogPostID})" class="btn btn-warning btn-sm">
+                                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                            </a>
+                                            <button class="btn btn-danger btn-sm deleteBlog" type="submit" id=@Html.Raw(bp.BlogPostID)>
+                                                <span class="glyphicon glyphicon-ban-circle"></span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    </div>
-    @section scripts{<script src="~/Scripts/app/Administrative.min.js"></script>}
+@section scripts{
+
+        <script src="~/Scripts/app/Administrative.min.js"></script>
+<script src="~/Scripts/app/jscolor.min.js"></script>
+        <script type="text/javascript">
+            function update(jscolor, it) {
+                var kID = $(it).parents().children()[0];
+                var Category = {
+                    Color: '#' + jscolor,
+                    CategoryID: kID.value
+                };
+                var OtherPost = {
+                    Category: Category,
+                    type: 'EDIT'
+                };
+                bootbox.confirm('Are you sure you would like to change this color?', function (result) {
+                    if (result === true) {
+                        $.ajax({
+                            type: "POST",
+                            url: '/api/CategoryAPI/post',
+                            data: OtherPost,
+                            async: true
+                        }).done(function () {
+                            Snarl.addNotification({
+                                title: 'Color Changed',
+                                text: 'The Color has been changed successfully'
+                            });
+                        })
+                            .fail(function (jqXhr, status, err) {
+                                alert((status + ' - ' + err));
+                            });
+                    };
+                });
+            }
+        </script>
+    }

@@ -71,6 +71,14 @@ $(document).ready(function () {
         };
         ButtonWithWarning($(this), "/api/categoryAPI" , "Are you sure you would like to delete this category?", 'Category Removed', 'The category has been successfully removed!', OtherPost);
     });
+    
+    $('.catDelete').click(function () {
+        var OtherPost = {
+            id: this.id,
+            type: 'DELETE'
+        };
+        ButtonWithWarning($(this), "/api/categoryAPI" , "Are you sure you would like to delete this category?", 'Category Removed', 'The category has been successfully removed!', OtherPost);
+    });
 
     $('.deleteBlog').click(function() {
         

@@ -39,6 +39,23 @@ namespace CircularLogic.Data
             }
         }
 
+        public void UpdateACategory(Category category)
+        {
+            using (SqlConnection cn =
+                new SqlConnection(ConfigurationManager.ConnectionStrings["CircularLogic"].ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "UpdateACategory";
+                cmd.Parameters.AddWithValue("@Color", category.Color);
+                cmd.Parameters.AddWithValue("@CategoryID", category.CategoryID);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Connection = cn;
+                cn.Open();
+                cmd.ExecuteNonQuery();
+                cn.Close();
+            }
+        }
+
         private int AddABlogPost(BlogPost blogPost)
         {
             using (

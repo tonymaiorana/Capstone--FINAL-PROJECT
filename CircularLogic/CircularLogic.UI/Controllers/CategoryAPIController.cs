@@ -23,6 +23,10 @@ namespace CircularLogic.UI.Controllers
             } else if (op.Type == "DELETE")
             {
                 _repo.DeleteCategory(op.id);
+            }else if (op.Type == "EDIT")
+            {
+                op.Category.Color = op.Category.Color.Replace("#", "");
+                _repo.UpdateACategory(op.Category);
             }
             _repo.DeleteCategory(op.id);
             var response = Request.CreateResponse(HttpStatusCode.Accepted);
