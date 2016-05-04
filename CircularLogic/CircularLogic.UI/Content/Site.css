@@ -4,7 +4,7 @@
     color: #e79c00;
 }
 
-footer > a:visited {
+footer > a:link, a:visited, a:hover, a:active {
     color: #dcdcdc;
 }
 
@@ -17,7 +17,7 @@ body {
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-    padding-top: 110px;
+    padding-top: 50px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists
