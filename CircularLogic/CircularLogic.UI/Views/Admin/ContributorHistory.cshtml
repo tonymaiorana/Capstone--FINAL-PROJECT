@@ -26,21 +26,27 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (BlogPost bp in Model.BlogPostHistory)
+                    @{
+                        Model.BlogPostHistory.Reverse();
+                    }
+                    @foreach (BlogPost bp in Model.BlogPostHistory)
                     {
-                            <tr>
-                                <td>@Html.ActionLink(@bp.Title, "BlogPostDetail", "BlogPost", new { id = @bp.BlogPostID }, new { target = "_blank" })</td>
-                                <td>@bp.CreationTime.ToShortDateString()</td>
-                                <td>
-                                    <a href="@Url.Action("EditBlog", "BlogPost", new {id = @bp.BlogPostID})" class="btn btn-warning btn-sm">
-                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                    </a>
-                                    <button class="btn btn-danger btn-sm deleteBlogReq" type="submit" id=@Html.Raw(bp.BlogPostID)>
-                                        <span class="glyphicon glyphicon-ban-circle"></span>
-                                    </button>
-                                </td>
-                            </tr>
-                        }
+                        <tr>
+                            <td>@Html.ActionLink(@bp.Title, "BlogPostDetail", "BlogPost", new {id = @bp.BlogPostID}, new {target = "_blank"})</td>
+                            <td>@bp.CreationTime.ToShortDateString()</td>
+                            <td>
+                                <a title="Edit" href="@Url.Action("EditBlog", "BlogPost", new {id = @bp.BlogPostID})" class="btn btn-warning btn-sm">
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                </a>
+                                <button title="Delete" class="btn btn-danger btn-sm deleteBlogReq" type="submit" id=@Html.Raw(bp.BlogPostID)>
+                                    <span class="glyphicon glyphicon-ban-circle"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                    @{
+                        Model.BlogPostHistory.Reverse();
+                    }
                     </tbody>
                 </table>
             </div>
@@ -90,5 +96,5 @@
 </div>
 
 @section scripts{
-<script src="~/Scripts/app/Administrative.min.js"></script>
+<script src="~/Scripts/app/AdministrativeJS.js"></script>
 }

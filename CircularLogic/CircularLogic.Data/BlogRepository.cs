@@ -528,6 +528,7 @@ namespace CircularLogic.Data
             Tag tag = new Tag();
             tag.TagID = (int)dr["TagID"];
             tag.Name = (string)dr["TagName"];
+            tag.Name = tag.Name.ToUpper();
             return tag;
         }
 

@@ -22,9 +22,9 @@
             <br/>
 
             <div class="postTags">
-                Tags: @foreach (string tag in Model.BlogPost.Tags.Select(r => r.Name))
+                <h3>Tags:</h3> @foreach (string tag in Model.BlogPost.Tags.Select(r => r.Name))
             {
-                    <strong>@tag</strong>
+                    <strong> @tag.ToUpper() |</strong>
                 }
             </div>
         </div>

@@ -1,14 +1,14 @@
 ﻿@model CircularLogic.UI.Models.BlogPostViewModel
 @{
-    ViewBag.Title = "EditBlog";
+    ViewBag.Title = "Edit";
 }
 
-<h2>EditBlog</h2>
+<h2>Edit Blog Post</h2>
 
 @using (Html.BeginForm("EditBlog", "BlogPost", FormMethod.Post, new { @class = "form-horizontal" }))
 {
 
-    <h4>Blog Post</h4>
+    <h4>@Model.BlogPost.Title</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 

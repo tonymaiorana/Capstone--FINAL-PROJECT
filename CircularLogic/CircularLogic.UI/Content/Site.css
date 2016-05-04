@@ -4,7 +4,19 @@
     color: #e79c00;
 }
 
-footer > a:link, a:visited, a:hover, a:active {
+footer > a:link {
+    color: #dcdcdc;
+}
+
+footer > a:visited {
+    color: #dcdcdc;
+}
+
+footer > a:hover {
+    color: #dcdcdc;
+}
+
+footer > a:active {
     color: #dcdcdc;
 }
 

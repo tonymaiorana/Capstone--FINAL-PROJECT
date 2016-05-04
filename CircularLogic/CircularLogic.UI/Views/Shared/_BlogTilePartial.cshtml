@@ -1,31 +1,44 @@
 ﻿@model CircularLogic.UI.Models.BlogPostViewModel
 
 <a href="@Url.Action("BlogPostDetail", "BlogPost", new {id = Model.BlogPost.BlogPostID})" class="tile-link col-lg-3 col-md-4 col-sm-6 col-xs-12">
-<div class="blog-tile">
-    <div class="tile-title" @if(@Model.BlogPost.Category.Color.Length>1) {
-                                @:style="background-color: #@Model.BlogPost.Category.Color" 
+    <div class="blog-tile">
+        <div class="tile-title" @if (@Model.BlogPost.Category.Color.Length > 1)
+                                {
+                                    @:style="background-color: #@Model.BlogPost.Category.Color" 
                                 }>
-        <div class="tile-date">@Model.BlogPost.CreationTime.ToString("MMM dd yyyy")</div>
-    </div>
-    <div class="tile-image-container">
-        <div class="tile-image">
-            <img src="@Model.BlogPost.Image.ImageData" style='height: 130px; width: 100%; object-fit: contain'>
+            <div class="tile-date">@Model.BlogPost.CreationTime.ToString("MMM dd yyyy")</div>
         </div>
-    </div>
-    <div class="tile-title-text-container">
-        <div class="tile-title-text ">@Model.BlogPost.Title</div>
-    </div>
-    <div class="tile-author-container">
-        <div class="tile-author">@Model.User.FirstName @Model.User.LastName</div>
-    </div>
-    <div class="tile-tags-container">
-        <div class="tile-tags">
-            @foreach (var tag in Model.BlogPost.Tags)
-            {
-                <span>@tag.Name, </span>
-            }
+        <div class="tile-image-container">
+            <div class="tile-image">
+                <img src="@Model.BlogPost.Image.ImageData" style='height: 130px; width: 100%; object-fit: contain'>
+            </div>
         </div>
+        <div class="tile-title-text-container">
+            <div class="tile-title-text ">@Model.BlogPost.Title</div>
+        </div>
+        <div class="tile-author-container">
+            <div class="tile-author">@Model.User.FirstName @Model.User.LastName</div>
+        </div>
+        <div class="tile-tags-container">
+            <div class="tile-tags">
+                @foreach (var tag in Model.BlogPost.Tags)
+                {
+                    <span>@tag.Name.ToUpper() |</span>
+                }
+            </div>
+        </div>
+        <div class="tile-fadeout"> </div>
     </div>
-    <div class="tile-fadeout"> </div>
-</div>
 </a>
+
+@section scripts{
+<script type="text/javascript">
+    $(document)
+        .ready(function() {
+            $("img")
+                .error(function() {
+                    $(this).hide();
+                });
+        });
+</script>
+}
