@@ -1,13 +1,14 @@
-﻿jQuery.ajaxSetup({ async: false });
+﻿//jQuery.ajaxSetup({ async: false });
 var Category = {
     Name: "",
     Color: ""
 };
-
+var pIc;
 function setTextColor(picker) {
     $('#colorPreview').css('background-color', '#' + picker.toString());
     //document.getElementById('#colorPreview').style.backgroundColor = '#' + picker.toString();
     Category.Color = picker.toString();
+    pIc = picker;
 }
 
 $(document).ready(function () {
@@ -18,10 +19,20 @@ $(document).ready(function () {
             id: 0,
             type: 'ADD',
             Category: Category
-    };
-            $.post('/api/categoryAPI', OtherPost)
+        };
+        $.ajax({
+            type:'POST',
+            url: '/api/categoryAPI',
+            data: OtherPost,
+            async: true
+        })
+            //$.post('/api/categoryAPI', OtherPost)
                 .done(function () {
-                    jQuery.ajaxSetup({ async: true });
+                    //jQuery.ajaxSetup({ async: true });
+                    $('#loadCatModal').click(function () {
+                        $('#catName').val("");
+                        $('#addCatModalHolder').empty();
+                    });
                 })
                 .success(function () {
                     Snarl.addNotification({

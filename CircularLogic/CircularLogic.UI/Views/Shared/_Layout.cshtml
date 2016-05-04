@@ -117,13 +117,17 @@
                 .error(function() {
                     $(this).hide();
                 });
-            jQuery.ajaxSetup({ async: false });
+            //jQuery.ajaxSetup({ async: false });
             $('#loadCatModal')
-                .click(function() {
-                    $('#addCatModalHolder').load('/Admin/AddCategory');
-                    @*@{Html.RenderAction("AddCategory", "Home");}*@
-                    $("#myModal").modal();
-
+                .click(function () {
+                    $.get('/Admin/AddCategory', function(data) {
+                        $('#addCatModalHolder').replaceWith(data);
+                        $("#myModal").modal();
+                    });
+                    //$('#addCatModalHolder').load('/Admin/AddCategory', function() {
+                    //    $("#myModal").modal();
+                    //});
+                    //jQuery.ajaxSetup({ async: true });                   
                 });
 
         });

@@ -19,17 +19,19 @@
     </div>
 
     <div class="form-group">
-        @Html.TextAreaFor(model => model.BlogPost.HtmlContent)
+        @Html.LabelFor(model => model.BlogPost.HtmlContent, new { @class = "control-label " })
+        @Html.TextAreaFor(model => model.BlogPost.HtmlContent, new { @class = "form-control" } )
+        @Html.ValidationMessageFor(model => model.BlogPost.HtmlContent, "", new {@class = "text-danger"})
+
     </div>
     <br/>
     <div class="form-group">
-        @Html.LabelFor(model => model.BlogPost.Tags,new {@class = "control-label"})
+        @Html.LabelFor(model => model.BlogPost.Tags,new {@class = "control-label", required = "required" })
         <input type="text" name="tags" placeholder="add a new tag" class="tagsManager form-control" />
         <span id="tagContainer"></span>
 
 
-        <input type="hidden" value="" name="hiddenTagList">
-        @Html.Hidden("hiddenTagListA")
+        @Html.Hidden("hiddenTagListA","" , new {id="hiddenTagListA" })
     </div>
 
     <div class="form-group">
@@ -49,7 +51,7 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-success" />
+            <input type="submit" value="Create" class="btn btn-success" id="sumbit"/>
         </div>
     </div>
 
@@ -61,11 +63,16 @@
     <script src="~/Scripts/app/jquery-validate-defaults.js"></script>
     <script src="~/Scripts/app/blogPostValidation.js"></script>
     <script type="text/javascript">
+        
         $(document).ready(function () {
             tinyMCE.init({
                 mode: "textareas",
                 theme: "modern",
                 convert_newlines_to_brs: true
+            });
+            $('#createBlogPost').data('validator').settings.ignore = '';
+            $('form input[type=submit]').click(function () {
+                tinyMCE.triggerSave();
             });
         });
     </script>

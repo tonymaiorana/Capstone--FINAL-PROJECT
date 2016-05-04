@@ -49,7 +49,17 @@ namespace CircularLogic.UI.Controllers
             {
                 blogPost.IsApproved = false;
             }
-            string[] tags = this.Request.Form["hiddenTagListA"].Split(',');
+            List<string> tags;
+            if (Request.Form["hiddenTagListA"].Contains(','))
+            {
+                tags = Request.Form["hiddenTagListA"].Split(',').ToList();
+            }
+            else
+            {
+                tags = new List<string>();
+                tags.Add(Request.Form["hiddenTagListA"]);
+            }
+            
             List<Tag> existingTags = _repo.GetAllTags();
             foreach (string s in tags)
             {
@@ -116,7 +126,17 @@ namespace CircularLogic.UI.Controllers
             {
                 blogPost.IsApproved = false;
             }
-            string[] tags = this.Request.Form["hiddenTagListA"].Split(',');
+            List<string> tags;
+            if (Request.Form["hiddenTagListA"].Contains(','))
+            {
+                tags = Request.Form["hiddenTagListA"].Split(',').ToList();
+            }
+            else
+            {
+                tags = new List<string>();
+                tags.Add(Request.Form["hiddenTagListA"]);
+            }
+
             List<Tag> existingTags = _repo.GetAllTags();
             foreach (string s in tags)
             {
