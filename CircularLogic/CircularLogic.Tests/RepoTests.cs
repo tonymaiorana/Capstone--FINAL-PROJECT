@@ -61,7 +61,7 @@ namespace CircularLogic.Tests
         [Test]
         public void EditABlogPost_Test()
         {
-           BlogPost expectedBlogPost = _repo.GetBlogPostByBlogID(2);
+            BlogPost expectedBlogPost = _repo.GetBlogPostByBlogID(2);
             expectedBlogPost.IsApproved = true;
             expectedBlogPost.Title = "Test the testing features of the test";
             _repo.EditABlogPost(expectedBlogPost);
@@ -107,15 +107,35 @@ namespace CircularLogic.Tests
             Assert.IsNotNull(testBlogPost);
         }
 
+        //[Test]
+        //public void GetBlogPostByBlogID_Test()
+        //{
+        //    BlogPost expectedBlogPost = new BlogPost()
+        //    {
+        //        BlogPostID = 2,
+        //    };
+        //    BlogPost actual = _repo.GetAllBlogPosts().FirstOrDefault(b => b.BlogPostID == 2);
+        //    Assert.AreEqual(expectedBlogPost.BlogPostID, actual.BlogPostID);
+        //}
+
         [Test]
-        public void GetBlogPostByBlogID_Test()
+        public void GetBlogImageByBlogID_Test()
         {
             BlogPost expectedBlogPost = new BlogPost()
             {
-                BlogPostID = 2,
+                BlogPostID = 1,
+                Image = new Image()
+                {
+                    ImageData = "http://standrewscitychurch.com/wp-content/uploads/2015/12/Testing.gif",
+                    Name = "Test",
+                    ImageID = 1
+                    
+                }
             };
-            BlogPost actual = _repo.GetAllBlogPosts().FirstOrDefault(b => b.BlogPostID == 2);
-            Assert.AreEqual(expectedBlogPost.BlogPostID, actual.BlogPostID);
+
+           BlogPost actual = _repo.GetBlogPostByBlogID(1);
+            Assert.AreEqual(expectedBlogPost.Image.ImageID, actual.Image.ImageID);
+
         }
-}
+    }
 }
