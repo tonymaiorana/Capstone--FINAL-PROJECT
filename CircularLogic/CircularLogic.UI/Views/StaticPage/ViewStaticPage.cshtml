@@ -1,17 +1,21 @@
 ﻿@model CircularLogic.Models.StaticPage
-
-<div class="col-md-12 details">
-    <h2 class="staticTitle">@Model.Title</h2>
-    <div class="row image">
-        @if (!(Model.Image.ImageData == null))
-        {
-            <div class="staticImage">
-                <img src="@Model.Image.ImageData" alt="@Model.Image.Name" style="max-width: 586px; margin-left: auto; margin-right: auto; display: block;"/>
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-12 details" style="text-align: left">
+            <h2 class="staticTitle">@Model.Title</h2>
+            <div class="row image">
+                @if (!(Model.Image.ImageData == null))
+            {
+                    <div class="staticImage">
+                        <img src="@Model.Image.ImageData" alt="@Model.Image.Name" style="max-width: 586px; margin-left: auto; margin-right: auto; display: block;" />
+                    </div>
+                }
+                <br />
             </div>
-        }
-        <br/>
+
+            <div class="postContent">
+                @Html.Raw(Model.HtmlContent)
+            </div>
+        </div>
     </div>
-</div>
-<div class="staticContent" style="width: 69%; margin: auto;">
-    @Html.Raw(Model.HtmlContent)
 </div>
