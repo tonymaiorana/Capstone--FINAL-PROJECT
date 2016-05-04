@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "AddStaticPage";
 }
-@using (Html.BeginForm("AddStaticPage", "StaticPage", FormMethod.Post, new { @class = "form-horizontal" }))
+@using (Html.BeginForm("AddStaticPage", "StaticPage", FormMethod.Post, new { @class = "form-horizontal", id = "addStaticPage" }))
 {
     <h3>Create A Static Page</h3>
     <hr />
@@ -43,7 +43,8 @@
     <script src="~/scripts/tinymce/tinymce.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/app/jquery-validate-defaults.js"></script>
-    <script src="~/Scripts/app/blogPostValidation.js"></script>
+    <script src="~/Scripts/app/StaticPageValidation.js"></script>
+
     <script type="text/javascript">
         $(document)
             .ready(function () {

@@ -1,18 +1,25 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Web.Mvc;
+using Microsoft.Build.Framework;
 
 namespace CircularLogic.Models
 {
     public class StaticPage
     {
         public int StaticID { get; set; }
+
+        [Required]
         public string Title { get; set; }
+
+        [Required]
         [AllowHtml]
         public string HtmlContent { get; set; }
 
-        [DisplayName("Link Text")]
+        [Required]
+        [DisplayName("Link Name")]
         public string LinkName { get; set; }
+
         public string RouteValue { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime UpdateTime { get; set; }

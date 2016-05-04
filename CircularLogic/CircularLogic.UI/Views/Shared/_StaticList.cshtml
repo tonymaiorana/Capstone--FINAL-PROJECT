@@ -4,7 +4,7 @@
     <ul class="dropdown-menu" id="menu2">
        @foreach (var m in Model)
        {
-        <li>@Html.ActionLink(@m.Title, "ViewStaticPage", "StaticPage", new {id=@m.StaticID}, null)</li>
+        <li>@Html.ActionLink(@m.LinkName, "ViewStaticPage", "StaticPage", new {id=@m.StaticID}, null)</li>
        }
     </ul>
 </li>

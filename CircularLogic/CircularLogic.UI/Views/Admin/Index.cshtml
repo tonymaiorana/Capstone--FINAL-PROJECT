@@ -17,7 +17,7 @@
             <a href="#Category_Management" data-toggle="tab">Category Management</a>
         </li>
         <li>
-            <a href="#User_Management" data-toggle="tab">User Management</a>
+            <a href="#Page_Stats" id="pageStats" data-toggle="tab">Page Stats</a>
         </li>
         <li>
             <a href="#Post_History" data-toggle="tab">Post History</a>
@@ -216,28 +216,11 @@
                     @*<div class="panel-footer">Panel Footer</div>*@
                 </div>
             </div>
-            <div class="tab-pane" id="User_Management">
-                <div class="panel-body">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <td>User Name</td>
-                                <td>Role<td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (ApplicationUser u in Model.Users)
-                            {
-                                <tr>
-                                    <td>@u.UserName</td>
-                                    <td>@u.Roles.GetEnumerator()</td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-
+    <div class="tab-pane" id="Page_Stats">
+            <div id="resizable" style="height: 400px;border:1px solid gray;">
+                <div id="chartContainer1" style="height: 100%; width: 100%;"></div>
             </div>
+        </div>
             <div class="tab-pane" id="Post_History">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -277,37 +260,81 @@
     </div>
 @section scripts{
 
-        <script src="~/Scripts/app/Administrative.min.js"></script>
-<script src="~/Scripts/app/jscolor.min.js"></script>
-        <script type="text/javascript">
-            function update(jscolor, it) {
-                var kID = $(it).parents().children()[0];
-                var Category = {
-                    Color: '#' + jscolor,
-                    CategoryID: kID.value
-                };
-                var OtherPost = {
-                    Category: Category,
-                    type: 'EDIT'
-                };
-                bootbox.confirm('Are you sure you would like to change this color?', function (result) {
-                    if (result === true) {
-                        $.ajax({
+    <script src="~/Scripts/app/Administrative.min.js"></script>
+    <script src="~/Scripts/app/jscolor.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.0.min.js"></script>
+    <script src="~/Scripts/app/jquery.canvasjs.min.js"></script>
+    <script type="text/javascript">
+        function update(jscolor, it) {
+            var kID = $(it).parents().children()[0];
+            var Category = {
+                Color: '#' + jscolor,
+                CategoryID: kID.value
+            };
+            var OtherPost = {
+                Category: Category,
+                type: 'EDIT'
+            };
+            bootbox.confirm('Are you sure you would like to change this color?', function(result) {
+                if (result === true) {
+                    $.ajax({
                             type: "POST",
                             url: '/api/CategoryAPI/post',
                             data: OtherPost,
                             async: true
-                        }).done(function () {
+                        }).done(function() {
                             Snarl.addNotification({
                                 title: 'Color Changed',
                                 text: 'The Color has been changed successfully'
                             });
                         })
-                            .fail(function (jqXhr, status, err) {
-                                alert((status + ' - ' + err));
-                            });
-                    };
-                });
+                        .fail(function(jqXhr, status, err) {
+                            alert((status + ' - ' + err));
+                        });
+                };
+            });
+        }
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var dps = [];
+            @foreach (var b in Model.Posts)
+            {
+                @:var d = { y: @b.Viewed, name: "@b.Title" };
+                @:dps.push(d);
+
             }
-        </script>
-    }
+            //Better to construct options first and then pass it as a parameter
+            var options1 = {
+                title: {
+                    text: "Page View Statistics"
+                },
+                animationEnabled: true,
+                data: [
+                    {
+                        toolTipContent: "{name} <br/>Number of Views: {y}",
+                        type: "column", //change it to line, area, bar, pie, etc
+                        dataPoints: dps
+                    }
+                ]
+            };
+
+            $("#resizable").resizable({
+                create: function(event, ui) {
+                    //Create chart.
+                    $("#chartContainer1").CanvasJSChart(options1);
+                },
+                resize: function(event, ui) {
+                    //Update chart size according to its container's size.
+                    $("#chartContainer1").CanvasJSChart().render();
+                }
+            });
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                var target = $(e.target).attr("href"); // activated tab
+                if (target === '#Page_Stats') {
+                    window.dispatchEvent(new Event('resize'));
+                }
+            });
+        })
+    </script>
+}

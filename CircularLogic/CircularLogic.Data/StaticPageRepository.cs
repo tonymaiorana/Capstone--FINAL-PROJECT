@@ -21,6 +21,7 @@ namespace CircularLogic.Data
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = "AddAStaticPage";
                 cmd.Parameters.AddWithValue("@Title", newStaticPage.Title);
+                cmd.Parameters.AddWithValue("@LinkName", newStaticPage.LinkName);
                 cmd.Parameters.AddWithValue("@TextBody", newStaticPage.HtmlContent);
                 cmd.Parameters.AddWithValue("@UpdateTime", newStaticPage.UpdateTime);
                 cmd.Parameters.AddWithValue("@CreationTime", newStaticPage.CreationTime);
@@ -40,7 +41,7 @@ namespace CircularLogic.Data
 
                 int staticID = int.Parse(outputParam.SqlValue.ToString());
 
-                if (newStaticPage.Image != null)
+                if (newStaticPage.Image.ImageData != null)
                 {
                     newStaticPage.Image.ImageID = AddAnImage(newStaticPage.Image, staticID);
                 }
@@ -60,7 +61,7 @@ namespace CircularLogic.Data
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = "UpdateAStaticPage";
                 cmd.Parameters.AddWithValue("@StaticPageID", staticPage.StaticID);
-                //cmd.Parameters.AddWithValue("@LinkName", staticPage.LinkName);
+                cmd.Parameters.AddWithValue("@LinkName", staticPage.LinkName);
                 cmd.Parameters.AddWithValue("@Title", staticPage.Title);
                 cmd.Parameters.AddWithValue("@TextBody", staticPage.HtmlContent);
                 cmd.Parameters.AddWithValue("@UpdateTime", staticPage.UpdateTime);
@@ -126,6 +127,7 @@ namespace CircularLogic.Data
 
             staticPage.StaticID = (int)dr["StaticPageID"];
             staticPage.Title = (string)dr["Title"];
+            staticPage.LinkName = (string)dr["LinkName"];
             staticPage.HtmlContent = (string)dr["TextBody"];
             staticPage.UpdateTime = (DateTime)dr["UpdateTime"];
             staticPage.CreationTime = (DateTime)dr["CreationTime"];

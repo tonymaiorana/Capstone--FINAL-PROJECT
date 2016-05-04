@@ -323,7 +323,10 @@ namespace CircularLogic.Data
                 {
                     while (dr.Read())
                     {
-                        blogPosts.Add(BlogPostFromReader(dr));
+                        BlogPost bp = BlogPostFromReader(dr);
+                        bp.Viewed = (int) dr["Viewed"];
+                        blogPosts.Add(bp);
+
                     }
                 }
             }

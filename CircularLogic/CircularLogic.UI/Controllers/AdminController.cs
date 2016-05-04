@@ -27,7 +27,7 @@ namespace CircularLogic.UI.Controllers
             }
             aivm.CategoryCountDictionary = _repo.GetCategoryCount();
             aivm.BlogPostHistory = _repo.GetAllBlogPosts().Where(p => p.UserID == User.Identity.GetUserId()).ToList();
-            aivm.Users = context.Users.ToList();
+            aivm.Posts = _repo.GetAllBlogPosts();
             return View(aivm);
         }
 
