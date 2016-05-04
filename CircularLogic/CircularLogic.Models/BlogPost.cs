@@ -35,6 +35,7 @@ namespace CircularLogic.Models
 
         public bool IsApproved { get; set; }
 
+        [Required]
         [AllowHtml]
         public string HtmlContent { get; set; }
 

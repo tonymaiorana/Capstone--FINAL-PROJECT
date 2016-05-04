@@ -35,7 +35,7 @@ namespace CircularLogic.UI.Controllers
         public ActionResult ViewStaticPage(int id)
         {
             var viewStaticPage = _repo.GetStaticPageByStaticPageID(id);
-            ViewBag.Title = viewStaticPage.Title; 
+            ViewBag.Title = viewStaticPage.Title;
             return View(viewStaticPage);
         }
 
@@ -52,7 +52,7 @@ namespace CircularLogic.UI.Controllers
             staticPage.UpdateTime = DateTime.Now;
 
             _repo.UpdateAStaticPage(staticPage);
-            return View();
+            return RedirectToAction("ViewStaticPage", staticPage.StaticID);
         }
 
         [HttpPost]
