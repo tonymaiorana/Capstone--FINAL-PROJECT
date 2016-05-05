@@ -1,7 +1,7 @@
 USE [CircularLogic]
 GO
 
-/****** Object:  StoredProcedure [dbo].[GetAdminQueue]    Script Date: 4/26/2016 11:16:00 AM ******/
+/****** Object:  StoredProcedure [dbo].[GetAdminQueue]    Script Date: 5/4/2016 11:38:47 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -26,8 +26,19 @@ BEGIN
 	SELECT * FROM BlogPost bp
 		INNER JOIN Category c ON c.CategoryID = bp.CategoryID
 		INNER JOIN ContentQueue q ON bp.BlogPostID = q.NewBlogPostID
-		WHERE bp.IsApproved = 0 AND bp.IsDeleted = 0
+		WHERE  bp.IsDeleted = 0 and bp.IsApproved != q.QueueActionID
 END
+
+
+
+
+
+
+
+
+
+
+
 
 GO
 

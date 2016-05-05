@@ -18,7 +18,9 @@
     </div>
 
     <div class="form-group">
-        @Html.TextAreaFor(m => m.HtmlContent)
+        @Html.LabelFor(model => model.HtmlContent, new { @class = "control-label " })
+        @Html.TextAreaFor(model => model.HtmlContent, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.HtmlContent, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">
@@ -52,6 +54,10 @@
                     mode: "textareas",
                     theme: "modern",
                     convert_newlines_to_brs: true
+                });
+                $('#addStaticPage').data('validator').settings.ignore = '';
+                $('form input[type=submit]').click(function () {
+                    tinyMCE.triggerSave();
                 });
             });
     </script>
