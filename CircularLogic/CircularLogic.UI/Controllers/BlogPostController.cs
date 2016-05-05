@@ -74,8 +74,11 @@ namespace CircularLogic.UI.Controllers
                 }
             }
             _repo.CreateBlogPost(blogPost);
-
-            return RedirectToAction("Blogs");
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+            return RedirectToAction("ContributorHistory","Admin");
         }
 
         public ActionResult BlogPostDetail(int id)

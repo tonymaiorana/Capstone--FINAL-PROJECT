@@ -14,79 +14,91 @@
 </head>
 <body style="min-height: 100%;" id="myPage" data-spy="scroll" data-target=".navbar">
 
-<div class="navbar navbar-inverse navbar-fixed-top">
-    @*<div class="masthead-container">
-        <div class="masthead-image">
-            <img src="~/Content/Images/lowPolyOrange2.jpg" />
-        </div>
-    </div>
-    <div class="masthead-fadeout"> </div>*@
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            @Html.ActionLink("Circular Logic", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
-        </div>
-        <div class="navbar-collapse collapse" style="padding-top: 50px;">
-            <ul class="nav navbar-nav">
-                @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
-                <li>@Html.ActionLink("Blog", "Blogs", "BlogPost")</li>
-                @if (User.IsInRole("Admin") || User.IsInRole("Contributor"))
-                {
-                    <li class="dropdown">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Admin <b class="caret"></b></a>
-                        <ul class="dropdown-menu" id="menu1">
-                            <li>
-                                <a href="#">Blog <i class="glyphicon glyphicon-chevron-right pull-right"></i></a>
-                                <ul class="dropdown-menu sub-menu">
-                                    <li>@Html.ActionLink("Create", "CreateBlogPost", "BlogPost")</li>
-                                    <li>@Html.ActionLink("History", "ContributorHistory", "Admin")</li>
-                                </ul>
-                            </li>
-                            @if (User.IsInRole("Admin"))
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        @*<div class="masthead-container">
+                <div class="masthead-image">
+                    <img src="~/Content/Images/lowPolyOrange2.jpg" />
+                </div>
+            </div>
+            <div class="masthead-fadeout"> </div>*@
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Circular Logic", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse" style="padding-top: 50px;">
+                <ul class="nav navbar-nav">
+                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
+                    <li>@Html.ActionLink("Blog", "Blogs", "BlogPost")</li>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Contributor"))
+                    {
+                        <li class="dropdown">
+                            @if (@User.IsInRole("Admin"))
                             {
+                                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Admin <b class="caret"></b></a>
+                            }
+                            else
+                            {
+                                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Contributor <b class="caret"></b></a>
+                            }
+                            <ul class="dropdown-menu" id="menu1" style="border-top: 0!important">
                                 <li>
-                                    <a href="#">Static Page<i class="glyphicon glyphicon-chevron-right pull-right"></i></a>
+                                    <a href="#">Blog <i class="glyphicon glyphicon-chevron-right pull-right"></i></a>
                                     <ul class="dropdown-menu sub-menu">
-                                        <li>@Html.ActionLink("Add", "AddStaticPage", "StaticPage")</li>
-                                        <li>@Html.ActionLink("Manage", "Index", "StaticPage")</li>
+                                        <li>@Html.ActionLink("Create", "CreateBlogPost", "BlogPost")</li>
+                                        @if (!User.IsInRole("Admin"))
+                                        {
+                                            <li>@Html.ActionLink("History", "ContributorHistory", "Admin")</li>
+                                        }
                                     </ul>
                                 </li>
-                            }
-                            <li class="divider"></li>
-                            <li><a href="#" id="loadCatModal">Add Category</a></li>
-                            <li>@Html.ActionLink("Admin Queue", "Index", "Admin")</li>
-                        </ul>
-                    </li>
-                }
-                @{Html.RenderAction("MenuDropDown", "StaticPage");}
-                <li>@Html.ActionLink("About", "About", "Home")</li>
-                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-            </ul>
-            @Html.Partial("_LoginPartial")
+                               
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <li>
+                                        <a href="#">Static Page<i class="glyphicon glyphicon-chevron-right pull-right"></i></a>
+                                        <ul class="dropdown-menu sub-menu">
+                                            <li>@Html.ActionLink("Add", "AddStaticPage", "StaticPage")</li>
+                                            <li>@Html.ActionLink("Manage", "Index", "StaticPage")</li>
+                                        </ul>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li><a href="#" id="loadCatModal">Add Category</a></li>
+                                    <li>@Html.ActionLink("Admin Queue", "Index", "Admin")</li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                    @{Html.RenderAction("MenuDropDown", "StaticPage");}
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+
+                @Html.Partial("_LoginPartial")
+            </div>
         </div>
     </div>
-</div>
 
 
-<div class="container body-content">
+    <div class="container body-content">
 
-    @RenderBody()
-    <div id="addCatModalHolder"></div>
-    <hr/>
-    <footer class="container-fluid text-center">
-        <a href="#myPage" title="To Top">
-            <span class="glyphicon glyphicon-chevron-up"></span>
-        </a>
-        <br/>
-        <img src="~/Content/Logos/CL_100x100.png"/>
-        <br/>
-        <p>Est. 2016, sponsored by Red Bull</p>
-    </footer>
-</div>
+        @RenderBody()
+        <div id="addCatModalHolder"></div>
+        <hr />
+        <footer class="container-fluid text-center">
+            <a href="#myPage" title="To Top">
+                <span class="glyphicon glyphicon-chevron-up"></span>
+            </a>
+            <br />
+            <img src="~/Content/Logos/CL_100x100.png" />
+            <br />
+            <p>Est. 2016, sponsored by Red Bull</p>
+        </footer>
+    </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
@@ -97,41 +109,41 @@
     <script src="~/Scripts/app/AngularLib/dirPagination.js"></script>
     <script src="~/Scripts/app/konami.js"></script>
     @RenderSection("scripts", required: false)
-<script type="text/javascript">
-    $(document)
-        .ready(function() {
-            var easter_egg = new Konami(function() {
-                $('body').empty();
-                $('body')
-                    .css({
-                        'height': $(window).height(),
-                        'width': '100%',
-                        'overflow': 'hidden',
-                        'margin': '0px',
-                        'background-color': 'rgb(38, 38, 38)'
-                    });
-                $('body')
-                    .append('<embed width="100%" height="100%" name="plugin" id="plugin" src="http://blackacrebrewing.com/hey.swf" type="application/x-shockwave-flash">');
-            });
-            $("img")
-                .error(function() {
-                    $(this).hide();
+    <script type="text/javascript">
+        $(document)
+            .ready(function () {
+                var easter_egg = new Konami(function () {
+                    $('body').empty();
+                    $('body')
+                        .css({
+                            'height': $(window).height(),
+                            'width': '100%',
+                            'overflow': 'hidden',
+                            'margin': '0px',
+                            'background-color': 'rgb(38, 38, 38)'
+                        });
+                    $('body')
+                        .append('<embed width="100%" height="100%" name="plugin" id="plugin" src="http://blackacrebrewing.com/hey.swf" type="application/x-shockwave-flash">');
                 });
-            //jQuery.ajaxSetup({ async: false });
-            $('#loadCatModal')
-                .click(function () {
-                    $.get('/Admin/AddCategory', function(data) {
-                        $('#addCatModalHolder').replaceWith(data);
-                        $("#myModal").modal();
+                $("img")
+                    .error(function () {
+                        $(this).hide();
                     });
-                    //$('#addCatModalHolder').load('/Admin/AddCategory', function() {
-                    //    $("#myModal").modal();
-                    //});
-                    //jQuery.ajaxSetup({ async: true });                   
-                });
+                //jQuery.ajaxSetup({ async: false });
+                $('#loadCatModal')
+                    .click(function () {
+                        $.get('/Admin/AddCategory', function (data) {
+                            $('#addCatModalHolder').replaceWith(data);
+                            $("#myModal").modal();
+                        });
+                        //$('#addCatModalHolder').load('/Admin/AddCategory', function() {
+                        //    $("#myModal").modal();
+                        //});
+                        //jQuery.ajaxSetup({ async: true });
+                    });
 
-        });
-</script>
+            });
+    </script>
     <script>
         $(document).ready(function () {
             // Add smooth scrolling to all links in navbar + footer link

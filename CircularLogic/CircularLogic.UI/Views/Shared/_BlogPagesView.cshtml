@@ -31,15 +31,26 @@
                     @if (User.IsInRole("Admin") || User.IsInRole("Contributor"))
                     {
                         <li class="dropdown">
-                            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Admin <b class="caret"></b></a>
-                            <ul class="dropdown-menu" id="menu1">
+                            @if (@User.IsInRole("Admin"))
+                            {
+                                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Admin <b class="caret"></b></a>
+                            }
+                            else
+                            {
+                                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Contributor <b class="caret"></b></a>
+                            }
+                            <ul class="dropdown-menu" id="menu1" style="border-top: 0!important">
                                 <li>
                                     <a href="#">Blog <i class="glyphicon glyphicon-chevron-right pull-right"></i></a>
                                     <ul class="dropdown-menu sub-menu">
                                         <li>@Html.ActionLink("Create", "CreateBlogPost", "BlogPost")</li>
-                                        <li>@Html.ActionLink("History", "ContributorHistory", "Admin")</li>
+                                        @if (!User.IsInRole("Admin"))
+                                        {
+                                            <li>@Html.ActionLink("History", "ContributorHistory", "Admin")</li>
+                                        }
                                     </ul>
                                 </li>
+
                                 @if (User.IsInRole("Admin"))
                                 {
                                     <li>
@@ -49,10 +60,10 @@
                                             <li>@Html.ActionLink("Manage", "Index", "StaticPage")</li>
                                         </ul>
                                     </li>
+                                    <li class="divider"></li>
+                                    <li><a href="#" id="loadCatModal">Add Category</a></li>
+                                    <li>@Html.ActionLink("Admin Queue", "Index", "Admin")</li>
                                 }
-                                <li class="divider"></li>
-                                <li><a href="#" id="loadCatModal">Add Category</a></li>
-                                <li>@Html.ActionLink("Admin Queue", "Index", "Admin")</li>
                             </ul>
                         </li>
                     }
@@ -77,27 +88,27 @@
                 <div id="tags"> </div>
             </div>
             <div class="fb-page" data-href="https://www.facebook.com/circlog/" data-width="250" data-small-header="false"
-                 data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" style="margin-left: 10%; margin-top: 2%;">
+                 data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" style="margin-left: 3%; margin-top: 2%;">
                 <div class="fb-xfbml-parse-ignore">
                     <blockquote cite="https://www.facebook.com/circlog/"><a href="https://www.facebook.com/circlog/">Circular Logic</a></blockquote>
                 </div>
             </div>
-            <div style="margin-left: 10%; margin-top: 5%; margin-bottom: -15px;">
+            <div style="margin-left: 3%; margin-top: 5%; margin-bottom: -15px;">
                 <a href="https://twitter.com/circularlogic" class="twitter-follow-button" data-show-count="false" data-size="large">"Follow @("@")username"</a>
             </div>
             @*<div style="margin: 50px; width: 300px">
-                <h2 style="text-align: center;">About Our Blog</h2>
-                <p style="font-size: 10px;">
-                    The Dev’s Round Table is a blog managed by our in house development team.
-                    We utilize this blog to share our team’s view on core programming principles with the world.
-                    Posts touch on a wide range of topics from low level topics such as assembly languages to high
-                    level concepts like user experience. Our hope is that this blog can provide a window for our
-                    clients to observe our development strategies and reference for other development teams to get
-                    insight into our team’s thought process. The blog has also proven to be a useful training tool
-                    for new team members of all skill levels, as it helps bring them up to speed with the types of
-                    concepts they will see implemented on projects and insight into the core value of our development team.
-                </p>
-            </div>*@
+                    <h2 style="text-align: center;">About Our Blog</h2>
+                    <p style="font-size: 10px;">
+                        The Dev’s Round Table is a blog managed by our in house development team.
+                        We utilize this blog to share our team’s view on core programming principles with the world.
+                        Posts touch on a wide range of topics from low level topics such as assembly languages to high
+                        level concepts like user experience. Our hope is that this blog can provide a window for our
+                        clients to observe our development strategies and reference for other development teams to get
+                        insight into our team’s thought process. The blog has also proven to be a useful training tool
+                        for new team members of all skill levels, as it helps bring them up to speed with the types of
+                        concepts they will see implemented on projects and insight into the core value of our development team.
+                    </p>
+                </div>*@
         </div>
 
         <!-- Page Content -->
@@ -187,42 +198,42 @@
     </script>
     <div id="fb-root"></div>
     <script>
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.6";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-    </script>
-<script>
-    $(document).ready(function(d, s, id) {
-        var js,
-            fjs = d.getElementsByTagName(s)[0],
-            p = /^http:/.test(d.location) ? 'http' : 'https';
-        if (!d.getElementById(id)) {
-            js = d.createElement(s);
-            js.id = id;
-            js.src = p +
-                '://platform.twitter.com/widgets.js';
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.6";
             fjs.parentNode.insertBefore(js, fjs);
-        }
-    }(document, 'script', 'twitter-wjs'));
-</script>
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <script>
+        $(document).ready(function (d, s, id) {
+            var js,
+                fjs = d.getElementsByTagName(s)[0],
+                p = /^http:/.test(d.location) ? 'http' : 'https';
+            if (!d.getElementById(id)) {
+                js = d.createElement(s);
+                js.id = id;
+                js.src = p +
+                    '://platform.twitter.com/widgets.js';
+                fjs.parentNode.insertBefore(js, fjs);
+            }
+        }(document, 'script', 'twitter-wjs'));
+    </script>
     <script type="text/javascript">
-    $(document)
-        .ready(function() {
-            $("img")
-                .error(function() {
-                    $(this).hide();
-                });
-            jQuery.ajaxSetup({ async: false });
-            $('#loadCatModal')
-                .click(function() {
-                    $('#addCatModalHolder').load('/Admin/AddCategory');
-                    $("#myModal").modal();
-                });
-        });
+        $(document)
+            .ready(function () {
+                $("img")
+                    .error(function () {
+                        $(this).hide();
+                    });
+                jQuery.ajaxSetup({ async: false });
+                $('#loadCatModal')
+                    .click(function () {
+                        $('#addCatModalHolder').load('/Admin/AddCategory');
+                        $("#myModal").modal();
+                    });
+            });
     </script>
 </body>
 </html>
